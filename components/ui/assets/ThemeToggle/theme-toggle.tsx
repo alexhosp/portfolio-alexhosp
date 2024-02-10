@@ -1,52 +1,29 @@
-'use client';
-
-import * as React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { MotionButton } from '@/ui/Button/button';
 
-import { Button } from '@/ui/Button/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/ui/DropdownMenu/dropdown-menu';
+export const ModeToggle = () => {
+  const { setTheme, theme: currentTheme } = useTheme();
 
-export function ModeToggle() {
-  const { setTheme } = useTheme();
+  const toggleTheme = () => {
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+  };
+
+  const Icon = currentTheme === 'light' ? Moon : Sun;
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant='outline' size='icon'>
-          <Sun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
-          <Moon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
-          <span className='sr-only'>Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align='end'>
-        <DropdownMenuItem
-          onClick={() => {
-            setTheme('light');
-          }}
-        >
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => {
-            setTheme('dark');
-          }}
-        >
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => {
-            setTheme('system');
-          }}
-        >
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <MotionButton
+      variant='ghost'
+      size='icon'
+      onClick={toggleTheme}
+      whileTap={{ scale: 0.9 }}
+      whileHover={{
+        scale: 1.1,
+      }}
+    >
+      <Icon className='h-[1.2rem] w-[1.2rem] text-[var(--color-icon)] transition-colors' />
+      <span className='sr-only'>Toggle theme</span>
+    </MotionButton>
   );
-}
+};
