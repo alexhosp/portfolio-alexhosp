@@ -19,6 +19,7 @@ const meta: Meta<typeof ModeToggle> = {
       </ThemeProvider>
     ),
   ],
+  tags: ['autodocs'],
 };
 export default meta;
 

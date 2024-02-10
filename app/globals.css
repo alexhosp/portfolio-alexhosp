@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --color-icon-dark: #334155;
+  --color-icon: #334155;
 }
 
 .dark {
-  --color-icon-light: #cbd5e1;
+  --color-icon: #cbd5e1;
 }
