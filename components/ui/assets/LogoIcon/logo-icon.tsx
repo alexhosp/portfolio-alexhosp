@@ -26,7 +26,7 @@ const LogoIcon: React.FC = () => {
     >
       <div>
         <Image
-          src='/logo.png'
+          src='/logo-light.png'
           width={1024}
           height={1024}
           alt='Logo Icon'
