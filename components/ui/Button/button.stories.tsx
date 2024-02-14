@@ -34,3 +34,11 @@ export const NavLink = {
     children: 'Link',
   },
 };
+
+export const NavCTALink = {
+  args: {
+    variant: 'cta',
+    size: 'sm',
+    children: 'Link',
+  },
+};

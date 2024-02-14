@@ -15,15 +15,14 @@ const buttonVariants = cva(
           'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline:
           'cursor-pointer border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-        secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        cta: 'bg-[var(--color-accent)] text-mercury hover:bg-[var(--color-accent-active)] rounded-full text-xl lg:text-base text-mercury font-bold lg:font-normal font-display tracking-wider lg:tracking-[0.09em]',
         ghost: 'text-[var(--color-foreground)] transition-colors',
         link: 'text-[var(--color-foreground)]',
       },
       size: {
         default: 'h-11 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
+        sm: 'min-h-9 rounded-full px-5',
+        lg: 'h-11 rounded-full px-8',
         icon: 'h-11 w-11',
         nav: 'text-3xl font-bold text-left font-display tracking-wider lg:tracking-[0.09em] lg:text-base lg:font-normal text-center',
       },

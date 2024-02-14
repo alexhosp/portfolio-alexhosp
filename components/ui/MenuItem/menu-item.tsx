@@ -1,7 +1,12 @@
 import { MotionButton } from '@/ui/Button/button';
 import { navLinkAnimation } from '../util/animation';
 
-const MenuItem: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+interface MenuItemProps {
+  children: React.ReactNode;
+  isCTA?: boolean;
+}
+
+const MenuItem: React.FC<MenuItemProps> = ({ children }) => {
   return (
     <MotionButton variant='link' size='nav' {...navLinkAnimation}>
       {children}

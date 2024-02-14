@@ -33,7 +33,7 @@ const config = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       colors: {
-        'icon-light': 'var(--color-icon-light)',
+        mercury: '#e6e6e8',
         'icon-dark': 'var(--color-icon-dark)',
       },
       fontFamily: {
