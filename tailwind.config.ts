@@ -34,7 +34,8 @@ const config = {
       },
       colors: {
         mercury: '#e6e6e8',
-        'icon-dark': 'var(--color-icon-dark)',
+        electricBlue: '#007fff',
+        darkElectricBlue: '#0861c5',
       },
       fontFamily: {
         display: ['var(--font-exo2)'],

@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CTAButton from './cta-button';
+import { CTAButton } from './cta-button';
+import { ChevronRight } from 'lucide-react';
 
 const meta: Meta<typeof CTAButton> = {
   title: 'Components/CTAButton',
@@ -12,8 +13,12 @@ export default meta;
 type Story = StoryObj<typeof CTAButton>;
 
 export const AnimatedCTA: Story = {
-  render: (args) => <CTAButton>{args.children}</CTAButton>,
+  render: (args) => <CTAButton {...args} />,
   args: {
-    children: 'Link',
+    children: (
+      <>
+        Link <ChevronRight />
+      </>
+    ),
   },
 };
