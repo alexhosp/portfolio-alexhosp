@@ -26,3 +26,11 @@ export const MoonIconButton = {
     ),
   },
 };
+
+export const NavLink = {
+  args: {
+    variant: 'link',
+    size: 'nav',
+    children: 'Link',
+  },
+};

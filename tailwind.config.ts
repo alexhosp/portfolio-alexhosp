@@ -35,6 +35,15 @@ const config = {
       colors: {
         'icon-light': 'var(--color-icon-light)',
         'icon-dark': 'var(--color-icon-dark)',
+        metallic: {
+          base: '#9CA3AF', // A neutral, metallic gray
+          light: '#D1D5DB', // A lighter shade for hover states or highlights
+          dark: '#4B5563', // A darker shade for shadows or accents
+        },
+      },
+      fontFamily: {
+        display: ['var(--font-exo2)'],
+        body: ['var(--font-open-sans)'],
       },
     },
   },
