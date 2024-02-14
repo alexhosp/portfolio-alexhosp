@@ -20,7 +20,7 @@ export const ModeToggle = () => {
       onClick={toggleTheme}
       {...iconAnimation}
     >
-      <Icon className='h-[1.2rem] w-[1.2rem] text-[var(--color-icon)] transition-colors' />
+      <Icon className='h-[1.2rem] w-[1.2rem] transition-colors' />
       <span className='sr-only'>Toggle theme</span>
     </MotionButton>
   );

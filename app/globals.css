@@ -3,13 +3,21 @@
 @tailwind utilities;
 
 :root {
+  --color-background: #e5e4e2;
+  --color-foreground: #2a3439;
   --color-icon: #334155;
-  --color-primary: #334155;
+  --color-primary: #c0c0c0;
+  --color-detail: #d1d1d1;
+  --color-accent: #007fff;
+  --color-accent-active: #0066cc;
   --font-exo2: 'Exo 2', sans-serif;
   --font-open-sans: 'Open Sans', sans-serif;
 }
 
 .dark {
+  --color-background: #1c2022;
+  --color-foreground: #e6e6e8;
   --color-icon: #cbd5e1;
-  --color-primary: #cbd5e1;
+  --color-primary: #50555c;
+  --color-detail: #20262a;
 }

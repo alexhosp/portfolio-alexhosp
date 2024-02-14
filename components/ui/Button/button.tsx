@@ -17,16 +17,15 @@ const buttonVariants = cva(
           'cursor-pointer border border-input bg-background hover:bg-accent hover:text-accent-foreground',
         secondary:
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost:
-          'text-[var(--color-icon)] transition-colors dark:text-icon-light',
-        link: 'text-[var(--color-primary)]',
+        ghost: 'text-[var(--color-foreground)] transition-colors',
+        link: 'text-[var(--color-foreground)]',
       },
       size: {
         default: 'h-11 px-4 py-2',
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-11 w-11',
-        nav: 'text-3xl font-bold text-left font-display tracking-wider lg:text-lg lg:font-normal text-center',
+        nav: 'text-3xl font-bold text-left font-display tracking-wider lg:tracking-[0.09em] lg:text-base lg:font-normal text-center',
       },
     },
     defaultVariants: {

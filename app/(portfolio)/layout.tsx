@@ -27,7 +27,7 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang='en' className={`${exo2.variable} ${openSans.variable}`}>
-      <body>
+      <body className='bg-[var(--color-background)]'>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
