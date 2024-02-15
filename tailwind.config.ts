@@ -41,6 +41,9 @@ const config = {
         display: ['var(--font-exo2)'],
         body: ['var(--font-open-sans)'],
       },
+      boxShadow: {
+        'small-shadow': '0 1px 3px 0 var(--color-background)',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],

@@ -7,7 +7,12 @@ export const CTAButton: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <MotionButton variant='cta' size='sm' {...CTAButtonAnimation}>
+    <MotionButton
+      variant='cta'
+      size='sm'
+      {...CTAButtonAnimation}
+      className='min-h-8'
+    >
       {children}
     </MotionButton>
   );

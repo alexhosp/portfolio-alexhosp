@@ -17,23 +17,25 @@ const LogoIcon: React.FC = () => {
     }
   }, []);
   return (
-    <MotionButton
-      variant='ghost'
-      size='icon'
-      onClick={handleNavigation}
-      aria-label='Scroll back to top'
-      {...iconAnimation}
-    >
-      <div>
-        <Image
-          src='/logo-light.png'
-          width={1024}
-          height={1024}
-          alt='Logo Icon'
-          layout='responsive'
-        />
-      </div>
-    </MotionButton>
+    <div className='px-1 flex items-center'>
+      <MotionButton
+        variant='ghost'
+        size='icon'
+        onClick={handleNavigation}
+        aria-label='Scroll back to top'
+        {...iconAnimation}
+      >
+        <div>
+          <Image
+            src='/logo-light.png'
+            width={1024}
+            height={1024}
+            alt='Logo Icon'
+            layout='responsive'
+          />
+        </div>
+      </MotionButton>
+    </div>
   );
 };
 export default LogoIcon;

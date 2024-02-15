@@ -15,16 +15,15 @@ export const navLinkAnimation = {
 
 export const CTAButtonAnimation = {
   whileTap: {
-    scale: 0.92,
+    scale: 0.95,
     x: 1,
     transition: { duration: 0.2, type: 'spring', stiffness: 200, damping: 15 },
   },
   whileHover: {
-    scale: 0.95,
-    opacity: 0.9,
-    x: 2,
+    scale: 1.025,
+    x: -0.5,
     transition: {
-      duration: 0.3,
+      duration: 0.2,
       ease: 'easeInOut',
       type: 'spring',
       stiffness: 100,

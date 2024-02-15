@@ -1,45 +1,34 @@
-import React from 'react';
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuCheckboxItem,
-} from './dropdown-menu';
+import NavigationBar from './dropdown-menu';
+import { Meta, StoryObj } from '@storybook/react';
+import { ThemeProvider } from 'next-themes';
 
-export default {
-  title: 'Components/DropdownMenu',
-  component: DropdownMenu,
-  subcomponents: { DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem },
+const meta: Meta<typeof NavigationBar> = {
+  title: 'Components/NavigationBar',
+  component: NavigationBar,
+  tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <ThemeProvider
+        enableSystem={true}
+        attribute='class'
+        defaultTheme='system'
+        disableTransitionOnChange
+      >
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 };
 
-export const Default = () => (
-  <DropdownMenu>
-    <DropdownMenuTrigger>Options</DropdownMenuTrigger>
-    <DropdownMenuContent>
-      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-      <DropdownMenuItem>Save</DropdownMenuItem>
-      <DropdownMenuItem>Edit</DropdownMenuItem>
-      <DropdownMenuItem>Delete</DropdownMenuItem>
-      <DropdownMenuSeparator />
-      <DropdownMenuLabel>Settings</DropdownMenuLabel>
-      <DropdownMenuRadioGroup
-        value='light'
-        onValueChange={(value) => {
-          console.log(value);
-        }}
-      >
-        <DropdownMenuRadioItem value='light'>Light Theme</DropdownMenuRadioItem>
-        <DropdownMenuRadioItem value='dark'>Dark Theme</DropdownMenuRadioItem>
-      </DropdownMenuRadioGroup>
-      <DropdownMenuSeparator />
-      <DropdownMenuCheckboxItem checked={true}>
-        Enable Notifications
-      </DropdownMenuCheckboxItem>
-    </DropdownMenuContent>
-  </DropdownMenu>
-);
+export default meta;
+
+type Story = StoryObj<typeof NavigationBar>;
+
+export const Default: Story = {
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
+  },
+  render: () => <NavigationBar />,
+};

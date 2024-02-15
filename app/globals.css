@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    @apply box-border font-body m-0 p-0;
+  }
+  body {
+    @apply p-0 m-0;
+  }
+}
+
 :root {
   --color-background: #e5e4e2;
   --color-foreground: #2a3439;
