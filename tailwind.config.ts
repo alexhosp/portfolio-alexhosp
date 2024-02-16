@@ -43,6 +43,11 @@ const config = {
       },
       boxShadow: {
         'small-shadow': '0 1px 3px 0 var(--color-background)',
+        'medium-shadow': '0 3px 9px 3 var(--color-background)',
+      },
+      backgroundImage: {
+        'radial-gradient-light': 'var(--radial-gradient-light)',
+        'radial-gradient-dark': 'var(--radial-gradient-dark)',
       },
     },
   },

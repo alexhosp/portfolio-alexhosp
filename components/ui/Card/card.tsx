@@ -3,30 +3,60 @@ import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const cardVariants = cva(
-  'rounded-lg border bg-card text-card-foreground shadow-sm',
+  'leading-7 w-full text-body tracking-[0.002em] flex flex-col items-center text-center pt-11 break-words',
   {
     variants: {
-      variant: {},
-      size: {},
+      edge: {
+        sharp: 'rounded-none p-4',
+        rounded: 'rounded-lg p-4 medium-shadow',
+      },
+      width: {
+        full: 'w-full',
+        half: 'md:w-1/2',
+        third: 'md:w-1/3',
+      },
+      color: {
+        gradientPrimary: 'bg-radial-gradient-light text-semibold',
+        gradientSecondary: 'bg-radial-gradient-dark  text-semibold',
+        solidPrimary:
+          'bg-[var(--color-primary)] text-[var(--color-foreground)]',
+        solidBackground: 'bg-[var(--color-background)]',
+      },
     },
-    defaultVariants: {},
+    defaultVariants: {
+      edge: 'sharp',
+      width: 'full',
+      color: 'solidBackground',
+    },
   }
 );
 
 export interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof cardVariants> {
-  asChild?: boolean;
+  color?:
+    | 'gradientPrimary'
+    | 'gradientSecondary'
+    | 'solidPrimary'
+    | 'solidBackground';
 }
 
-// TODO:
-// add the types and set the classname using cn and cvm
-// add the variants as props, follow similar pattern as in Button component
-// render a div and leave the type declaration (HTMLDivElement) if possible
+const Card: React.FC<CardProps> = ({
+  className,
+  edge,
+  width,
+  color,
+  ...props
+}) => {
+  return (
+    <div
+      className={cn(cardVariants({ edge, width, color }), className)}
+      style={{ color: 'var(--color-foreground)' }}
+      {...props}
+    />
+  );
+};
 
-const Card = ({ className, ...props }: React.FC<HTMLDivElement>) => (
-  <div className={cn()} {...props} />
-);
 Card.displayName = 'Card';
 
 const CardHeader = ({
@@ -83,3 +113,5 @@ export {
   CardDescription,
   CardContent,
 };
+
+// consider adding card items with all subcomponets and export (PrimaryCard and SecondaryCard)

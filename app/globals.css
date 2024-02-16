@@ -21,6 +21,22 @@
   --color-accent-active: #0861c5;
   --font-exo2: 'Exo 2', sans-serif;
   --font-open-sans: 'Open Sans', sans-serif;
+
+  --radial-gradient-light: radial-gradient(
+    circle at 50% center,
+    var(--color-background),
+    var(--color-accent) 50%,
+    var(--color-background) 75%,
+    var(--color-background) 75%
+  );
+
+  --radial-gradient-dark: radial-gradient(
+    circle at 50% center,
+    var(--color-background),
+    var(--color-accent-active) 50%,
+    var(--color-background) 75%,
+    var(--color-background) 75%
+  );
 }
 
 .dark {
@@ -29,4 +45,20 @@
   --color-icon: #cbd5e1;
   --color-primary: #50555c;
   --color-detail: #20262a;
+
+  --radial-gradient-light: radial-gradient(
+    circle at 50% center,
+    var(--color-background),
+    var(--color-accent) 50%,
+    var(--color-background) 75%,
+    var(--color-background) 75%
+  );
+
+  --radial-gradient-dark: radial-gradient(
+    circle at 50% center,
+    var(--color-background),
+    var(--color-accent-active) 50%,
+    var(--color-background) 75%,
+    var(--color-background) 75%
+  );
 }
