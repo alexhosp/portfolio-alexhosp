@@ -2,7 +2,6 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import { motion, MotionProps } from 'framer-motion';
 import { headingAnimations } from '../util/animation';
-import React from 'react';
 
 const headingVariants = cva([' font-exo2 text-center'], {
   variants: {
