@@ -15,6 +15,8 @@ const headingVariants = cva([' font-exo2 text-center'], {
       h2Small: 'text-2xl font-semibold tracking-wider md:text-3xl lg:text-5xl',
       h3Default:
         'text-xl uppercase tracking-wider md:text-2xl lg:text-4xl font-semibold',
+      h3Small:
+        'text-sm md:text-base uppercase tracking-wider font-semibold pb-2 antialiased',
     },
 
     color: {
@@ -39,6 +41,14 @@ export interface HeadingProps
   as: 'h1' | 'h2' | 'h3';
   color: 'default' | 'h2accent' | 'h1accent' | 'lighter' | 'h2accentgradient';
   children: React.ReactNode;
+  size:
+    | 'h1Default'
+    | 'h1Accent'
+    | 'h2Big'
+    | 'h2Default'
+    | 'h2Small'
+    | 'h3Default'
+    | 'h3Small';
 }
 
 export const Heading: React.FC<HeadingProps> = ({
