@@ -1,26 +1,58 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
+import { cva, VariantProps } from 'class-variance-authority';
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  type: string;
+const inputVariants = cva(
+  [
+    'text-[var(--color-foreground)] flex w-full rounded-lg border bg-[var(--color-background)] px-3 py-2 text-sm tracking-wider placeholder:text-[var(--color-foreground)]/90 focus-visible:outline-none focus-visible:ring-[var(--color-accent-active)] focus-visible:ring-2  disabled:cursor-not-allowed disabled:opacity-50  focus:border-[var(--color-accent-active)]',
+  ],
+  {
+    variants: {
+      fieldSize: {
+        default: 'h-11',
+        small: 'h-6',
+      },
+    },
+    defaultVariants: {
+      fieldSize: 'default',
+    },
+  }
+);
+
+type InputVariantsProps = VariantProps<typeof inputVariants>;
+
+interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>,
+    InputVariantsProps {
+  type?: string;
+  as: 'input' | 'textarea';
+  fieldSize: 'default' | 'small';
 }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
+const Input = React.forwardRef<
+  HTMLInputElement | HTMLTextAreaElement,
+  InputProps
+>(({ className, type = 'text', as = 'input', fieldSize, ...props }, ref) => {
+  if (as === 'textarea') {
+    return (
+      <textarea
+        {...props}
+        ref={ref as React.ForwardedRef<HTMLTextAreaElement>}
+        className={cn(inputVariants({ fieldSize }), className)}
+      />
+    );
+  } else {
     return (
       <input
         type={type}
-        className={cn(
-          'flex h-6 w-full rounded-lg border border-[var(--color-detail)] bg-[var(--color-background)] px-3 py-2 text-sm tracking-wider ring-offset-[var(--color-background)] file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 focus:bg-[var(--color-background)] focus:border-[var(--color-accent)]',
-          className
-        )}
-        ref={ref}
         {...props}
+        ref={ref as React.ForwardedRef<HTMLInputElement>}
+        className={cn(className)}
       />
     );
   }
-);
+});
+
 Input.displayName = 'Input';
 
 export { Input };

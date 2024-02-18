@@ -81,6 +81,8 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ name, options, title }) => {
               </Label>
               {field.value === 'other' && (
                 <Input
+                  as='input'
+                  fieldSize='small'
                   type='text'
                   value={otherValue}
                   onChange={(e) => {
@@ -89,7 +91,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ name, options, title }) => {
                     setOtherValue(newValue);
                   }}
                   placeholder='Please specify'
-                  className='ml-2 text-[var(--color-foreground)] bg-[var(--background-color)]'
+                  className='ml-3 text-[var(--color-foreground)] bg-[var(--background-color)]'
                 />
               )}
             </div>
