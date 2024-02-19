@@ -91,7 +91,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ name, options, title }) => {
                     setOtherValue(newValue);
                   }}
                   placeholder='Please specify'
-                  className='ml-3 text-[var(--color-foreground)] bg-[var(--background-color)]'
+                  className='ml-3 text-[var(--color-foreground)] bg-[var(--background-color)] max-w-[50%]'
                 />
               )}
             </div>

@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof Input>;
 
-export const EmailInput: Story = {
+export const EmailInputDefault: Story = {
   args: {
     as: 'input',
     type: 'email',
@@ -22,5 +22,14 @@ export const TextInput: Story = {
   args: {
     as: 'textarea',
     placeholder: 'Message',
+  },
+};
+
+export const InputSmall: Story = {
+  args: {
+    as: 'input',
+    type: 'email',
+    placeholder: 'Email',
+    fieldSize: 'small',
   },
 };

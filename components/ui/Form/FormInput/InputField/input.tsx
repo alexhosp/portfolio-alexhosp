@@ -4,7 +4,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 
 const inputVariants = cva(
   [
-    'text-[var(--color-foreground)] flex w-full rounded-lg border bg-[var(--color-background)] px-3 py-2 text-sm tracking-wider placeholder:text-[var(--color-foreground)]/90 focus-visible:outline-none focus-visible:ring-[var(--color-accent-active)] focus-visible:ring-2  disabled:cursor-not-allowed disabled:opacity-50  focus:border-[var(--color-accent-active)]',
+    'text-[var(--color-foreground)] tracking-wider flex w-full rounded-lg border bg-[var(--color-background)] px-3 py-2 text-sm tracking-wider placeholder:text-[var(--color-foreground)]/90 focus-visible:outline-none focus-visible:ring-[var(--color-accent-active)] focus-visible:ring-2  disabled:cursor-not-allowed disabled:opacity-50  focus:border-[var(--color-accent-active)]',
   ],
   {
     variants: {
@@ -47,7 +47,7 @@ const Input = React.forwardRef<
         type={type}
         {...props}
         ref={ref as React.ForwardedRef<HTMLInputElement>}
-        className={cn(className)}
+        className={cn(inputVariants({ fieldSize }), className)}
       />
     );
   }
