@@ -21,6 +21,7 @@
   --font-exo2: 'Exo 2', sans-serif;
   --font-open-sans: 'Open Sans', sans-serif;
   --color-highlight: #7097a0;
+  --color-destructive: #ff7043;
 
   --radial-gradient-light: radial-gradient(
     circle at 50% center,

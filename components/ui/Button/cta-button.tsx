@@ -7,12 +7,7 @@ export const CTAButton: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <MotionButton
-      variant='cta'
-      size='sm'
-      {...CTAButtonAnimation}
-      className='min-h-8'
-    >
+    <MotionButton variant='cta' size='sm' {...CTAButtonAnimation}>
       {children}
     </MotionButton>
   );
@@ -36,3 +31,15 @@ export const GradientCTAButton: React.FC<{ children: React.ReactNode }> = ({
     </motion.div>
   );
 };
+
+export const SmallCTAButton: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  return (
+    <MotionButton variant='cta' size='xs' {...CTAButtonAnimation}>
+      {children}
+    </MotionButton>
+  );
+};
+
+SmallCTAButton.displayName = 'SmallCTAButton';

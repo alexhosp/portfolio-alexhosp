@@ -12,17 +12,18 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         destructive:
-          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+          'bg-[var(--color-destructive)] text-destructive-foreground hover:bg-destructive/90',
         outline:
-          'cursor-pointer border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-        cta: 'bg-[var(--color-accent)] text-mercury hover:small-shadow rounded-full text-2xl lg:text-sm text-mercury font-bold lg:font-normal font-display tracking-wider lg:tracking-[0.09em]',
+          'cursor-pointer border border-[var(--color-foreground)] text-[var(--color-foreground)] bg-[var(--color-background)] hover:border-[var(--color-destructive)] hover:text-[var(--color-destructive)]',
+        cta: 'bg-[var(--color-accent)] text-mercury hover:small-shadow rounded-full font-bold lg:font-normal font-display tracking-wider lg:tracking-[0.09em]',
         ghost: 'text-[var(--color-foreground)] transition-colors',
         link: 'text-[var(--color-foreground)]',
         gradient: 'text-transparent font-bold font-display uppercase text-xl',
       },
       size: {
         default: 'h-11 px-4 py-2',
-        sm: 'min-h-9 rounded-full px-5 py-1 lg:py-0',
+        xs: 'min-h-6 rounded-full px-3 py-1 text-base',
+        sm: 'min-h-9 rounded-full px-5 py-1 lg:py-0 text-2xl lg:text-sm',
         lg: 'h-11 rounded-full px-8',
         icon: 'h-11 w-11',
         nav: 'text-3xl font-bold text-left font-display tracking-wider lg:tracking-[0.09em] lg:text-sm lg:font-normal text-center',

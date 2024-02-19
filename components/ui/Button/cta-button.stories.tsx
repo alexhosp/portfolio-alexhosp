@@ -3,7 +3,7 @@ import { CTAButton } from './cta-button';
 import { ChevronRight } from 'lucide-react';
 
 const meta: Meta<typeof CTAButton> = {
-  title: 'Components/CTAButton',
+  title: 'Components/Button/CTAButton',
   component: CTAButton,
   tags: ['autodocs'],
 };

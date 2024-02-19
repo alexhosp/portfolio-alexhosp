@@ -31,6 +31,24 @@ export const CTAButtonAnimation = {
   },
 };
 
+export const cancelButtonAnimation = {
+  whileTap: {
+    scale: 0.95,
+    y: -2,
+    transition: { duration: 0.2, type: 'spring', stiffness: 300, damping: 30 },
+  },
+  whileHover: {
+    scale: 0.98,
+    y: -1,
+    transition: {
+      duration: 0.2,
+      ease: 'easeInOut',
+      type: 'spring',
+      stiffness: 100,
+    },
+  },
+};
+
 export const headingAnimations = {
   expand: {
     initial: { opacity: 0, scaleX: 0 },
