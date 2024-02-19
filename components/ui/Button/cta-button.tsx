@@ -2,12 +2,14 @@ import { MotionButton, Button } from './button';
 import { CTAButtonAnimation } from '../util/animation';
 import { ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { ButtonHTMLAttributes } from 'react';
 
 export const CTAButton: React.FC<{ children: React.ReactNode }> = ({
   children,
+  ...props
 }) => {
   return (
-    <MotionButton variant='cta' size='sm' {...CTAButtonAnimation}>
+    <MotionButton variant='cta' size='sm' {...CTAButtonAnimation} {...props}>
       {children}
     </MotionButton>
   );
@@ -15,9 +17,10 @@ export const CTAButton: React.FC<{ children: React.ReactNode }> = ({
 
 export const GradientCTAButton: React.FC<{ children: React.ReactNode }> = ({
   children,
+  ...props
 }) => {
   return (
-    <motion.div {...CTAButtonAnimation} className='inline-flex'>
+    <motion.div {...CTAButtonAnimation} {...props} className='inline-flex'>
       <Button
         variant='gradient'
         size='lg'
@@ -32,13 +35,29 @@ export const GradientCTAButton: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-export const SmallCTAButton: React.FC<{ children: React.ReactNode }> = ({
+interface SmallCTAButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?:
+    | 'link'
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'cta'
+    | 'ghost'
+    | 'gradient'
+    | null
+    | undefined;
+  size?: 'default' | 'nav' | 'xs' | 'sm' | 'lg' | 'icon' | null | undefined;
+  children: React.ReactNode;
+}
+
+export const SmallCTAButton: React.FC<SmallCTAButtonProps> = ({
   children,
+  ...props
 }) => {
   return (
-    <MotionButton variant='cta' size='xs' {...CTAButtonAnimation}>
+    <Button variant='cta' size='xs' {...props}>
       {children}
-    </MotionButton>
+    </Button>
   );
 };
 

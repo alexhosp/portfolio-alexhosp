@@ -22,6 +22,7 @@ export const TextInput: Story = {
   args: {
     as: 'textarea',
     placeholder: 'Message',
+    label: 'Name',
   },
 };
 
@@ -31,5 +32,6 @@ export const InputSmall: Story = {
     type: 'email',
     placeholder: 'Email',
     fieldSize: 'small',
+    label: 'Email',
   },
 };

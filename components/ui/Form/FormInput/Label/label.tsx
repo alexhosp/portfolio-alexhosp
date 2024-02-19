@@ -13,7 +13,7 @@ const labelVariants = cva(
   {
     variants: {
       intent: {
-        labelAbove: 'font-semibold text-[var(--color-foreground)]',
+        labelAbove: 'font-semibold text-[var(--color-foreground)] mx-1 mt-1',
         labelInside: 'font-light text-[var(--color-highlight)]',
       },
     },

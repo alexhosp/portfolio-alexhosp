@@ -27,6 +27,8 @@ export interface TextProps
     React.HTMLAttributes<HTMLParagraphElement | HTMLSpanElement> {
   as: 'p' | 'span';
   children: React.ReactNode;
+  size: 'default' | 'large';
+  textColor: 'default' | 'accent' | 'highlight';
 }
 
 const Text: React.FC<TextProps> = ({

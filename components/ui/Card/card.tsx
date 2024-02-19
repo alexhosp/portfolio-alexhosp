@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { Heading } from '../Heading/heading';
+import Text from '../Text/text';
 
 const cardVariants = cva(
   'leading-7 w-full text-body tracking-[0.002em] flex flex-col items-center text-center pt-11 break-words',
@@ -67,25 +69,19 @@ const CardHeader = ({
 );
 CardHeader.displayName = 'CardHeader';
 
-const CardTitle = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h3
-    className={cn(
-      'text-2xl font-semibold leading-none tracking-tight',
-      className
-    )}
-    {...props}
-  />
+const CardTitle = ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
+  <Heading as='h2' color='default' size='h2Small'>
+    {children}
+  </Heading>
 );
 CardTitle.displayName = 'CardTitle';
 
 const CardDescription = ({
-  className,
-  ...props
+  children,
 }: React.HTMLAttributes<HTMLParagraphElement>) => (
-  <p className={cn('text-sm text-muted-foreground', className)} {...props} />
+  <Text as='p' size='default' textColor='default'>
+    {children}
+  </Text>
 );
 CardDescription.displayName = 'CardDescription';
 
