@@ -3,10 +3,11 @@
 import * as React from 'react';
 import { useState } from 'react';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { Controller, useForm } from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 import { Heading } from '@/ui/Heading/heading';
 import { Label } from '@/ui/Form/FormInput/Label/label';
 import { Input } from '@/ui/Form/FormInput/InputField/input';
+import { FormInput } from '../form';
 
 interface RadioOption {
   label: string;
@@ -14,15 +15,20 @@ interface RadioOption {
 }
 
 interface RadioGroupProps {
-  name: string;
+  name: 'radioGroup';
   options: RadioOption[];
   title: string;
+  control: Control<FormInput>;
+  onOtherValueChange?: (value: string) => void;
 }
 
-type FormData = Record<string, string>;
-
-const RadioGroup: React.FC<RadioGroupProps> = ({ name, options, title }) => {
-  const { control } = useForm<FormData>(); // all hoook methods
+const RadioGroup: React.FC<RadioGroupProps> = ({
+  name,
+  options,
+  title,
+  control,
+  onOtherValueChange,
+}) => {
   const [otherValue, setOtherValue] = useState('');
 
   return (
@@ -32,19 +38,15 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ name, options, title }) => {
       </Heading>
       <Controller
         control={control}
-        name={name} // unique name of the radio input
-        // provides useForm methods to the child component
-        // methods are accessible through the field object
+        name={name}
         render={({ field }) => (
           <RadioGroupPrimitive.Root
-            // triggered whenever a radio button is clicked
             onValueChange={(value) => {
-              if (value === 'other' && otherValue) {
-                field.onChange(otherValue); // updates formState for the 'other' button
+              if (value === 'other') {
+                field.onChange(value);
               } else {
                 field.onChange(value);
                 if (value !== 'other') {
-                  // Reset otherValue if 'other' is not selected
                   setOtherValue('');
                 }
               }
@@ -83,10 +85,13 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ name, options, title }) => {
                   as='input'
                   fieldSize='small'
                   type='text'
-                  value={otherValue} // value entered, gets added to the formState through the onValueChange event
+                  value={otherValue}
                   onChange={(e) => {
                     const newValue = e.target.value;
-                    setOtherValue(newValue); // store entered value in state
+                    setOtherValue(newValue);
+                    if (onOtherValueChange) {
+                      onOtherValueChange(newValue);
+                    }
                   }}
                   placeholder='Please specify'
                   className='ml-2 text-[var(--color-foreground)] bg-[var(--background-color)] max-w-[75%]'

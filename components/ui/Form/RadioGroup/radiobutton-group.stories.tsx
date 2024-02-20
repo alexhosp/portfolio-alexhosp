@@ -23,7 +23,6 @@ type Story = StoryObj<typeof RadioGroup>;
 
 export const DefaultRadioGroup: Story = {
   args: {
-    name: 'Inquiry Type',
     options: [
       { label: 'Job Offer', value: 'job' },
       { label: 'Freelance Opportunity', value: 'freelance' },
