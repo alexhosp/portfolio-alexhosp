@@ -8,9 +8,12 @@ const textVariants = cva(['text-body'], {
         'text-base antialiased text-pretty whitespace-normal tracking-wider',
       large:
         'text-lg font-bold text-center md:text-xl tracking-wider antialiased text-pretty whitespace-normal',
+      small:
+        'text-sm/[1.2rem] text-left tracking-wide antialiased text-pretty whitespace-normal',
     },
     textColor: {
       default: 'text-[var(--color-foreground)]',
+      muted: 'text-[var(--color-foreground)] opacity-80',
       accent: 'text-[var(--color-highlight)] font-bold drop-shadow-sm',
       highlight:
         'text-mercury px-2 py-1 rounded bg-gradient-to-tr from-[var(--color-accent-active)] to-[var(--color-accent)]',
@@ -27,8 +30,8 @@ export interface TextProps
     React.HTMLAttributes<HTMLParagraphElement | HTMLSpanElement> {
   as: 'p' | 'span';
   children: React.ReactNode;
-  size: 'default' | 'large';
-  textColor: 'default' | 'accent' | 'highlight';
+  size: 'default' | 'large' | 'small';
+  textColor: 'default' | 'accent' | 'highlight' | 'muted';
 }
 
 const Text: React.FC<TextProps> = ({

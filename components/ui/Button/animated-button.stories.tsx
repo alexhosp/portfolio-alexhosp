@@ -24,7 +24,7 @@ export const SmallAnimatedCancelButton: Story = {
   ),
   args: {
     children: 'Cancel',
-    variant: 'outline',
+    variant: 'destructive',
     size: 'xs',
   },
 };

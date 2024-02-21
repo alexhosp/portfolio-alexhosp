@@ -12,9 +12,9 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         destructive:
-          'bg-[var(--color-destructive)] text-destructive-foreground hover:bg-destructive/90',
+          'cursor-pointer border border-[var(--color-foreground)] text-[var(--color-foreground)] bg-transparent  hover:border-[var(--color-destructive)] hover:text-[var(--color-destructive)]',
         outline:
-          'cursor-pointer border border-[var(--color-foreground)] text-[var(--color-foreground)] bg-[var(--color-background)] hover:border-[var(--color-destructive)] hover:text-[var(--color-destructive)]',
+          'cursor-pointer border border-[var(--color-foreground)] text-[var(--color-foreground)] bg-[var(--color-background)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]',
         cta: 'bg-[var(--color-accent)] text-mercury hover:small-shadow rounded-full font-bold lg:font-normal font-display tracking-wider lg:tracking-[0.09em]',
         ghost: 'text-[var(--color-foreground)] transition-colors',
         link: 'text-[var(--color-foreground)]',
@@ -22,7 +22,7 @@ const buttonVariants = cva(
       },
       size: {
         default: 'h-11 px-4 py-2',
-        xs: 'min-h-6 rounded-full px-3 py-1 text-base',
+        xs: 'min-h-6 rounded-full px-4 py-1 text-base',
         sm: 'min-h-9 rounded-full px-5 py-1 lg:py-0 text-2xl lg:text-sm',
         lg: 'h-11 rounded-full px-8',
         icon: 'h-11 w-11',

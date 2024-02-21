@@ -13,7 +13,7 @@ const cardVariants = cva(
         rounded: 'rounded-lg p-4 medium-shadow',
       },
       width: {
-        full: 'w-full',
+        full: 'w-full p-8',
         half: 'md:w-1/2',
         third: 'md:w-1/3',
       },

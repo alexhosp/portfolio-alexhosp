@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 
 const labelVariants = cva(
   [
-    'text-xs md:text-sm leading-loose leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-body tracking-wider',
+    'text-body text-xs md:text-sm leading-loose leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-body tracking-wider',
   ],
   {
     variants: {
@@ -23,7 +23,7 @@ const labelVariants = cva(
 interface LabelProps
   extends React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>,
     VariantProps<typeof labelVariants> {
-  intent: 'labelAbove' | 'labelInside';
+  intent?: 'labelAbove' | 'labelInside';
 }
 
 const Label = React.forwardRef<
@@ -32,7 +32,7 @@ const Label = React.forwardRef<
 >(({ className, intent, children, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
-    className={cn(labelVariants({ intent }), className)} // Apply the variant
+    className={cn(labelVariants({ intent }), className)}
     {...props}
   >
     {children}

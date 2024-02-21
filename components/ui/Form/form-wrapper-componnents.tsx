@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { Label } from '@/ui/Form/FormInput/Label/label';
 import { Slot } from '@radix-ui/react-slot';
 import {
+  Controller,
   ControllerProps,
   FieldPath,
   FieldValues,
@@ -9,7 +11,6 @@ import {
 } from 'react-hook-form';
 
 import { cn } from '@/lib/utils';
-import { Label } from '@/ui/Form/FormInput/Label/label';
 
 const Form = FormProvider;
 
@@ -21,12 +22,10 @@ interface FormFieldContextValue<
 }
 
 const FormFieldContext = React.createContext<FormFieldContextValue | null>(
-  null
+  {} as FormFieldContextValue
 );
 
-// wraps components with the FormField Context so that they can me managed centrally
-// wrapped components are managed by the name prop passed to the Controller
-// elements in here need to be wrapped by a <Controller />
+// input field wrapper, wraps children in a RHF controller and with a form context
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
@@ -34,25 +33,22 @@ const FormField = <
   ...props
 }: ControllerProps<TFieldValues, TName>) => {
   return (
-    <FormFieldContext.Provider
-      value={{ name: props.name }}
-    ></FormFieldContext.Provider>
+    <FormFieldContext.Provider value={{ name: props.name }}>
+      <Controller {...props} />
+    </FormFieldContext.Provider>
   );
 };
 
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext);
   const itemContext = React.useContext(FormItemContext);
-  // access state of a field and the entire form
-  const { getFieldState, formState } = useFormContext();
+  const { getFieldState, formState } = useFormContext(); // gives access to the useForm() methods
 
-  if (fieldContext === null) {
-    throw new Error(
-      'useFormField must be used within a <FormField> component.'
-    );
+  if (!fieldContext) {
+    throw new Error('useFormField should be used within <FormField>'); // hook needs to have access to the context
   }
 
-  const fieldState = getFieldState(fieldContext.name, formState);
+  const fieldState = getFieldState(fieldContext.name, formState); // gives information about an individual form field
 
   const { id } = itemContext;
 

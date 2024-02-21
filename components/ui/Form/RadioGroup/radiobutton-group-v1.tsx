@@ -6,8 +6,8 @@ import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { Control, Controller } from 'react-hook-form';
 import { Heading } from '@/ui/Heading/heading';
 import { Label } from '@/ui/Form/FormInput/Label/label';
-import { Input } from '@/ui/Form/FormInput/InputField/input';
-import { FormInput } from '../form';
+import { Input } from '@/ui/Form/FormInput/InputField/input-v1';
+import { FormInput } from '../form-v1';
 
 interface RadioOption {
   label: string;

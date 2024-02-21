@@ -55,9 +55,11 @@ export const SmallCTAButton: React.FC<SmallCTAButtonProps> = ({
   ...props
 }) => {
   return (
-    <Button variant='cta' size='xs' {...props}>
-      {children}
-    </Button>
+    <motion.div className='inline-block' {...CTAButtonAnimation}>
+      <Button variant='cta' size='xs' {...props}>
+        {children}
+      </Button>
+    </motion.div>
   );
 };
 

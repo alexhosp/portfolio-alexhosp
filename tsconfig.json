@@ -30,6 +30,6 @@
    ".next/types/**/*.ts",
    "components/ui/**/*",
    "components/ui/assets/**/*"
-  ],
+, "components/Modal"  ],
   "exclude": ["node_modules"],
 }

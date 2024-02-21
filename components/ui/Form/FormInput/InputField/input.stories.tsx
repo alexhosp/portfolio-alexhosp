@@ -1,4 +1,4 @@
-import { Input } from '@/ui/Form/FormInput/InputField/input';
+import { Input } from '@/ui/Form/FormInput/InputField/input-v1';
 import { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof Input> = {

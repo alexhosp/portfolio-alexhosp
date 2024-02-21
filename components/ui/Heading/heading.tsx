@@ -13,6 +13,7 @@ const headingVariants = cva([' font-exo2 text-center'], {
         'text-[2.5rem] font-extrabold tracking-wider md:text-5xl lg:text-[4rem]',
       h2Default: 'text-[2rem] font-bold tracking-wide md:text-4xl lg:text-6xl',
       h2Small: 'text-2xl font-semibold tracking-wider md:text-3xl lg:text-5xl',
+      h2Tiny: 'text-lg font-semibold tracking-wider',
       h3Default:
         'text-xl uppercase tracking-wider md:text-2xl lg:text-4xl font-semibold',
       h3Small:
@@ -47,6 +48,7 @@ export interface HeadingProps
     | 'h2Big'
     | 'h2Default'
     | 'h2Small'
+    | 'h2Tiny'
     | 'h3Default'
     | 'h3Small';
 }
