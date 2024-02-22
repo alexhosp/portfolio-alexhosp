@@ -19,27 +19,34 @@ import { RadioGroup, RadioGroupItem } from '@/ui/Form/RadioGroup/radio-group';
 import { Toaster } from '@/ui/Toast/toaster';
 import { toast } from '@/ui/Toast/hooks/use-toast';
 import { Input } from '@/ui/Form/FormInput/InputField/input';
+import { Textarea } from '@/ui/Form/Textarea/textarea';
 
 export const ContactForm = () => {
   const form = useForm<z.infer<typeof ContactFormSchema>>({
     resolver: zodResolver(ContactFormSchema),
+    defaultValues: {
+      email: '',
+      message: '',
+    },
   });
 
   const watchType = form.watch('type');
 
   const onSubmit = (data: z.infer<typeof ContactFormSchema>) => {
+    const { type, email } = data;
     toast({
-      title: 'You selected the following values:',
+      title: 'Received your message.',
       description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-[var(--color-black)] p-4'>
-          <code className='text-mercury'>{JSON.stringify(data, null, 2)}</code>
+        <pre className='mt-2 rounded-md bg-[var(--color-black)] p-1'>
+          <code className='text-xs text-mercury'>
+            {JSON.stringify({ type, email }, null, 2)}
+          </code>
         </pre>
       ),
     });
 
     // add the server action
   };
-
   return (
     <>
       <Form {...form}>
@@ -48,7 +55,7 @@ export const ContactForm = () => {
             control={form.control}
             name='type'
             render={({ field }) => (
-              <FormItem>
+              <FormItem className='mb-3'>
                 <FormLabel>Inquiry Type</FormLabel>
                 <FormControl>
                   <RadioGroup
@@ -95,15 +102,56 @@ export const ContactForm = () => {
               control={form.control}
               name='customType'
               render={({ field }) => (
-                <FormItem>
+                <FormItem className='mt-1 mb-3'>
                   <FormControl>
-                    <Input placeholder='Please specify.' {...field} />
+                    <Input
+                      placeholder='Please specify.'
+                      fieldHeight='small'
+                      fieldWidth='default'
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
           )}
+          <FormField
+            control={form.control}
+            name='email'
+            render={({ field }) => (
+              <FormItem className='mb-3'>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder='Email'
+                    fieldHeight='small'
+                    fieldWidth='default'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name='message'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Message</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder='Feel free to add any questions and requests.'
+                    className='resize-none'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <SmallCTAButton
             type='submit'
