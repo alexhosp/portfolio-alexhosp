@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { SmallCTAButton } from './cta-button';
 import { ChevronRight } from 'lucide-react';
+import LoadingSpinner from '@/ui/assets/LoadingSpinner/loading-spinner';
 
 const meta: Meta<typeof SmallCTAButton> = {
   title: 'Components/Button/SmallCTAButton',
@@ -15,7 +16,7 @@ export default meta;
 
 type Story = StoryObj<typeof SmallCTAButton>;
 
-export const FormCTA: Story = {
+export const FormCTAArrow: Story = {
   render: (args) => (
     <SmallCTAButton {...args}>
       {args.children}
@@ -25,4 +26,13 @@ export const FormCTA: Story = {
   args: {
     children: 'Link',
   },
+};
+
+export const LoadingCTA: Story = {
+  render: (args) => (
+    <SmallCTAButton {...args}>
+      <LoadingSpinner />
+      {args.children}
+    </SmallCTAButton>
+  ),
 };

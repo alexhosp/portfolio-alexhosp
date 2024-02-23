@@ -81,7 +81,7 @@ const FormItem = React.forwardRef<
       <div
         ref={ref}
         className={
-          marginTop ? cn('mt-2', className) : cn('space-y-3', className)
+          marginTop ? cn('mt-2', className) : cn('space-y-3 ', className)
         }
         {...props}
       />

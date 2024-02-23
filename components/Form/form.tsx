@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { ContactFormSchema } from '@/lib/auth';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 
 import { SmallCTAButton } from '@/ui/Button/cta-button';
 import {
@@ -16,10 +17,11 @@ import {
 } from '@/ui/Form/form';
 
 import { RadioGroup, RadioGroupItem } from '@/ui/Form/RadioGroup/radio-group';
-import { Toaster } from '@/ui/Toast/toaster';
 import { toast } from '@/ui/Toast/hooks/use-toast';
 import { Input } from '@/ui/Form/FormInput/InputField/input';
 import { Textarea } from '@/ui/Form/Textarea/textarea';
+import { Toaster } from '@/ui/Toast/toaster';
+import LoadinSpinner from '@/ui/assets/LoadingSpinner/loading-spinner';
 
 export const ContactForm = () => {
   const form = useForm<z.infer<typeof ContactFormSchema>>({
@@ -31,9 +33,17 @@ export const ContactForm = () => {
   });
 
   const watchType = form.watch('type');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = (data: z.infer<typeof ContactFormSchema>) => {
+  const onSubmit = async (data: z.infer<typeof ContactFormSchema>) => {
+    setIsSubmitting(true);
+
     const { type, email } = data;
+
+    // simulate the server action, add the server action here
+    // make sure to add error handling
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     toast({
       title: 'Received your message.',
       description: (
@@ -44,54 +54,58 @@ export const ContactForm = () => {
         </pre>
       ),
     });
-
-    // add the server action
+    setIsSubmitting(false);
   };
   return (
     <>
       <Form {...form}>
-        <form onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}>
+        <form
+          onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
+          className='bg-[var(--color-background)]/25 mx-auto w-[20rem]'
+        >
           <FormField
             control={form.control}
             name='type'
             render={({ field }) => (
-              <FormItem className='mb-3'>
+              <FormItem className='my-3 flex flex-col items-start'>
                 <FormLabel>Inquiry Type</FormLabel>
                 <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className='flex flex-col space-y-1'
-                  >
-                    <FormItem className='flex items-center space-x-3 space-y-0'>
-                      <FormControl>
-                        <RadioGroupItem value='job' />
-                      </FormControl>
-                      <FormLabel className='font-normal'>Job Offer</FormLabel>
-                    </FormItem>
-                    <FormItem className='flex items-center space-x-3 space-y-0'>
-                      <FormControl>
-                        <RadioGroupItem value='freelance' />
-                      </FormControl>
-                      <FormLabel className='font-normal'>
-                        Freelance Opportunity
-                      </FormLabel>
-                    </FormItem>
-                    <FormItem className='flex items-center space-x-3 space-y-0'>
-                      <FormControl>
-                        <RadioGroupItem value='colab' />
-                      </FormControl>
-                      <FormLabel className='font-normal'>
-                        Collaboration Request
-                      </FormLabel>
-                    </FormItem>
-                    <FormItem className='flex items-center space-x-3 space-y-0'>
-                      <FormControl>
-                        <RadioGroupItem value='other' />
-                      </FormControl>
-                      <FormLabel className='font-normal'>Other</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
+                  <div className='flex flex-col items-center'>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className='flex flex-col space-y-1'
+                    >
+                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                        <FormControl>
+                          <RadioGroupItem value='job' />
+                        </FormControl>
+                        <FormLabel className='font-normal'>Job Offer</FormLabel>
+                      </FormItem>
+                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                        <FormControl>
+                          <RadioGroupItem value='freelance' />
+                        </FormControl>
+                        <FormLabel className='font-normal'>
+                          Freelance Opportunity
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                        <FormControl>
+                          <RadioGroupItem value='colab' />
+                        </FormControl>
+                        <FormLabel className='font-normal'>
+                          Collaboration Request
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                        <FormControl>
+                          <RadioGroupItem value='other' />
+                        </FormControl>
+                        <FormLabel className='font-normal'>Other</FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -120,13 +134,13 @@ export const ContactForm = () => {
             control={form.control}
             name='email'
             render={({ field }) => (
-              <FormItem className='mb-3'>
+              <FormItem className='my-3 flex flex-col items-start'>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input
                     placeholder='Email'
                     fieldHeight='small'
-                    fieldWidth='default'
+                    fieldWidth='full'
                     {...field}
                   />
                 </FormControl>
@@ -139,7 +153,7 @@ export const ContactForm = () => {
             control={form.control}
             name='message'
             render={({ field }) => (
-              <FormItem>
+              <FormItem className='my-3 flex flex-col items-start'>
                 <FormLabel>Message</FormLabel>
                 <FormControl>
                   <Textarea
@@ -157,9 +171,10 @@ export const ContactForm = () => {
             type='submit'
             variant='cta'
             size='xs'
-            className='mt-6'
+            className='inline-flex place-items-center min-w-20 mt-6 drop-shadow-lg bg-[var(--color-background)] text-[var(--color-foreground)]'
+            disabled={isSubmitting}
           >
-            Submit
+            {isSubmitting ? <LoadinSpinner /> : 'Submit'}
           </SmallCTAButton>
         </form>
       </Form>

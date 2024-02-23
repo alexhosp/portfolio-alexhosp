@@ -9,7 +9,7 @@ const textVariants = cva(['text-body'], {
       large:
         'text-lg font-bold text-center md:text-xl tracking-wider antialiased text-pretty whitespace-normal',
       small:
-        'text-sm/[1.2rem] text-left tracking-wide antialiased text-pretty whitespace-normal',
+        'text-sm/[1.2rem] tracking-wide antialiased text-pretty whitespace-normal',
     },
     textColor: {
       default: 'text-[var(--color-foreground)]',
