@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import { motion, MotionProps } from 'framer-motion';
 import { headingAnimations } from '../util/animation';
 
-const headingVariants = cva([' font-exo2 text-center'], {
+const headingVariants = cva([' font-exo2 text-center flex items-center'], {
   variants: {
     size: {
       h1Default:

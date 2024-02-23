@@ -5,8 +5,19 @@ import { iconAnimation } from '../../util/animation';
 const EmailIcon = () => {
   return (
     <MotionButton variant='ghost' size='icon' {...iconAnimation}>
-      <Mail />
+      <Mail aria-label='Mail Icon' />
     </MotionButton>
   );
 };
 export default EmailIcon;
+
+export const EmailIconLarge = () => {
+  return (
+    <MotionButton variant='ghost' size='iconLarge' {...iconAnimation}>
+      <Mail
+        style={{ height: '4.8rem', width: '4.8rem' }}
+        aria-label='Mail Icon'
+      />
+    </MotionButton>
+  );
+};

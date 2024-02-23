@@ -26,7 +26,10 @@ const buttonVariants = cva(
         sm: 'min-h-9 rounded-full px-5 py-1 lg:py-0 text-2xl lg:text-sm',
         lg: 'h-11 rounded-full px-8',
         icon: 'h-11 w-11',
+        iconLarge: 'h-[5.5rem] w-[5.5rem]',
         nav: 'text-3xl font-bold text-left font-display tracking-wider lg:tracking-[0.09em] lg:text-sm lg:font-normal text-center',
+        footer:
+          'font-display tracking-wider tracking-[0.09em] text-sm font-normal text-center',
       },
     },
     defaultVariants: {
