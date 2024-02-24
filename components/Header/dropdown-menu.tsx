@@ -42,17 +42,17 @@ const containerVariants = {
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
   visible: { y: 0, opacity: 1 },
-  exit: { y: -20, opacity: 0 }, // Define how each item should animate out
+  exit: { y: -20, opacity: 0 },
 };
 
 const NavigationBar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const navContentClass = dropdownOpen ? 'opacity-0' : 'opacity-100';
+  const navContentClass = dropdownOpen ? 'opacity-0' : 'opacity-80';
   const navBarOverlayClass = dropdownOpen ? 'bg-[var(--color-background)]' : '';
 
   return (
     <nav
-      className={`flex items-center justify-between bg-[var(--color-detail)] bg-opacity-80 ${navBarOverlayClass}`}
+      className={`flex items-center justify-between bg-[#e5e4e2]/90 dark:bg-[#1c2022]/90 ${navBarOverlayClass}`}
     >
       <div className={`small-shadow ${navContentClass}`}>
         <LogoIcon />
@@ -97,7 +97,7 @@ const NavigationBar = () => {
           </div>
         </DropdownMenuPrimitive.Trigger>
         <DropdownMenuPrimitive.Portal>
-          <DropdownMenuPrimitive.Content className='top-0 min-h-screen w-screen flex flex-col items-start bg-[var(--color-detail)] focus:outline-none'>
+          <DropdownMenuPrimitive.Content className='top-0 min-h-screen w-screen flex flex-col items-start bg-[var(--color-background)] focus:outline-none'>
             <motion.div
               variants={containerVariants}
               initial='hidden'

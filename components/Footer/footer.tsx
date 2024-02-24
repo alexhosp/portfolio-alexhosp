@@ -10,7 +10,7 @@ import { PrivacyPolicyModal } from '@/components/Modal/modal';
 
 const Footer = () => {
   return (
-    <footer className='bg-[var(--color-detail)]' role='contentinfo'>
+    <footer className='bg-[var(--color-background)]' role='contentinfo'>
       <nav role='navigation'>
         <div className='mx-auto max-w-screen-xl'>
           <div className='md:grid md:grid-cols-4 md:pt-6 md:justify-center items-center'>

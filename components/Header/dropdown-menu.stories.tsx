@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { ThemeProvider } from 'next-themes';
 
 const meta: Meta<typeof NavigationBar> = {
-  title: 'Components/NavigationBar',
+  title: 'Components/Navigation/Header',
   component: NavigationBar,
   tags: ['autodocs'],
   decorators: [

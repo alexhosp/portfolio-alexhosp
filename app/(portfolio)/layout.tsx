@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import '@/app/globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Exo_2 as displayFont, Open_Sans as bodyFont } from 'next/font/google';
-import NavigationBar from '@/components/ui/DropdownMenu/dropdown-menu';
 
 export const metadata: Metadata = {
   title: 'Alex Hosp Portfolio',
@@ -35,7 +34,6 @@ const RootLayout = ({
           enableSystem
           disableTransitionOnChange
         >
-          <NavigationBar />
           {children}
         </ThemeProvider>
       </body>

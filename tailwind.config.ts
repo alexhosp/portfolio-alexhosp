@@ -36,6 +36,7 @@ const config = {
         mercury: '#e6e6e8',
         electricBlue: '#007fff',
         darkElectricBlue: '#0861c5',
+        backgroundLight: '#e5e4e2',
       },
       fontFamily: {
         display: ['var(--font-exo2)'],
