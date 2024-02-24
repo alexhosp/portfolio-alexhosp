@@ -8,9 +8,9 @@ export const RootLayout: React.FC<{
   return (
     <div className='flex flex-col'>
       <Slot>
-        <div className='fixed top-0 left-0 w-full z-[200]'>{header}</div>
+        <div className='fixed top-0 left-0 w-full z-[40]'>{header}</div>
       </Slot>
-      <main className='flex-grow overflow-auto mt-11'>{children}</main>
+      <div className='flex-grow overflow-auto mt-[5.5rem]'>{children}</div>
       <Slot>
         <div className='mt-auto'>{footer}</div>
       </Slot>

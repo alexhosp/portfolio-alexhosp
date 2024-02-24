@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import '@/app/globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Exo_2 as displayFont, Open_Sans as bodyFont } from 'next/font/google';
+import { RootLayout } from '@/ui/Layout/root-layout';
+import NavigationBar from '@/components/Header/dropdown-menu';
+import Footer from '@/components/Footer/footer';
 
 export const metadata: Metadata = {
   title: 'Alex Hosp Portfolio',
@@ -20,7 +23,7 @@ const openSans = bodyFont({
   variable: '--font-open-sans',
 });
 
-const RootLayout = ({
+const Layout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -34,11 +37,13 @@ const RootLayout = ({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <RootLayout header={<NavigationBar />} footer={<Footer />}>
+            {children}
+          </RootLayout>
         </ThemeProvider>
       </body>
     </html>
   );
 };
 
-export default RootLayout;
+export default Layout;

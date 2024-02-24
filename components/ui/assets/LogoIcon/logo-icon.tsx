@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { MotionButton } from '@/ui/Button/button';
 import { iconAnimation } from '@/ui/util/animation';
@@ -27,11 +29,10 @@ const LogoIcon: React.FC = () => {
       >
         <div>
           <Image
-            src='/logo-light.png'
+            src='/logo-blue.png'
             width={1024}
             height={1024}
             alt='Logo Icon'
-            layout='responsive'
           />
         </div>
       </MotionButton>
@@ -62,11 +63,10 @@ export const LogoIconLarge: React.FC = () => {
       >
         <div>
           <Image
-            src='/logo-light.png'
+            src='/logo-blue.png'
             width={1024}
             height={1024}
             alt='Logo Icon'
-            layout='responsive'
             style={{ height: '4.8rem', width: '4.8rem' }}
           />
         </div>

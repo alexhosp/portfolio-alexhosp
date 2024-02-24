@@ -1,3 +1,4 @@
+'use client';
 import LogoIcon from '@/ui/assets/LogoIcon/logo-icon';
 import { LogoIconLarge } from '@/ui/assets/LogoIcon/logo-icon';
 import { LargeLinkednIcon } from '@/ui/assets/LinkedInIcon/linkedin-icon';
@@ -12,7 +13,7 @@ const Footer = () => {
   return (
     <footer className='bg-[var(--color-background)]' role='contentinfo'>
       <nav role='navigation'>
-        <div className='mx-auto max-w-screen-xl'>
+        <div className='mx-auto max-w-screen'>
           <div className='md:grid md:grid-cols-4 md:pt-6 md:justify-center items-center'>
             <div className='md:col-span-1 pt-1.5 mb-3 md:mb-0 flex flex-row align-center justify-center'>
               <div className='md:hidden'>
@@ -21,10 +22,18 @@ const Footer = () => {
               <div className='hidden md:block'>
                 <LogoIconLarge />
               </div>
-              <Heading as='h2' color='default' size='h2Tiny'>
-                Alex Hosp
-              </Heading>
+              <div className='md:hidden sm:block lg:block'>
+                <Heading as='h2' color='default' size='h2Tiny'>
+                  Alex Hosp
+                </Heading>
+              </div>
+              <div className='md:flex sm:hidden lg:hidden items-center'>
+                <Text as='p' color='default' size='small' textColor='default'>
+                  Alex Hosp
+                </Text>
+              </div>
             </div>
+
             <div className='md:col-span-3 md:flex md:place-content-around grid grid-cols-1 gap-6 md:gap-0'>
               <div>
                 <ul className='grid grid-cols-3 gap-3'>
@@ -61,6 +70,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
+
           <hr className='my-6 border-[var(--color-primary)] sm:mx-auto lg:my-8' />
           <div className='flex flex-col items-center text-center pb-1.5'>
             <Text as='p' textColor='default' size='small'>

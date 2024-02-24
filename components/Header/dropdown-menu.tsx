@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useState } from 'react';
-import LogoIcon from '@/ui/assets/LogoIcon/logo-icon';
+import LogoIcon, { LogoIconLarge } from '@/ui/assets/LogoIcon/logo-icon';
 import { ModeToggle } from '@/ui/assets/ThemeToggle/theme-toggle';
 import GitHubIcon from '@/ui/assets/GitHubIcon/gh-icon';
 import MenuItem from '@/ui/MenuItem/menu-item';
@@ -10,6 +10,7 @@ import Link from 'next/link';
 import HamburgerIcon from '@/ui/assets/HamburgerIcon/hamburger-icon';
 import { motion } from 'framer-motion';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import { Heading } from '@/ui/Heading/heading';
 
 const navLinks = [
   { name: 'About', href: '/about' },
@@ -52,10 +53,18 @@ const NavigationBar = () => {
 
   return (
     <nav
-      className={`flex items-center justify-between bg-[#e5e4e2]/90 dark:bg-[#1c2022]/90 ${navBarOverlayClass}`}
+      className={`flex items-center justify-around bg-[#e5e4e2]/90 dark:bg-[#1c2022]/90 ${navBarOverlayClass}`}
     >
       <div className={`small-shadow ${navContentClass}`}>
-        <LogoIcon />
+        <div className='md:hidden flex place-content-center'>
+          <LogoIcon />
+        </div>
+        <div className='hidden md:flex place-content-center'>
+          <LogoIconLarge />
+          <Heading as='h2' color='default' size='h2Tiny'>
+            Alex Hosp
+          </Heading>
+        </div>
       </div>
 
       <div
@@ -87,7 +96,7 @@ const NavigationBar = () => {
         onOpenChange={setDropdownOpen}
       >
         <DropdownMenuPrimitive.Trigger asChild>
-          <div className='md:hidden z-40'>
+          <div className='lg:hidden z-40'>
             <HamburgerIcon
               isOpen={dropdownOpen}
               toggleOpen={() => {

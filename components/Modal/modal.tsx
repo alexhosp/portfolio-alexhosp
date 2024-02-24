@@ -1,24 +1,34 @@
 'use client';
+
 import {
   Dialog,
   DialogContent,
-  DialogTrigger,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
+  DialogTrigger,
 } from '@/ui/Dialog/dialog';
-import { EmailIconLarge } from '@/ui/assets/EmailIcon/email-icon';
+
+import { Mail } from 'lucide-react';
 import { Card } from '@/ui/Card/card';
+import { iconAnimation } from '@/ui/util/animation';
+import { motion } from 'framer-motion';
 
 import { ContactForm } from '@/components/Form/form';
 import { FooterMenuItem } from '@/ui/MenuItem/menu-item';
+
+const MotionMail = motion(Mail);
 
 export const ContactFormModal = () => {
   return (
     <>
       <Dialog>
         <DialogTrigger>
-          <EmailIconLarge />
+          <MotionMail
+            {...iconAnimation}
+            style={{ height: '4.8rem', width: '4.8rem' }}
+            aria-label='Open the contact form'
+          />
         </DialogTrigger>
         <DialogContent>
           <Card
@@ -48,7 +58,7 @@ export const PrivacyPolicyModal = () => {
     <>
       <Dialog>
         <DialogTrigger>
-          <FooterMenuItem>Privacy Policy</FooterMenuItem>
+          <FooterMenuItem isModalTrigger>Privacy Policy</FooterMenuItem>
         </DialogTrigger>
         <DialogContent>
           <Card

@@ -12,6 +12,8 @@ const LinkednIcon: React.FC = () => {
         className='object-contain'
         style={{ height: '1.1rem', width: '1.1rem' }}
         aria-label='Visit my LinkedIn Profile'
+        target='_blank'
+        rel='noopener noreferrer'
       />
     </MotionButton>
   );
@@ -28,6 +30,8 @@ export const LargeLinkednIcon: React.FC = () => {
         className='object-contain'
         style={{ height: '4.8rem', width: '4.8rem' }}
         aria-label='Visit my LinkedIn Profile'
+        target='_blank'
+        rel='noopener noreferrer'
       />
     </MotionButton>
   );
