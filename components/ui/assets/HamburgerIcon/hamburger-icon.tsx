@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@/ui/Button/button';
+
 import { motion } from 'framer-motion';
 
 const lineVariants = {
@@ -36,39 +36,34 @@ const HamburgerIcon: React.FC<HamburgerIconProps> = ({
   toggleOpen,
 }) => {
   return (
-    <Button
-      variant='ghost'
-      size='icon'
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 24 24'
+      className='p-2.5 w-11 h-11 text-[var(--color-foreground)] transition-colors'
       onClick={toggleOpen}
       aria-label='Toggle menu'
     >
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        viewBox='0 0 24 24'
-        className='w-6 h-6'
-      >
-        <motion.path
-          fill='none'
-          strokeWidth='1.5'
-          stroke='currentColor'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          d='M3.75 9h16.5'
-          variants={lineVariants}
-          animate={isOpen ? 'open' : 'closed'}
-        />
-        <motion.path
-          fill='none'
-          strokeWidth='1.5'
-          stroke='currentColor'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          d='M3.75 15.75h16.5'
-          variants={crossVariants}
-          animate={isOpen ? 'open' : 'closed'}
-        />
-      </svg>
-    </Button>
+      <motion.path
+        fill='none'
+        strokeWidth='1.5'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        d='M3.75 9h16.5'
+        variants={lineVariants}
+        animate={isOpen ? 'open' : 'closed'}
+      />
+      <motion.path
+        fill='none'
+        strokeWidth='1.5'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        d='M3.75 15.75h16.5'
+        variants={crossVariants}
+        animate={isOpen ? 'open' : 'closed'}
+      />
+    </svg>
   );
 };
 export default HamburgerIcon;

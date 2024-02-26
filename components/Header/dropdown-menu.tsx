@@ -95,7 +95,7 @@ const NavigationBar = () => {
         open={dropdownOpen}
         onOpenChange={setDropdownOpen}
       >
-        <DropdownMenuPrimitive.Trigger asChild>
+        <DropdownMenuPrimitive.Trigger>
           <div className='lg:hidden z-40'>
             <HamburgerIcon
               isOpen={dropdownOpen}
