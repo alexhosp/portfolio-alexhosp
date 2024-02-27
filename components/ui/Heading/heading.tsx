@@ -1,7 +1,8 @@
+'use client';
+
 import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import { motion, MotionProps } from 'framer-motion';
-import { headingAnimations } from '../util/animation';
 
 const headingVariants = cva([' font-exo2 text-center flex items-center'], {
   variants: {
@@ -41,7 +42,7 @@ export interface HeadingProps
     VariantProps<typeof headingVariants> {
   as: 'h1' | 'h2' | 'h3';
   color: 'default' | 'h2accent' | 'h1accent' | 'lighter' | 'h2accentgradient';
-  children: React.ReactNode;
+  children?: React.ReactNode;
   size:
     | 'h1Default'
     | 'h1Accent'
@@ -51,6 +52,7 @@ export interface HeadingProps
     | 'h2Tiny'
     | 'h3Default'
     | 'h3Small';
+  text?: string;
 }
 
 export const Heading: React.FC<HeadingProps> = ({
@@ -67,23 +69,53 @@ export const Heading: React.FC<HeadingProps> = ({
   return <Component className={combinedClasses}>{children}</Component>;
 };
 
+const childVariants = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut',
+      type: 'spring',
+    },
+  },
+};
+
 export const MotionHeading: React.FC<HeadingProps & MotionProps> = ({
-  children,
-  as,
+  as = 'h1',
   size,
   color = 'default',
+  text,
   ...props
 }) => {
-  const Component = motion(as);
   const variantClasses = headingVariants({ size, color });
   const combinedClasses = cn(variantClasses);
 
-  const selectedAnimation = as === 'h1' ? 'expand' : 'bounce';
-  const animationProps = headingAnimations[selectedAnimation];
+  const Component = motion(as);
 
   return (
-    <Component className={combinedClasses} {...animationProps} {...props}>
-      {children}
+    <Component className={combinedClasses} {...props}>
+      <span className='sr-only'>{text}</span>
+      <motion.span
+        aria-hidden
+        initial='hidden'
+        animate='visible'
+        transition={{
+          staggerChildren: 0.1,
+          ease: 'easeInOut',
+          type: 'spring',
+        }}
+      >
+        {text?.split('').map((char, index) => (
+          <motion.span key={index} variants={childVariants}>
+            {char}
+          </motion.span>
+        ))}
+      </motion.span>
     </Component>
   );
 };

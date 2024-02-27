@@ -48,31 +48,3 @@ export const cancelButtonAnimation = {
     },
   },
 };
-
-export const headingAnimations = {
-  expand: {
-    initial: { opacity: 0, scaleX: 0 },
-    animate: {
-      opacity: 1,
-      scaleX: 1,
-      transition: {
-        duration: 10,
-        type: 'spring',
-        stiffness: 700,
-        damping: 900,
-        delay: 2,
-        ease: 'easeInOut',
-      },
-    },
-    whileInView: { opacity: 1, scaleX: 1 },
-  },
-  bounce: {
-    initial: { y: -30, opacity: 0 },
-    animate: {
-      y: 0,
-      opacity: 1,
-      transition: { type: 'spring', stiffness: 260, damping: 20 },
-    },
-    whileInView: { y: 0, opacity: 1 }, // If you want it to bounce when in view
-  },
-};

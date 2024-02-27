@@ -22,12 +22,12 @@ const Footer = () => {
               <div className='hidden md:block'>
                 <LogoIconLarge />
               </div>
-              <div className='md:hidden sm:block lg:block'>
+              <div className='md:hidden flex lg:flex place-content-center'>
                 <Heading as='h2' color='default' size='h2Tiny'>
                   Alex Hosp
                 </Heading>
               </div>
-              <div className='md:flex sm:hidden lg:hidden items-center'>
+              <div className='md:flex hidden lg:hidden items-center'>
                 <Text as='p' color='default' size='small' textColor='default'>
                   Alex Hosp
                 </Text>
