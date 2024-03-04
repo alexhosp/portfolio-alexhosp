@@ -6,7 +6,7 @@ const svgVariants = {
   hidden: { opacity: 0, y: -50 },
   visible: {
     opacity: 1,
-    y: 50,
+    y: 20,
     transition: { duration: 5, ease: 'easeOut' },
   },
 };

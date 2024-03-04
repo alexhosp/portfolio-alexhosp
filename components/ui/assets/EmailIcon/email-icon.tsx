@@ -17,7 +17,7 @@ export const EmailIconLarge = () => {
   return (
     <MotionButton variant='ghost' size='iconLarge' {...iconAnimation}>
       <Mail
-        style={{ height: '4.8rem', width: '4.8rem' }}
+        style={{ height: '50px', width: '50px' }}
         aria-label='Open the contact form'
       />
     </MotionButton>

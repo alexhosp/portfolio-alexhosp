@@ -2,7 +2,7 @@ import { MotionButton } from '../../Button/button';
 import { iconAnimation } from '../../util/animation';
 import { SocialIcon } from 'react-social-icons';
 
-const LinkednIcon: React.FC = () => {
+const LinkedInIcon: React.FC = () => {
   return (
     <MotionButton variant='ghost' size='icon' {...iconAnimation}>
       <SocialIcon
@@ -18,7 +18,7 @@ const LinkednIcon: React.FC = () => {
     </MotionButton>
   );
 };
-export default LinkednIcon;
+export default LinkedInIcon;
 
 export const LargeLinkednIcon: React.FC = () => {
   return (
@@ -28,7 +28,7 @@ export const LargeLinkednIcon: React.FC = () => {
         bgColor='var(--color-foreground)'
         fgColor='var(--color-background)'
         className='object-contain'
-        style={{ height: '4.8rem', width: '4.8rem' }}
+        style={{ height: '50px', width: '50px' }}
         aria-label='Visit my LinkedIn Profile'
         target='_blank'
         rel='noopener noreferrer'

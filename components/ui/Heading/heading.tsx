@@ -4,38 +4,43 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import { motion, MotionProps } from 'framer-motion';
 
-const headingVariants = cva([' font-exo2 text-center flex items-center'], {
-  variants: {
-    size: {
-      h1Default:
-        'mb-4 pt-5 pb-0.5 text-[2.5rem] leading-none font-extrabold tracking-wider md:text-5xl md:pt-11 md:pb-1 lg:text-[4rem] lg:pt-[1.625rem] lg:tracking-[0.09em]',
-      h1Accent: 'text-6xl font-black md:text-7xl lg:text-8xl pb-2',
-      h2Big:
-        'text-[2.5rem] font-extrabold tracking-wider md:text-5xl lg:text-[4rem]',
-      h2Default: 'text-[2rem] font-bold tracking-wide md:text-4xl lg:text-6xl',
-      h2Small: 'text-2xl font-semibold tracking-wider md:text-3xl lg:text-5xl',
-      h2Tiny: 'text-lg font-semibold tracking-wider',
-      h3Default:
-        'text-xl uppercase tracking-wider md:text-2xl lg:text-4xl font-semibold',
-      h3Small:
-        'text-sm md:text-base uppercase tracking-wider font-semibold pb-2 antialiased',
-    },
+const headingVariants = cva(
+  ['font-display text-center flex justify-center items-center'],
+  {
+    variants: {
+      size: {
+        h1Default:
+          'mb-4 pt-5 pb-0.5 text-[2.5rem] leading-none font-extrabold tracking-wider md:text-5xl md:pt-11 md:pb-1 lg:text-[4rem] lg:pt-[1.625rem] lg:tracking-[0.09em]',
+        h1Accent: 'text-6xl font-black md:text-7xl lg:text-8xl pb-2',
+        h2Big:
+          'text-[2.5rem] font-extrabold tracking-wider md:text-5xl lg:text-[4rem]',
+        h2Default:
+          'text-[2rem] font-bold tracking-wide md:text-4xl lg:text-6xl',
+        h2Small:
+          'text-2xl font-semibold tracking-wider md:text-3xl lg:text-5xl',
+        h2Tiny: 'text-lg font-semibold tracking-wider',
+        h3Default:
+          'text-xl uppercase tracking-wider md:text-2xl lg:text-4xl font-semibold',
+        h3Small:
+          'text-sm md:text-base uppercase tracking-wider font-semibold pb-2 antialiased',
+      },
 
-    color: {
-      default: 'text-[var(--color-foreground)]',
-      h1accent:
-        'bg-clip-text text-transparent bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-foreground)] drop-shadow-lg',
-      h2accent: 'text-[var(--color-accent)] drop-shadow-md',
-      h2accentgradient:
-        'bg-clip-text text-transparent bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-active)] drop-shadow-md',
-      lighter: 'text-[var(--color-primary)] drop-shadow-lg',
+      color: {
+        default: 'text-[var(--color-foreground)]',
+        h1accent:
+          'bg-clip-text text-transparent bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-foreground)] drop-shadow-lg',
+        h2accent: 'text-[var(--color-accent)] drop-shadow-md',
+        h2accentgradient:
+          'bg-clip-text text-transparent bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-active)] drop-shadow-md',
+        lighter: 'text-[var(--color-primary)] drop-shadow-lg',
+      },
     },
-  },
-  defaultVariants: {
-    size: 'h2Default',
-    color: 'default',
-  },
-});
+    defaultVariants: {
+      size: 'h2Default',
+      color: 'default',
+    },
+  }
+);
 
 export interface HeadingProps
   extends React.HTMLAttributes<HTMLHeadingElement>,
@@ -72,7 +77,7 @@ export const Heading: React.FC<HeadingProps> = ({
 const childVariants = {
   hidden: {
     opacity: 0,
-    y: 50,
+    y: 100,
   },
   visible: {
     opacity: 1,
@@ -101,6 +106,7 @@ export const MotionHeading: React.FC<HeadingProps & MotionProps> = ({
     <Component className={combinedClasses} {...props}>
       <span className='sr-only'>{text}</span>
       <motion.span
+        className='font-display tracking-[0.008em]'
         aria-hidden
         initial='hidden'
         animate='visible'

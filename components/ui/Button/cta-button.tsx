@@ -1,15 +1,23 @@
+'use client';
+
 import { MotionButton, Button } from './button';
 import { CTAButtonAnimation } from '../util/animation';
 import { ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ButtonHTMLAttributes } from 'react';
 
-export const CTAButton: React.FC<{ children: React.ReactNode }> = ({
-  children,
-  ...props
-}) => {
+export const CTAButton: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+}> = ({ children, className, ...props }) => {
   return (
-    <MotionButton variant='cta' size='sm' {...CTAButtonAnimation} {...props}>
+    <MotionButton
+      className={className}
+      variant='cta'
+      size='sm'
+      {...CTAButtonAnimation}
+      {...props}
+    >
       {children}
     </MotionButton>
   );

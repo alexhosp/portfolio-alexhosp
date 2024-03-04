@@ -26,7 +26,7 @@ export const ContactFormModal = () => {
         <DialogTrigger>
           <MotionMail
             {...iconAnimation}
-            style={{ height: '4.8rem', width: '4.8rem' }}
+            style={{ height: '50px', width: '50px' }}
             aria-label='Open the contact form'
           />
         </DialogTrigger>

@@ -44,14 +44,17 @@ export default LogoIcon;
 export const LogoIconLarge: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const handleNavigation = useCallback((event: React.MouseEvent) => {
-    event.preventDefault();
-    if (pathname === '/') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      router.push('/');
-    }
-  }, []);
+  const handleNavigation = useCallback(
+    (event: React.MouseEvent) => {
+      event.preventDefault();
+      if (pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        router.push('/');
+      }
+    },
+    [pathname, router]
+  );
   return (
     <div className='px-1 flex items-center'>
       <MotionButton

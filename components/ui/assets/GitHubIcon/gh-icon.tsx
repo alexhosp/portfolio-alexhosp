@@ -48,7 +48,7 @@ export const LargeGitHubIcon = () => {
           viewBox='0 0 15 15'
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
-          style={{ height: '4.8rem', width: '4.8rem' }}
+          style={{ height: '50px', width: '50px' }}
           className='text-[var(--color-icon)] transition-colors cursor-pointer focus:outline-none'
         >
           <path
