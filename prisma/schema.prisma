@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Content {
+  id               Int      @id @default(autoincrement())
+  type             String // "service", "project", "about", 'FAQ'
+  title            String
+  imageUrl         String?
+  shortDescription String // for homepage
+  description      String? // for summary pages
+  fullDescription  String? // for dedicated service/project/about pages
+  cta              String?
+  additionalInfo   Json? // for any additional structured data
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
