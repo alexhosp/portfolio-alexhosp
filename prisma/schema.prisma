@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Content {
@@ -12,9 +13,9 @@ model Content {
   type             String // "service", "project", "about", 'FAQ'
   title            String
   imageUrl         String?
-  shortDescription String // for homepage
-  description      String? // for summary pages
-  fullDescription  String? // for dedicated service/project/about pages
+  shortDescription String   @db.Text // for homepage
+  description      String?  @db.Text // for summary pages
+  fullDescription  String?  @db.Text // for dedicated service/project/about pages
   cta              String?
   additionalInfo   Json? // for any additional structured data
   createdAt        DateTime @default(now())

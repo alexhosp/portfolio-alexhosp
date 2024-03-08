@@ -5,7 +5,7 @@ const textVariants = cva(['text-body'], {
   variants: {
     size: {
       default:
-        'text-base antialiased text-pretty whitespace-normal tracking-wider',
+        'text-base antialiased text-pretty whitespace-normal tracking-[0.07em]',
       large:
         'text-lg font-bold text-center md:text-xl tracking-wider antialiased text-pretty whitespace-normal',
       small:

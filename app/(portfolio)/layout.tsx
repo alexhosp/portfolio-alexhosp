@@ -1,14 +1,21 @@
 import type { Metadata } from 'next';
 import '@/app/globals.css';
-import { ThemeProvider } from '@/components/theme-provider';
 import { Exo_2 as displayFont, Open_Sans as bodyFont } from 'next/font/google';
 import { RootLayout } from '@/ui/Layout/root-layout';
 import NavigationBar from '@/components/Header/dropdown-menu';
 import Footer from '@/components/Footer/footer';
+import dynamic from 'next/dynamic';
 
+const ThemeProvider = dynamic(
+  () => import('@/components/ThemeProvider/theme-provider'),
+  { ssr: false }
+);
+
+// this will be shown on Google!
 export const metadata: Metadata = {
-  title: 'Alex Hosp Portfolio',
-  description: 'developer portfolio website',
+  title: 'Alex Hosp - Data Driven Web Development ',
+  description:
+    'Performant websites, web applications and prototypes that scale.',
 };
 
 const exo2 = displayFont({
@@ -31,12 +38,7 @@ const Layout = ({
   return (
     <html lang='en' className={`${exo2.variable} ${openSans.variable}`}>
       <body className='bg-[var(--color-background)]'>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider>
           <RootLayout header={<NavigationBar />} footer={<Footer />}>
             {children}
           </RootLayout>

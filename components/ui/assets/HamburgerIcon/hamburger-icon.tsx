@@ -36,7 +36,7 @@ const HamburgerIcon: React.FC<HamburgerIconProps> = ({
   toggleOpen,
 }) => {
   return (
-    <svg
+    <motion.svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
       className='p-2.5 w-11 h-11 text-[var(--color-foreground)] transition-colors'
@@ -63,7 +63,7 @@ const HamburgerIcon: React.FC<HamburgerIconProps> = ({
         variants={crossVariants}
         animate={isOpen ? 'open' : 'closed'}
       />
-    </svg>
+    </motion.svg>
   );
 };
 export default HamburgerIcon;

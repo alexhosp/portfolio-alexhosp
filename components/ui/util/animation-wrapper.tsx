@@ -50,7 +50,7 @@ export const CardItemAnimationWrapper: React.FC<{
     className='inline-block'
     initial='offscreen'
     whileInView='onscreen'
-    viewport={{ once: false, amount: 0.8 }}
+    viewport={{ once: false, amount: 0.5 }}
     variants={cardItemAnimationVariants[animate]}
     {...props}
   >

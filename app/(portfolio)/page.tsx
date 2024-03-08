@@ -1,12 +1,19 @@
-import { Card } from '@/ui/Card/card';
+import { Card, CardTitle } from '@/ui/Card/card';
 import { MotionHeading } from '@/ui/Heading/heading';
 import { HeroSVG } from '@/ui/assets/HeroSVG/hero-svg';
 import { CTAButton, SmallCTAButton } from '@/ui/Button/cta-button';
 import Link from 'next/link';
+import { getAboutContent } from '@/lib/data';
+import { CardItemAnimationWrapper } from '@/ui/util/animation-wrapper';
+import Image from 'next/image';
+import Text from '@/ui/Text/text';
 
-const HomePage = () => {
+const HomePage = async () => {
+  const aboutContent = await getAboutContent();
+  console.log(aboutContent[0].title);
+
   return (
-    <main>
+    <main className='overflow-x-hidden'>
       <Card
         edge='sharp'
         width='full'
@@ -45,6 +52,48 @@ const HomePage = () => {
           </div>
         </div>
       </Card>
+      {aboutContent.map((item) => {
+        return (
+          <Card
+            key={item.id}
+            edge='sharp'
+            width='full'
+            color='solidPrimary'
+            className='pt-0'
+          >
+            <CardItemAnimationWrapper animate='scaleDown'>
+              <Image
+                alt='avatar of the developer'
+                src={item.imageUrl ?? '/avatar-blue.png'}
+                height={512}
+                width={512}
+              />
+            </CardItemAnimationWrapper>
+            <CardItemAnimationWrapper animate='fadeIn'>
+              <CardTitle>{item.title}</CardTitle>
+            </CardItemAnimationWrapper>
+            <CardItemAnimationWrapper animate='floatUp'>
+              <Text
+                as='p'
+                size='large'
+                textColor='default'
+                style={{ whiteSpace: 'pre-wrap' }}
+                className='pt-4'
+              >
+                {item.shortDescription.replace(/\. /g, '.\n\n')}
+              </Text>
+            </CardItemAnimationWrapper>
+            <CardItemAnimationWrapper animate='scaleUp'>
+              <div className='md:hidden pt-5'>
+                <SmallCTAButton>{item.cta}</SmallCTAButton>
+              </div>
+              <div className='hidden md:block'>
+                <CTAButton>{item.cta}</CTAButton>
+              </div>
+            </CardItemAnimationWrapper>
+          </Card>
+        );
+      })}
     </main>
   );
 };
