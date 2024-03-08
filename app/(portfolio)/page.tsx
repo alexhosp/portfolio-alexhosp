@@ -17,7 +17,7 @@ const HomePage = async () => {
         edge='sharp'
         width='full'
         color='solidBackground'
-        className='pt-0 min-h-[80vh] md:mt-44 md:min-h-[70vh]'
+        className='justify-center pt-0 min-h-[80vh] md:mt-12'
       >
         <div>
           <MotionHeading
@@ -31,17 +31,21 @@ const HomePage = async () => {
           </div>
           <div>
             <MotionHeading
-              text='great ideas grow!'
+              text='great ideas grow'
               as='h1'
               color='h1accent'
               size='h1Default'
             ></MotionHeading>
           </div>
-          <div className='grid gap-3 grid-cols-2 grid-rows-1 mt-6 md:hidden'>
-            <SmallCTAButton>My Focus</SmallCTAButton>
-            <SmallCTAButton>My Services</SmallCTAButton>
+          <div className='grid gap-3 grid-cols-2 grid-rows-1 mt-12 md:hidden'>
+            <SmallCTAButton>
+              <Link href='/about'>My Focus</Link>
+            </SmallCTAButton>
+            <SmallCTAButton>
+              <Link href='/services'>My Services</Link>
+            </SmallCTAButton>
           </div>
-          <div className='hidden md:grid gap-12 grid-cols-2 grid-rows-1 mt-12 md:mt-20 lg:max-w-sm lg:m-auto lg:mt-12'>
+          <div className='hidden md:grid gap-12 grid-cols-2 grid-rows-1 mt-12 md:mt-20 lg:max-w-sm lg:m-auto lg:mt-12 lg:mb-6'>
             <CTAButton className='!font-bold'>
               <Link href='/about'>My Focus</Link>
             </CTAButton>
@@ -57,7 +61,7 @@ const HomePage = async () => {
             key={item.id}
             edge='sharp'
             width='full'
-            color='solidPrimary'
+            color='solidDetail'
             className='pt-0 lg:grid lg:gap-x-5'
           >
             <CardItemAnimationWrapper animate='scaleDown'>
@@ -91,7 +95,7 @@ const HomePage = async () => {
                   </SmallCTAButton>
                 </div>
                 <div className='hidden md:block md:mt-16'>
-                  <CTAButton>
+                  <CTAButton className='!text-lg'>
                     <Link href='/about'>{item.cta}</Link>
                   </CTAButton>
                 </div>

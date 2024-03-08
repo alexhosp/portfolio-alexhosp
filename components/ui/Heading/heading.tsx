@@ -10,14 +10,14 @@ const headingVariants = cva(
     variants: {
       size: {
         h1Default:
-          'mb-4 pt-5 pb-0.5 text-[2.5rem] leading-none font-extrabold tracking-wider md:text-5xl md:pt-11 md:pb-1 lg:text-[4rem] lg:pt-[1.625rem] lg:tracking-[0.09em]',
+          'mb-4 pt-5 pb-0.5 text-[2.5rem] leading-none font-extrabold tracking-[0.007em] md:text-5xl md:pt-11 md:pb-1 lg:text-6xl lg:pt-[1.625rem] lg:tracking-[0.09em]',
         h1Accent: 'text-6xl font-black md:text-7xl lg:text-8xl pb-2',
         h2Big:
-          'text-[2.5rem] font-extrabold tracking-wider md:text-5xl lg:text-[4rem]',
+          'text-[2.5rem] font-extrabold tracking-[0.007em] md:text-5xl lg:text-6xl',
         h2Default:
           'text-[2rem] font-bold tracking-wide md:text-4xl lg:text-6xl',
         h2Small:
-          'text-2xl font-semibold tracking-wider md:text-3xl lg:text-5xl',
+          'text-2xl font-semibold tracking-[0.007em] md:text-3xl lg:text-5xl',
         h2Tiny: 'text-lg font-semibold tracking-wider',
         h3Default:
           'text-xl uppercase tracking-wider md:text-2xl lg:text-4xl font-semibold',
@@ -29,7 +29,7 @@ const headingVariants = cva(
         default: 'text-[var(--color-foreground)]',
         h1accent:
           'bg-clip-text text-transparent bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-foreground)] drop-shadow-lg',
-        h2accent: 'text-[var(--color-accent)] drop-shadow-md',
+        h2accent: 'text-[var(--color-accent)] drop-shadow-sm',
         h2accentgradient:
           'bg-clip-text text-transparent bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-active)] drop-shadow-md',
         lighter: 'text-[var(--color-primary)] drop-shadow-lg',

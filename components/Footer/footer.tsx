@@ -34,40 +34,38 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className='md:col-span-3 md:flex md:place-content-around grid grid-cols-1 gap-6 md:gap-0'>
-              <div>
-                <ul className='grid grid-cols-3 gap-3'>
-                  <li className='mb-1.5 flex place-content-center'>
-                    <LargeLinkednIcon />
-                  </li>
-                  <li className='mb-1.5 flex place-content-center'>
-                    <LargeGitHubIcon />
-                  </li>
-                  <li className='mb-1.5 flex place-content-center'>
-                    <ContactFormModal />
-                  </li>
-                </ul>
-              </div>
-              <div className='flex flex-col place-content-around'>
-                <ul className='md:flex md:flex-col grid grid-cols-2 text-[var(--color-foreground)]'>
-                  <li className='mb-4 flex place-content-center'>
-                    <FooterMenuItem>
-                      <a
-                        href='/alexandra-hosp-DUMMY-resume.pdf'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        download
-                        aria-label='Download my resume as a PDF file'
-                      >
-                        Resume
-                      </a>
-                    </FooterMenuItem>
-                  </li>
-                  <li className='mb-4 flex place-content-center'>
-                    <PrivacyPolicyModal />
-                  </li>
-                </ul>
-              </div>
+            <div className='col-start-2 col-end-4 flex items-center justify-center'>
+              <ul className='grid grid-cols-3 gap-3'>
+                <li className='mb-1.5 flex place-content-center'>
+                  <LargeLinkednIcon />
+                </li>
+                <li className='mb-1.5 flex place-content-center'>
+                  <LargeGitHubIcon />
+                </li>
+                <li className='mb-1.5 flex place-content-center'>
+                  <ContactFormModal />
+                </li>
+              </ul>
+            </div>
+            <div className='col-start-4 flex flex-col place-content-around'>
+              <ul className='md:flex md:flex-col grid grid-cols-2 text-[var(--color-foreground)]'>
+                <li className='mb-4 flex place-content-center'>
+                  <FooterMenuItem>
+                    <a
+                      href='/alexandra-hosp-DUMMY-resume.pdf'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      download
+                      aria-label='Download my resume as a PDF file'
+                    >
+                      Resume
+                    </a>
+                  </FooterMenuItem>
+                </li>
+                <li className='mb-4 flex place-content-center'>
+                  <PrivacyPolicyModal />
+                </li>
+              </ul>
             </div>
           </div>
 

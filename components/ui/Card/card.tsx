@@ -5,7 +5,7 @@ import { Heading } from '../Heading/heading';
 import Text from '../Text/text';
 
 const cardVariants = cva(
-  'leading-7 w-full text-body tracking-[0.002em] flex flex-col items-center text-center pt-11 break-words',
+  'leading-7 w-full text-body flex flex-col items-center text-center pt-11',
   {
     variants: {
       edge: {
@@ -23,6 +23,7 @@ const cardVariants = cva(
         solidPrimary:
           'bg-[var(--color-primary)] text-[var(--color-foreground)]',
         solidBackground: 'bg-[var(--color-background)]',
+        solidDetail: 'bg-[var(--color-detail)]',
       },
     },
     defaultVariants: {
@@ -40,7 +41,8 @@ export interface CardProps
     | 'gradientPrimary'
     | 'gradientSecondary'
     | 'solidPrimary'
-    | 'solidBackground';
+    | 'solidBackground'
+    | 'solidDetail';
 }
 
 const Card: React.FC<CardProps> = ({

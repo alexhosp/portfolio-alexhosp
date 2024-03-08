@@ -18,17 +18,18 @@
   --color-black: #2a3439;
   --color-primary: #c0c0c0;
   --color-detail: #d1d1d1;
-  --color-accent: #007fff;
+  --color-accent: #0471e4;
   --color-accent-active: #0861c5;
   --font-exo2: 'Exo 2', sans-serif;
   --font-open-sans: 'Open Sans', sans-serif;
   --color-highlight: #7097a0;
   --color-destructive: #ff7043;
+  --color-accent-soft: #4ccbff;
 
   --radial-gradient-light: radial-gradient(
     circle at 50% center,
     var(--color-background),
-    var(--color-accent) 50%,
+    var(--color-accent-soft) 50%,
     var(--color-background) 75%,
     var(--color-background) 75%
   );
@@ -48,11 +49,12 @@
   --color-icon: #cbd5e1;
   --color-primary: #50555c;
   --color-detail: #20262a;
+  --color-accent-soft: #0f325c;
 
   --radial-gradient-light: radial-gradient(
     circle at 50% center,
     var(--color-background),
-    var(--color-accent) 50%,
+    var(--color-accent-soft) 50%,
     var(--color-background) 75%,
     var(--color-background) 75%
   );
