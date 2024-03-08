@@ -45,9 +45,10 @@ const cardItemAnimationVariants = {
 export const CardItemAnimationWrapper: React.FC<{
   children: React.ReactNode;
   animate: 'fadeIn' | 'floatUp' | 'scaleUp' | 'scaleDown';
-}> = ({ children, animate, ...props }) => (
+  className?: string;
+}> = ({ children, animate, className, ...props }) => (
   <motion.div
-    className='inline-block'
+    className={`inline-block ${className ?? ''}`}
     initial='offscreen'
     whileInView='onscreen'
     viewport={{ once: false, amount: 0.5 }}
