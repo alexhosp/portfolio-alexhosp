@@ -4,10 +4,12 @@ import * as React from 'react';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/ui/Button/button';
+
+const TWEEN_FACTOR = 0.84;
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -42,6 +44,54 @@ function useCarousel() {
   return context;
 }
 
+// dot button hook
+interface useDotButtonType {
+  selectedIndex: number;
+  scrollSnaps: number[];
+  onDotButtonClick: (index: number) => void;
+}
+
+export const useDotButton = (api: CarouselApi): useDotButtonType => {
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([]);
+
+  const onDotButtonClick = React.useCallback(
+    (index: number) => {
+      if (!api) return;
+      api.scrollTo(index);
+    },
+    [api]
+  );
+
+  const onInit = React.useCallback((api: CarouselApi) => {
+    if (api) {
+      setScrollSnaps(api.scrollSnapList());
+    }
+  }, []);
+
+  const onSelect = React.useCallback((api: CarouselApi) => {
+    if (api) {
+      setSelectedIndex(api.selectedScrollSnap());
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (!api) return;
+
+    onInit(api);
+    onSelect(api);
+    api.on('reInit', onInit);
+    api.on('reInit', onSelect);
+    api.on('select', onSelect);
+  }, [api, onInit, onSelect]);
+
+  return {
+    selectedIndex,
+    scrollSnaps,
+    onDotButtonClick,
+  };
+};
+
 const Carousel = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & CarouselProps
@@ -65,8 +115,15 @@ const Carousel = React.forwardRef<
       },
       plugins
     );
+
+    // Use the hook to get data for dot buttons
+    const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(api);
+
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
+
+    // store tween factor in a ref
+    const tweenFactor = React.useRef(0);
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
@@ -98,6 +155,22 @@ const Carousel = React.forwardRef<
       [scrollPrev, scrollNext]
     );
 
+    const adjustSlideOpacity = React.useCallback(() => {
+      if (!api) return;
+      const slides = api.slideNodes();
+
+      const scrollProgress = api.scrollProgress();
+
+      slides.forEach((slide, index) => {
+        const slideProgress = api.scrollSnapList()[index] - scrollProgress;
+        const adjustedOpacity = Math.max(
+          0,
+          1 - Math.abs(slideProgress * tweenFactor.current)
+        );
+        slide.style.opacity = adjustedOpacity.toString();
+      });
+    }, [api]);
+
     React.useEffect(() => {
       if (!api || !setApi) {
         return;
@@ -119,6 +192,27 @@ const Carousel = React.forwardRef<
         api.off('select', onSelect);
       };
     }, [api, onSelect]);
+
+    // adjust opacity of slides based on their position
+
+    React.useEffect(() => {
+      if (api) {
+        const numberOfSnaps = api.scrollSnapList().length;
+        console.log(numberOfSnaps);
+        tweenFactor.current = TWEEN_FACTOR * numberOfSnaps;
+
+        adjustSlideOpacity();
+        api.on('reInit', adjustSlideOpacity);
+        api.on('select', adjustSlideOpacity);
+        api.on('scroll', adjustSlideOpacity);
+
+        return () => {
+          api.off('reInit', adjustSlideOpacity);
+          api.off('select', adjustSlideOpacity);
+          api.off('scroll', adjustSlideOpacity);
+        };
+      }
+    }, [api, adjustSlideOpacity]);
 
     return (
       <CarouselContext.Provider
@@ -142,6 +236,19 @@ const Carousel = React.forwardRef<
           {...props}
         >
           {children}
+          <div className='flex justify-center items-center mt-4 space-x-2'>
+            {scrollSnaps.map((_, index) => (
+              <DotButton
+                key={index}
+                isSelected={index === selectedIndex}
+                onClick={() => {
+                  onDotButtonClick(index);
+                }}
+              >
+                {/*  {index + 1} */}
+              </DotButton>
+            ))}
+          </div>
         </div>
       </CarouselContext.Provider>
     );
@@ -196,7 +303,7 @@ CarouselItem.displayName = 'CarouselItem';
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
+>(({ className, variant = 'ghost', size = 'icon', ...props }, ref) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
@@ -215,7 +322,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className='h-4 w-4' />
+      <ChevronLeft className='h-11 w-11 text-[var(--color-foreground)]' />
       <span className='sr-only'>Previous slide</span>
     </Button>
   );
@@ -225,7 +332,7 @@ CarouselPrevious.displayName = 'CarouselPrevious';
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
+>(({ className, variant = 'ghost', size = 'icon', ...props }, ref) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
@@ -244,12 +351,32 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className='h-4 w-4' />
+      <ChevronRight className='h-11 w-11 text-[var(--color-foreground)]' />
       <span className='sr-only'>Next slide</span>
     </Button>
   );
 });
 CarouselNext.displayName = 'CarouselNext';
+
+// dot button component
+
+const DotButton: React.FC<{
+  onClick: () => void;
+  isSelected: boolean;
+}> = ({ onClick, isSelected, ...props }) => {
+  return (
+    <div className='flex flex-row flex-wrap justify-center items-center'>
+      <Button
+        className={` p-0 my-8 rounded-full bg-[var(--color-detail)] h-4 w-4 ${
+          isSelected ? 'bg-[var(--color-accent)]' : ''
+        }`}
+        type='button'
+        onClick={onClick}
+        {...props}
+      ></Button>
+    </div>
+  );
+};
 
 export {
   type CarouselApi,

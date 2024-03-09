@@ -22,32 +22,39 @@ const autoplay = Autoplay;
 export const DefaultCarousel: Story = {
   render: (args) => (
     <Carousel
-      className='max-w-screen m-auto'
       {...args}
       plugins={[
         autoplay({
           playOnInit: true,
-          delay: 4000,
+          delay: 3000,
+          stopOnLastSnap: true,
         }),
       ]}
+      opts={args.opts}
     >
-      <CarouselContent>
-        <CarouselItem className='basis-10/12'>
-          <Card color='solidPrimary'>
+      <CarouselContent className='flex'>
+        <CarouselItem className='basis-10/12 flex flex-grow'>
+          <Card color='solidPrimary' className='min-h-[50vh]'>
             <CardTitle>Web Application Development</CardTitle>
+            <div className='bg-[var(--color-background)]'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+              temporibus non hic eos, vero quam quae laboriosam reprehenderit,
+              illo esse perspiciatis quo quas. Animi odio laudantium beatae
+              molestias dolor dolores.
+            </div>
           </Card>
         </CarouselItem>
-        <CarouselItem className='basis-10/12'>
-          <Card color='solidPrimary'>
+        <CarouselItem className='basis-10/12 flex flex-grow'>
+          <Card color='gradientPrimary'>
             <CardTitle>Website Development</CardTitle>
           </Card>
         </CarouselItem>
-        <CarouselItem className='basis-10/12'>
+        <CarouselItem className='basis-10/12 flex flex-grow'>
           <Card color='solidPrimary'>
             <CardTitle>Prototype Development</CardTitle>
           </Card>
         </CarouselItem>
-        <CarouselItem className='basis-10/12'>
+        <CarouselItem className='basis-10/12 flex flex-grow'>
           <Card color='solidPrimary'>
             <CardTitle>Consultation</CardTitle>
           </Card>
@@ -59,9 +66,9 @@ export const DefaultCarousel: Story = {
   ),
   args: {
     opts: {
-      loop: true,
+      loop: false,
       align: 'center',
-      containScroll: 'trimSnaps',
+      containScroll: false,
     },
   },
 };
