@@ -59,6 +59,11 @@ export const DefaultCarousel: Story = {
             <CardTitle>Consultation</CardTitle>
           </Card>
         </CarouselItem>
+        <CarouselItem className='basis-10/12 flex flex-grow'>
+          <Card color='gradientPrimary'>
+            <CardTitle>Legacy Web Application Makeover</CardTitle>
+          </Card>
+        </CarouselItem>
       </CarouselContent>
       <CarouselPrevious />
       <CarouselNext />
