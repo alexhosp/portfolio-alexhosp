@@ -5,11 +5,11 @@ const textVariants = cva(['text-body'], {
   variants: {
     size: {
       default:
-        'text-base antialiased text-pretty whitespace-normal tracking-[0.07em]',
+        'text-base antialiased text-pretty whitespace-normal tracking-[0.007em]',
       large:
-        'text-lg font-bold text-center md:text-xl tracking-wider antialiased text-pretty whitespace-normal',
+        'text-lg font-bold text-center md:text-xl tracking-[0.007em] antialiased text-pretty whitespace-normal',
       small:
-        'text-sm/[1.2rem] tracking-wide antialiased text-pretty whitespace-normal',
+        'text-sm/[1.2rem] tracking-[0.007em] antialiased text-pretty whitespace-normal',
     },
     textColor: {
       default: 'text-[var(--color-foreground)]',

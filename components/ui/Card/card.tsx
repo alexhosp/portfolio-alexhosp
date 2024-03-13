@@ -5,7 +5,7 @@ import { Heading } from '../Heading/heading';
 import Text from '../Text/text';
 
 const cardVariants = cva(
-  'leading-7 w-full text-body flex flex-col items-center text-center pt-11',
+  'leading-7 w-full text-body flex flex-col items-center justify-center text-center pt-11',
   {
     variants: {
       edge: {
@@ -99,7 +99,10 @@ const CardFooter = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('flex items-center p-6 pt-0', className)} {...props} />
+  <div
+    className={cn('flex items-center justify-center p-6 pt-0', className)}
+    {...props}
+  />
 );
 CardFooter.displayName = 'CardFooter';
 

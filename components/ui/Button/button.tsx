@@ -17,7 +17,7 @@ const buttonVariants = cva(
           'cursor-pointer border border-[var(--color-foreground)] text-[var(--color-foreground)] bg-transparent  hover:border-[var(--color-destructive)] hover:text-[var(--color-destructive)]',
         outline:
           'cursor-pointer border border-[var(--color-foreground)] text-[var(--color-foreground)] bg-[var(--color-background)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]',
-        cta: 'bg-[var(--color-accent)] text-mercury hover:small-shadow rounded-full font-bold lg:font-normal font-display tracking-wider lg:tracking-[0.09em]',
+        cta: 'bg-[var(--color-accent)] text-mercury hover:small-shadow rounded-full font-bold lg:font-normal font-display tracking-wider lg:tracking-[0.007em]',
         ghost: 'text-[var(--color-foreground)] transition-colors',
         link: 'text-[var(--color-foreground)]',
         gradient: 'text-transparent font-bold font-display uppercase text-xl',

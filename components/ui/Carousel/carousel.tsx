@@ -4,6 +4,7 @@ import * as React from 'react';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
@@ -59,6 +60,7 @@ export const useDotButton = (api: CarouselApi): useDotButtonType => {
     (index: number) => {
       if (!api) return;
       api.scrollTo(index);
+      // turn the autoplay off here
     },
     [api]
   );
@@ -122,9 +124,6 @@ const Carousel = React.forwardRef<
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
 
-    // store tween factor in a ref
-    const tweenFactor = React.useRef(0);
-
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
         return;
@@ -158,16 +157,21 @@ const Carousel = React.forwardRef<
     const adjustSlideOpacity = React.useCallback(() => {
       if (!api) return;
       const slides = api.slideNodes();
-
       const scrollProgress = api.scrollProgress();
 
       slides.forEach((slide, index) => {
-        const slideProgress = api.scrollSnapList()[index] - scrollProgress;
-        const adjustedOpacity = Math.max(
-          0,
-          1 - Math.abs(slideProgress * tweenFactor.current)
+        const slideCenterPosition = api.scrollSnapList()[index];
+        const distanceFromCenter = Math.abs(
+          scrollProgress - slideCenterPosition
         );
-        slide.style.opacity = adjustedOpacity.toString();
+
+        const opacity = 1 - distanceFromCenter * TWEEN_FACTOR;
+        if (slideCenterPosition) {
+          slide.style.opacity = '1';
+          console.log('slide centered');
+        }
+
+        slide.style.opacity = opacity.toString();
       });
     }, [api]);
 
@@ -197,11 +201,8 @@ const Carousel = React.forwardRef<
 
     React.useEffect(() => {
       if (api) {
-        const numberOfSnaps = api.scrollSnapList().length;
-        console.log(numberOfSnaps);
-        tweenFactor.current = TWEEN_FACTOR * numberOfSnaps;
-
         adjustSlideOpacity();
+
         api.on('reInit', adjustSlideOpacity);
         api.on('select', adjustSlideOpacity);
         api.on('scroll', adjustSlideOpacity);
@@ -290,7 +291,7 @@ const CarouselItem = React.forwardRef<
       role='group'
       aria-roledescription='slide'
       className={cn(
-        'min-w-0 shrink-0 grow-0 basis-full',
+        'min-w-0 shrink-0 grow-0 basis-full cursor-pointer',
         orientation === 'horizontal' ? 'pl-4' : 'pt-4',
         className
       )}
@@ -385,4 +386,27 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+};
+
+export const AutoplayCarousel: React.FC<{
+  children: React.ReactNode;
+  opts?: CarouselOptions;
+  className?: string;
+}> = ({ children, opts, className }) => {
+  const autoplay = Autoplay;
+  return (
+    <Carousel
+      plugins={[
+        autoplay({
+          playOnInit: true,
+          delay: 4000,
+          stopOnLastSnap: false,
+        }),
+      ]}
+      opts={opts}
+      className={className}
+    >
+      {children}
+    </Carousel>
+  );
 };
