@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import '@/app/globals.css';
-import { Exo_2 as displayFont, Open_Sans as bodyFont } from 'next/font/google';
+import {
+  Space_Grotesk as displayFont,
+  Open_Sans as bodyFont,
+} from 'next/font/google';
 import { RootLayout } from '@/ui/Layout/root-layout';
 import NavigationBar from '@/components/Header/dropdown-menu';
 import Footer from '@/components/Footer/footer';

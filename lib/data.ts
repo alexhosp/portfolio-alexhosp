@@ -35,3 +35,23 @@ export const getServicesContent = async () => {
   });
   return servicesContent;
 };
+
+export const getProjectsContent = async () => {
+  const projectsContent = await prisma.content.findMany({
+    where: {
+      type: 'project',
+    },
+    select: {
+      id: true,
+      title: true,
+      imageUrl: true,
+      imageAlt: true,
+      shortDescription: true,
+      description: true,
+      cta: true,
+      ctaLink: true,
+      additionalInfo: true,
+    },
+  });
+  return projectsContent;
+};

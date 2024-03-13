@@ -4,12 +4,17 @@ import {
   CardTitle,
   CardContent,
   CardFooter,
+  CardDescription,
 } from '@/ui/Card/card';
 import { MotionHeading } from '@/ui/Heading/heading';
 import { HeroSVG } from '@/ui/assets/HeroSVG/hero-svg';
 import { CTAButton, SmallCTAButton } from '@/ui/Button/cta-button';
 import Link from 'next/link';
-import { getAboutContent, getServicesContent } from '@/lib/data';
+import {
+  getAboutContent,
+  getServicesContent,
+  getProjectsContent,
+} from '@/lib/data';
 import { CardItemAnimationWrapper } from '@/ui/util/animation-wrapper';
 import Image from 'next/image';
 import Text from '@/ui/Text/text';
@@ -24,6 +29,7 @@ import {
 const HomePage = async () => {
   const aboutContent = await getAboutContent();
   const servicesContent = await getServicesContent();
+  const projectsContent = await getProjectsContent();
 
   return (
     <main className='overflow-x-hidden'>
@@ -47,7 +53,7 @@ const HomePage = async () => {
             <MotionHeading
               text='great ideas grow'
               as='h1'
-              color='h1accent'
+              color='h2accentgradient'
               size='h1Default'
             ></MotionHeading>
           </div>
@@ -198,6 +204,34 @@ const HomePage = async () => {
           <CarouselNext /> */}
         </AutoplayCarousel>
       </div>
+      {projectsContent.map((project) => {
+        return (
+          <Card
+            color='solidDetail'
+            edge='rounded'
+            key={project.id}
+            className='w-5/6'
+          >
+            <CardHeader>
+              <CardTitle>{project.title}</CardTitle>
+              <CardDescription>{project.shortDescription}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <CardItemAnimationWrapper animate='scaleDown'>
+                <Image
+                  src={project.imageUrl ?? '/project_fallback.webp'}
+                  alt={project.imageAlt ?? 'product resulting from the project'}
+                  height={512}
+                  width={512}
+                />
+              </CardItemAnimationWrapper>
+            </CardContent>
+            <CardFooter>
+              {/* add dialog component triggerd by CTA */}
+            </CardFooter>
+          </Card>
+        );
+      })}
     </main>
   );
 };

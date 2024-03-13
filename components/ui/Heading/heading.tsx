@@ -106,7 +106,7 @@ export const MotionHeading: React.FC<HeadingProps & MotionProps> = ({
     <Component className={combinedClasses} {...props}>
       <span className='sr-only'>{text}</span>
       <motion.span
-        className='font-display tracking-[0.008em]'
+        className='font-[var(--font-exo2)] tracking-[0.008em]'
         aria-hidden
         initial='hidden'
         animate='visible'
