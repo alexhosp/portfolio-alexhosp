@@ -36,6 +36,10 @@ export const getServicesContent = async () => {
   return servicesContent;
 };
 
+export interface ModalImage {
+  imageAlt: string;
+  imageUrl: string;
+}
 export const getProjectsContent = async () => {
   const projectsContent = await prisma.content.findMany({
     where: {
@@ -53,5 +57,6 @@ export const getProjectsContent = async () => {
       additionalInfo: true,
     },
   });
+
   return projectsContent;
 };

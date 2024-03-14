@@ -5,9 +5,14 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogFooter,
   DialogTitle,
   DialogTrigger,
 } from '@/ui/Dialog/dialog';
+import { CardItemAnimationWrapper } from '@/ui/util/animation-wrapper';
+import { SmallCTAButton, CTAButton } from '@/ui/Button/cta-button';
+import Link from 'next/link';
+import Image from 'next/image';
 
 import { Mail } from 'lucide-react';
 import { Card } from '@/ui/Card/card';
@@ -89,5 +94,79 @@ export const PrivacyPolicyModal = () => {
         </DialogContent>
       </Dialog>
     </>
+  );
+};
+
+export interface CtaData {
+  cta: string[];
+  ctaLink: string[];
+}
+
+export const ProjectModal: React.FC<{
+  dialogTitle: string;
+  bulletPoints: string[];
+  ctaName: string | null;
+  imageUrl: string;
+  imageAlt: string;
+  dialogCtaData: CtaData;
+}> = ({
+  dialogTitle,
+  bulletPoints,
+  ctaName,
+  imageUrl,
+  imageAlt,
+  dialogCtaData,
+}) => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <CardItemAnimationWrapper animate='scaleUp'>
+          <div className='md:hidden pt-5'>
+            <SmallCTAButton>{ctaName}</SmallCTAButton>
+          </div>
+          <div className='hidden md:block md:mt-16'>
+            <CTAButton className='!text-lg'>{ctaName}</CTAButton>
+          </div>
+        </CardItemAnimationWrapper>
+      </DialogTrigger>
+      <DialogContent className='rounded-full sm:w-10/12'>
+        <Card color='solidDetail' edge='rounded' width='full'>
+          <DialogHeader>
+            <DialogTitle className='self-stretch'>{dialogTitle}</DialogTitle>
+            <Image
+              src={imageUrl ? imageUrl : '/project_fallback.webp'}
+              alt={
+                imageAlt ? imageAlt : 'illustration representing the project'
+              }
+              height={512}
+              width={512}
+              className='max-h-[50%] w-auto mx-auto'
+            />
+            <DialogDescription className='flex place-content-center self-stretch ml-10 -mt-4'>
+              <ul className='flex flex-col items-baseline mx-auto'>
+                {bulletPoints.map((line, index) => {
+                  return (
+                    <li className='py-1' key={index}>
+                      &#x2714; {line}
+                    </li>
+                  );
+                })}
+              </ul>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className='flex flex-col'>
+            <div className='flex flex-row gap-4 p-4'>
+              {dialogCtaData.cta.map((cta, index) => {
+                return (
+                  <SmallCTAButton key={index}>
+                    <Link href={dialogCtaData.ctaLink[index]}>{cta}</Link>
+                  </SmallCTAButton>
+                );
+              })}
+            </div>
+          </DialogFooter>
+        </Card>
+      </DialogContent>
+    </Dialog>
   );
 };

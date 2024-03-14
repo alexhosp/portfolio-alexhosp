@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     'Performant websites, web applications and prototypes that scale.',
 };
 
-const exo2 = displayFont({
+const spaceGrotesk = displayFont({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-exo2',
+  variable: '--font-space-grotesk',
 });
 
 const openSans = bodyFont({
@@ -39,7 +39,10 @@ const Layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang='en' className={`${exo2.variable} ${openSans.variable} `}>
+    <html
+      lang='en'
+      className={`${spaceGrotesk.variable} ${openSans.variable} `}
+    >
       <body className='bg-[var(--color-background)]'>
         <ThemeProvider>
           <RootLayout header={<NavigationBar />} footer={<Footer />}>

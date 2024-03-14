@@ -39,7 +39,7 @@ const config = {
         backgroundLight: '#e5e4e2',
       },
       fontFamily: {
-        display: ['var(--font-exo2)'],
+        display: ['var(--font-space-grotesk)'],
         body: ['var(--font-open-sans)'],
       },
       boxShadow: {

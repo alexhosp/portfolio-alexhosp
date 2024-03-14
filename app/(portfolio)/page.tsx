@@ -6,7 +6,7 @@ import {
   CardFooter,
   CardDescription,
 } from '@/ui/Card/card';
-import { MotionHeading } from '@/ui/Heading/heading';
+import { MotionHeading, Heading } from '@/ui/Heading/heading';
 import { HeroSVG } from '@/ui/assets/HeroSVG/hero-svg';
 import { CTAButton, SmallCTAButton } from '@/ui/Button/cta-button';
 import Link from 'next/link';
@@ -25,11 +25,15 @@ import {
   /*   CarouselNext,
   CarouselPrevious, */
 } from '@/ui/Carousel/carousel';
+import { Prisma } from '@prisma/client';
+import { ProjectModal, CtaData } from '@/components/Modal/modal';
 
 const HomePage = async () => {
   const aboutContent = await getAboutContent();
   const servicesContent = await getServicesContent();
   const projectsContent = await getProjectsContent();
+
+  console.log('projectsContent: ', typeof projectsContent);
 
   return (
     <main className='overflow-x-hidden'>
@@ -205,31 +209,71 @@ const HomePage = async () => {
         </AutoplayCarousel>
       </div>
       {projectsContent.map((project) => {
+        const additionalInfo = project.additionalInfo as Prisma.JsonObject;
+        const sectionTitles = additionalInfo.sectionTitle as string[];
+        const modalData = additionalInfo.projectModal as Prisma.JsonObject;
+        const modalImageData = modalData.modalImage as Prisma.JsonObject;
+        const modalImageUrl = modalImageData.imageUrl as string;
+        const modalImageAlt = modalImageData.imageAlt as string;
+        const modalBulletpoints = modalData.bulletPoints as string[];
+        const modalCtaData = modalData.modalCta;
+        console.log(modalCtaData);
+
         return (
-          <Card
-            color='solidDetail'
-            edge='rounded'
-            key={project.id}
-            className='w-5/6'
-          >
-            <CardHeader>
-              <CardTitle>{project.title}</CardTitle>
-              <CardDescription>{project.shortDescription}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CardItemAnimationWrapper animate='scaleDown'>
-                <Image
-                  src={project.imageUrl ?? '/project_fallback.webp'}
-                  alt={project.imageAlt ?? 'product resulting from the project'}
-                  height={512}
-                  width={512}
+          <>
+            <div className='w-11/12 mx-auto mt-7 mb-3.5'>
+              <Heading
+                as='h2'
+                color='default'
+                size='h2Small'
+                className='inline !text-left'
+              >
+                {Array.isArray(sectionTitles) ? sectionTitles[0] : undefined}
+                <span className='text-[var(--color-primary)] ml-2'>
+                  {Array.isArray(sectionTitles) ? sectionTitles[1] : undefined}
+                </span>
+              </Heading>
+            </div>
+
+            <Card
+              color='solidDetail'
+              edge='rounded'
+              key={project.id}
+              className='w-5/6'
+            >
+              <CardHeader>
+                <CardTitle>{project.title}</CardTitle>
+                <CardDescription>
+                  <Text as='p' size='small' textColor='default'>
+                    {project.shortDescription}
+                  </Text>
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CardItemAnimationWrapper animate='scaleDown'>
+                  <Image
+                    src={project.imageUrl ?? '/project_fallback.webp'}
+                    alt={
+                      project.imageAlt ?? 'product resulting from the project'
+                    }
+                    height={512}
+                    width={512}
+                    className='max-h-[40vh] w-auto md:max-h-[60vh]'
+                  />
+                </CardItemAnimationWrapper>
+              </CardContent>
+              <CardFooter>
+                <ProjectModal
+                  dialogTitle={project.title}
+                  imageUrl={modalImageUrl}
+                  imageAlt={modalImageAlt}
+                  bulletPoints={modalBulletpoints}
+                  ctaName={project.cta}
+                  /*  dialogCtaData={modalCtaData} */
                 />
-              </CardItemAnimationWrapper>
-            </CardContent>
-            <CardFooter>
-              {/* add dialog component triggerd by CTA */}
-            </CardFooter>
-          </Card>
+              </CardFooter>
+            </Card>
+          </>
         );
       })}
     </main>

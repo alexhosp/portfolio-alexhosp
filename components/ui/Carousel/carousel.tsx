@@ -168,7 +168,6 @@ const Carousel = React.forwardRef<
         const opacity = 1 - distanceFromCenter * TWEEN_FACTOR;
         if (slideCenterPosition) {
           slide.style.opacity = '1';
-          console.log('slide centered');
         }
 
         slide.style.opacity = opacity.toString();

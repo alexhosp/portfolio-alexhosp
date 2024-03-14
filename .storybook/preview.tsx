@@ -1,6 +1,23 @@
 import type { Preview, ReactRenderer } from '@storybook/react';
 import { withThemeByClassName } from '@storybook/addon-themes';
 import '../app/globals.css';
+import React from 'react';
+import {
+  Space_Grotesk as displayFont,
+  Open_Sans as bodyFont,
+} from 'next/font/google';
+
+const spaceGrotesk = displayFont({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-space-grotesk',
+});
+
+const openSans = bodyFont({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-open-sans',
+});
 
 const preview: Preview = {
   parameters: {
@@ -20,6 +37,11 @@ const preview: Preview = {
       },
       defaultTheme: 'light',
     }),
+    (Story) => (
+      <div className={`${spaceGrotesk.variable} ${openSans.variable}`}>
+        <Story />
+      </div>
+    ),
   ],
 };
 

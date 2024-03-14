@@ -100,6 +100,20 @@ export const AccentH2Default: Story = {
   },
 };
 
+export const LighterH2Default: Story = {
+  render: (args) => (
+    <Heading as={args.as} size={args.size} color={args.color}>
+      {args.children}
+    </Heading>
+  ),
+  args: {
+    as: 'h2',
+    size: 'h2Default',
+    color: 'lighter',
+    children: 'Accent H2',
+  },
+};
+
 export const AccentH2Small: Story = {
   render: (args) => (
     <Heading as={args.as} size={args.size} color={args.color}>
