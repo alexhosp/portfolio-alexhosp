@@ -159,7 +159,8 @@ export const ProjectModal: React.FC<{
               {dialogCtaData.cta.map((cta, index) => {
                 return (
                   <SmallCTAButton key={index}>
-                    <Link href={dialogCtaData.ctaLink[index]}>{cta}</Link>
+                    {/*  <Link href={dialogCtaData.ctaLink[index]}>{cta}</Link> */}
+                    {cta}
                   </SmallCTAButton>
                 );
               })}

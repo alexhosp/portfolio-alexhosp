@@ -269,7 +269,7 @@ const HomePage = async () => {
                   imageAlt={modalImageAlt}
                   bulletPoints={modalBulletpoints}
                   ctaName={project.cta}
-                  /*  dialogCtaData={modalCtaData} */
+                  dialogCtaData={modalCtaData}
                 />
               </CardFooter>
             </Card>
