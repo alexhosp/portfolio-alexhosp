@@ -39,10 +39,7 @@ const Layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html
-      lang='en'
-      className={`${spaceGrotesk.variable} ${openSans.variable} `}
-    >
+    <html lang='en' className={`${spaceGrotesk.variable} ${openSans.variable}`}>
       <body className='bg-[var(--color-background)]'>
         <ThemeProvider>
           <RootLayout header={<NavigationBar />} footer={<Footer />}>

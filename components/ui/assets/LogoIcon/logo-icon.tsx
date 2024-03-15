@@ -33,6 +33,7 @@ const LogoIcon: React.FC = () => {
             width={1024}
             height={1024}
             alt='Logo Icon'
+            priority
           />
         </div>
       </MotionButton>
@@ -71,6 +72,7 @@ export const LogoIconLarge: React.FC = () => {
             height={1024}
             alt='Logo Icon'
             style={{ height: '4.8rem', width: '4.8rem' }}
+            priority
           />
         </div>
       </MotionButton>

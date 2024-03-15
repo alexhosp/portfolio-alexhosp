@@ -97,11 +97,14 @@ export const PrivacyPolicyModal = () => {
   );
 };
 
-export interface CtaData {
-  cta: string[];
-  ctaLink: string[];
+interface Cta {
+  name: string;
+  link: string | null;
 }
 
+export type CtaData = Cta[] | undefined;
+
+// fix UI component issues and the link issue
 export const ProjectModal: React.FC<{
   dialogTitle: string;
   bulletPoints: string[];
@@ -121,16 +124,16 @@ export const ProjectModal: React.FC<{
     <Dialog>
       <DialogTrigger asChild>
         <CardItemAnimationWrapper animate='scaleUp'>
-          <div className='md:hidden pt-5'>
+          <div className='md:hidden'>
             <SmallCTAButton>{ctaName}</SmallCTAButton>
           </div>
-          <div className='hidden md:block md:mt-16'>
+          <div className='hidden md:block'>
             <CTAButton className='!text-lg'>{ctaName}</CTAButton>
           </div>
         </CardItemAnimationWrapper>
       </DialogTrigger>
-      <DialogContent className='rounded-full sm:w-10/12'>
-        <Card color='solidDetail' edge='rounded' width='full'>
+      <DialogContent>
+        <Card color='solidBackground' edge='rounded' className='p-1.5 py-5'>
           <DialogHeader>
             <DialogTitle className='self-stretch'>{dialogTitle}</DialogTitle>
             <Image
@@ -142,8 +145,8 @@ export const ProjectModal: React.FC<{
               width={512}
               className='max-h-[50%] w-auto mx-auto'
             />
-            <DialogDescription className='flex place-content-center self-stretch ml-10 -mt-4'>
-              <ul className='flex flex-col items-baseline mx-auto'>
+            <div className='flex place-content-center self-stretch ml-10 -mt-4'>
+              <ul className='flex flex-col items-baseline mx-auto pr-4 text-sm/[1.2rem] tracking-[0.007em] antialiased text-pretty whitespace-normal text-[var(--color-foreground)] opacity-80'>
                 {bulletPoints.map((line, index) => {
                   return (
                     <li className='py-1' key={index}>
@@ -152,16 +155,30 @@ export const ProjectModal: React.FC<{
                   );
                 })}
               </ul>
-            </DialogDescription>
+            </div>
           </DialogHeader>
           <DialogFooter className='flex flex-col'>
             <div className='flex flex-row gap-4 p-4'>
-              {dialogCtaData.cta.map((cta, index) => {
+              {dialogCtaData.map((cta, index) => {
+                const isDisabled =
+                  dialogTitle === 'Dev Portfolio' && cta.name === 'See it Live';
+
+                const tooltipText = `You're already here.`;
                 return (
-                  <SmallCTAButton key={index}>
-                    {/*  <Link href={dialogCtaData.ctaLink[index]}>{cta}</Link> */}
-                    {cta}
-                  </SmallCTAButton>
+                  <div key={index} className='relative group'>
+                    <SmallCTAButton>
+                      {cta.link !== null ? (
+                        <Link href={cta.link}>{cta.name}</Link>
+                      ) : (
+                        <span>{cta.name}</span>
+                      )}
+                    </SmallCTAButton>
+                    {isDisabled && (
+                      <div className='absolute bottom-full mb-2 hidden group-hover:block w-max p-2 bg-[var(--color-detail)] text-[var(--color-foreground)] text-sm rounded-md'>
+                        {tooltipText}
+                      </div>
+                    )}
+                  </div>
                 );
               })}
             </div>

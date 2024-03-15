@@ -4,7 +4,6 @@ import {
   CardTitle,
   CardContent,
   CardFooter,
-  CardDescription,
 } from '@/ui/Card/card';
 import { MotionHeading, Heading } from '@/ui/Heading/heading';
 import { HeroSVG } from '@/ui/assets/HeroSVG/hero-svg';
@@ -216,8 +215,9 @@ const HomePage = async () => {
         const modalImageUrl = modalImageData.imageUrl as string;
         const modalImageAlt = modalImageData.imageAlt as string;
         const modalBulletpoints = modalData.bulletPoints as string[];
-        const modalCtaData = modalData.modalCta;
-        console.log(modalCtaData);
+        const modalCtaData = modalData.modalCta as CtaData;
+        // properly typecheck the CtaData (modalCtaData)
+        console.log('ctaData: ', modalCtaData);
 
         return (
           <>
@@ -239,17 +239,30 @@ const HomePage = async () => {
               color='solidDetail'
               edge='rounded'
               key={project.id}
-              className='w-5/6'
+              className='w-5/6 p-2 md:grid md:grid-cols-[60%_40%] md:grid-rows-[80%_20%] md:ml-2'
             >
-              <CardHeader>
+              <CardHeader className='md:col-start-1 md:row-start-1 gap-y-4'>
                 <CardTitle>{project.title}</CardTitle>
-                <CardDescription>
-                  <Text as='p' size='small' textColor='default'>
-                    {project.shortDescription}
-                  </Text>
-                </CardDescription>
+
+                <Text
+                  as='p'
+                  size='small'
+                  textColor='default'
+                  className='md:hidden'
+                >
+                  {project.shortDescription}
+                </Text>
+                <Text
+                  as='p'
+                  size='large'
+                  textColor='muted'
+                  className='hidden md:block text-xl'
+                  style={{ whiteSpace: 'pre-wrap' }}
+                >
+                  {project.description?.replace(/([!?]) /g, '$1\n\n')}
+                </Text>
               </CardHeader>
-              <CardContent>
+              <CardContent className='md:col-star-2 row-span-2'>
                 <CardItemAnimationWrapper animate='scaleDown'>
                   <Image
                     src={project.imageUrl ?? '/project_fallback.webp'}
@@ -262,14 +275,16 @@ const HomePage = async () => {
                   />
                 </CardItemAnimationWrapper>
               </CardContent>
-              <CardFooter>
+              <CardFooter className='md:col-start-1 md:row-start-2'>
                 <ProjectModal
                   dialogTitle={project.title}
                   imageUrl={modalImageUrl}
                   imageAlt={modalImageAlt}
                   bulletPoints={modalBulletpoints}
                   ctaName={project.cta}
-                  dialogCtaData={modalCtaData}
+                  dialogCtaData={
+                    Array.isArray(modalCtaData) ? modalCtaData : undefined
+                  }
                 />
               </CardFooter>
             </Card>

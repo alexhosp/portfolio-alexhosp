@@ -29,7 +29,6 @@ export const HeroSVG = () => {
   return (
     <div className='flex justify-center items-center w-full h-full mb-4 lg:max-h-[50vh]'>
       <motion.svg
-        height='auto'
         viewBox='0 0 80 80'
         version='1.1'
         id='svg1'

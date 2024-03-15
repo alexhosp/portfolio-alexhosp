@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import React from 'react';
 
 const cardItemAnimationVariants = {
   fadeIn: {
@@ -42,12 +43,16 @@ const cardItemAnimationVariants = {
   },
 };
 
-export const CardItemAnimationWrapper: React.FC<{
-  children: React.ReactNode;
-  animate: 'fadeIn' | 'floatUp' | 'scaleUp' | 'scaleDown';
-  className?: string;
-}> = ({ children, animate, className, ...props }) => (
+export const CardItemAnimationWrapper = React.forwardRef<
+  HTMLDivElement,
+  {
+    children: React.ReactNode;
+    animate: 'fadeIn' | 'floatUp' | 'scaleUp' | 'scaleDown';
+    className?: string;
+  }
+>(({ children, animate, className, ...props }, ref) => (
   <motion.div
+    ref={ref}
     className={`inline-block ${className ?? ''}`}
     initial='offscreen'
     whileInView='onscreen'
@@ -57,4 +62,6 @@ export const CardItemAnimationWrapper: React.FC<{
   >
     {children}
   </motion.div>
-);
+));
+
+CardItemAnimationWrapper.displayName = 'CardItemAnimationWrapper';
