@@ -45,21 +45,18 @@ export interface CardProps
     | 'solidDetail';
 }
 
-const Card: React.FC<CardProps> = ({
-  className,
-  edge,
-  width,
-  color,
-  ...props
-}) => {
-  return (
-    <div
-      className={cn(cardVariants({ edge, width, color }), className)}
-      style={{ color: 'var(--color-foreground)' }}
-      {...props}
-    />
-  );
-};
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, edge, width, color, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(cardVariants({ edge, width, color }), className)}
+        style={{ color: 'var(--color-foreground)' }}
+        {...props}
+      />
+    );
+  }
+);
 
 Card.displayName = 'Card';
 

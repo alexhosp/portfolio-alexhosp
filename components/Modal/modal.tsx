@@ -159,7 +159,7 @@ export const ProjectModal: React.FC<{
           </DialogHeader>
           <DialogFooter className='flex flex-col'>
             <div className='flex flex-row gap-4 p-4'>
-              {dialogCtaData.map((cta, index) => {
+              {dialogCtaData?.map((cta, index) => {
                 const isDisabled =
                   dialogTitle === 'Dev Portfolio' && cta.name === 'See it Live';
 

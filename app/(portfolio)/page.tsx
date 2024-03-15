@@ -215,7 +215,7 @@ const HomePage = async () => {
         const modalImageUrl = modalImageData.imageUrl as string;
         const modalImageAlt = modalImageData.imageAlt as string;
         const modalBulletpoints = modalData.bulletPoints as string[];
-        const modalCtaData = modalData.modalCta as CtaData;
+        const modalCtaData = modalData.modalCta as unknown as CtaData;
         // properly typecheck the CtaData (modalCtaData)
         console.log('ctaData: ', modalCtaData);
 
