@@ -5,7 +5,7 @@ import { Heading } from '../Heading/heading';
 import Text from '../Text/text';
 
 const cardVariants = cva(
-  'leading-7 w-full text-body flex flex-col items-center justify-center text-center pt-11',
+  'font-body leading-7 w-full flex flex-col items-center justify-center text-center pt-11',
   {
     variants: {
       edge: {
@@ -31,7 +31,7 @@ const cardVariants = cva(
       width: 'full',
       color: 'solidBackground',
     },
-  }
+  },
 );
 
 export interface CardProps
@@ -55,7 +55,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 Card.displayName = 'Card';

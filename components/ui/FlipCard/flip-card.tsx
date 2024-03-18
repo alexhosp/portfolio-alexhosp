@@ -8,12 +8,13 @@ import { Slot } from '@radix-ui/react-slot';
 import Text from '@/ui/Text/text';
 import { SmallCTAButton } from '@/ui/Button/cta-button';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface FlipCardContent {
-  title?: string;
-  description?: string;
-  cta?: string;
-  ctaLink?: string;
+  title?: string | null;
+  description?: string | null;
+  cta?: string | null;
+  ctaLink?: string | null;
 }
 
 interface FlipCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -31,6 +32,9 @@ export const FlipCard = React.forwardRef<HTMLDivElement, FlipCardProps>(
   ({ frontContent, backContent, flipCardColor, ...props }, ref) => {
     const [isFlipped, setIsFlipped] = React.useState(false);
     const [isAnimating, setIsAnimating] = React.useState(false);
+    const router = useRouter();
+
+    const ctaRef = React.useRef<HTMLButtonElement>(null);
 
     const handleFlip = () => {
       if (!isAnimating) {
@@ -39,70 +43,98 @@ export const FlipCard = React.forwardRef<HTMLDivElement, FlipCardProps>(
       }
     };
 
-    // set color of the cards dynamically based on position of a string in an array
-    // set the size using tailwind selectors, full for mobile , half for desktop
+    const handleFlipKeyPress = (
+      event: React.KeyboardEvent<HTMLButtonElement>,
+    ) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        handleFlip();
+      }
+    };
+
+    const handleAnimationComplete = () => {
+      console.log('animation complete');
+      setIsAnimating(false);
+      if (isFlipped && ctaRef.current) {
+        setTimeout(() => {
+          ctaRef.current && ctaRef.current.focus();
+        }, 400);
+      }
+    };
+
+    const handleCtaKeyPress =
+      (link: string) => (event: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          console.log('navigating to: ', link);
+          event.preventDefault();
+          router.push(link);
+        }
+      };
 
     return (
-      <div
-        ref={ref}
-        style={{ perspective: '80vw' }}
-        className='relative'
-        {...props}
-      >
-        <div
-          style={{ transformStyle: 'preserve-3d' }}
-          className='transition-transform duration-500'
-          onClick={handleFlip}
+      <div ref={ref} style={{ perspective: '1000px' }} tabIndex={0} {...props}>
+        <motion.div
+          style={{
+            transformStyle: 'preserve-3d',
+            transformOrigin: 'center center',
+          }}
+          className='md:max-w-[25%] relative'
+          initial={false}
+          animate={{ rotateY: isFlipped ? 180 : 0 }}
+          transition={{ duration: 0.4, animationDuration: 'normal' }}
+          onAnimationComplete={handleAnimationComplete}
         >
-          <motion.div
-            className='absolute'
-            style={{ backfaceVisibility: 'hidden' }}
-            initial={false}
-            animate={{ rotateY: isFlipped ? 180 : 0 }}
-            transition={{ duration: 0.6, animationDuration: 'normal' }}
-            onAnimationComplete={() => {
-              setIsAnimating(false);
+          <FlipCardFront style={{ backfaceVisibility: 'hidden' }}>
+            <FlipCardContent flipCardColor={flipCardColor}>
+              {frontContent.title && (
+                <FlipCardTitle>{frontContent.title}</FlipCardTitle>
+              )}
+              {frontContent.description && (
+                <FlipCardDescription>
+                  {frontContent.description}
+                </FlipCardDescription>
+              )}
+
+              <SmallCTAButton
+                aria-label='Flip Card'
+                onClick={handleFlip}
+                tabIndex={0}
+                onKeyDown={handleFlipKeyPress}
+              >
+                Reveal
+              </SmallCTAButton>
+            </FlipCardContent>
+          </FlipCardFront>
+          <FlipCardBack
+            style={{
+              backfaceVisibility: 'hidden',
             }}
           >
-            <FlipCardFront>
-              <FlipCardContent flipCardColor={flipCardColor}>
-                {frontContent.title && (
-                  <FlipCardTitle>{frontContent.title}</FlipCardTitle>
-                )}
-                {frontContent.description && (
-                  <FlipCardDescription>
-                    {frontContent.description}
-                  </FlipCardDescription>
-                )}
-                {frontContent.cta && frontContent.ctaLink && (
-                  <SmallCTAButton>
-                    <Link href={frontContent.ctaLink}>{frontContent.cta}</Link>
-                  </SmallCTAButton>
-                )}
-              </FlipCardContent>
-            </FlipCardFront>
-            <FlipCardBack>
-              <FlipCardContent flipCardColor={flipCardColor}>
-                {backContent.title && (
-                  <FlipCardTitle>{backContent.title}</FlipCardTitle>
-                )}
-                {backContent.description && (
-                  <FlipCardDescription>
-                    {backContent.description}
-                  </FlipCardDescription>
-                )}
-                {backContent.cta && backContent.ctaLink && (
-                  <SmallCTAButton>
-                    <Link href={backContent.ctaLink}>{backContent.cta}</Link>
-                  </SmallCTAButton>
-                )}
-              </FlipCardContent>
-            </FlipCardBack>
-          </motion.div>
-        </div>
+            <FlipCardContent flipCardColor={flipCardColor}>
+              {backContent.title && (
+                <FlipCardTitle>{backContent.title}</FlipCardTitle>
+              )}
+              {backContent.description && (
+                <FlipCardDescription>
+                  {backContent.description}
+                </FlipCardDescription>
+              )}
+              {backContent.cta && backContent.ctaLink && (
+                <SmallCTAButton
+                  aria-label='Learn More'
+                  tabIndex={0}
+                  onKeyDown={handleCtaKeyPress(backContent.ctaLink)}
+                  ref={ctaRef}
+                  className='mt-1.5'
+                >
+                  <Link href={backContent.ctaLink}>{backContent.cta}</Link>
+                </SmallCTAButton>
+              )}
+            </FlipCardContent>
+          </FlipCardBack>
+        </motion.div>
       </div>
     );
-  }
+  },
 );
 
 FlipCard.displayName = 'Flip Card';
@@ -118,13 +150,13 @@ const FlipCardFront = React.forwardRef<HTMLDivElement, FlipCardFrontProps>(
       <Component
         ref={ref}
         {...props}
-        className={className}
+        className={`absolute ${className}`}
         style={{ backfaceVisibility: 'hidden', position: 'absolute' }}
       >
         {children}
       </Component>
     );
-  }
+  },
 );
 
 FlipCardFront.displayName = 'FlipCardFront';
@@ -136,43 +168,72 @@ const FlipCardBack = React.forwardRef<HTMLDivElement, FlipCardFrontProps>(
       <Component
         ref={ref}
         {...props}
-        className={className}
         style={{
           backfaceVisibility: 'hidden',
           transform: 'rotateY(180deg)',
           position: 'absolute',
         }}
+        className={`absolute ${className}`}
       >
         {children}
       </Component>
     );
-  }
+  },
 );
 
 FlipCardBack.displayName = 'FlipCardFront';
 
-export const FlipCardContent: React.FC<{
-  children: React.ReactNode;
-  flipCardColor?:
-    | 'gradientPrimary'
-    | 'gradientSecondary'
-    | 'solidPrimary'
-    | 'solidBackground'
-    | 'solidDetail';
-}> = ({ children, flipCardColor, ...props }) => {
+export const FlipCardContent = React.forwardRef<
+  HTMLDivElement,
+  {
+    children: React.ReactNode;
+    flipCardColor?:
+      | 'gradientPrimary'
+      | 'gradientSecondary'
+      | 'solidPrimary'
+      | 'solidBackground'
+      | 'solidDetail';
+  }
+>(({ children, flipCardColor, ...props }, ref) => {
   return (
-    <Card edge='sharp' color={flipCardColor} {...props}>
-      {children}
-    </Card>
+    <>
+      <Card
+        ref={ref}
+        edge='rounded'
+        width='full'
+        color={flipCardColor}
+        className='h-[75vh] gap-y-[4vh] py-2 md:hidden'
+        {...props}
+      >
+        {children}
+      </Card>
+      <Card
+        ref={ref}
+        edge='rounded'
+        color={flipCardColor}
+        className='hidden min-h-[75vh] gap-y-[6vh] w-[25vw] md:flex'
+        {...props}
+      >
+        {children}
+      </Card>
+    </>
   );
-};
+});
 
-export const FlipCardTitle: React.FC<{ children: React.ReactNode }> = ({
-  children,
-  ...props
-}) => {
+FlipCardContent.displayName = 'FlipCardContent';
+
+export const FlipCardTitle: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+}> = ({ children, className, ...props }) => {
   return (
-    <Heading as='h3' color='default' size='h3Default' {...props}>
+    <Heading
+      as='h3'
+      color='default'
+      size='h3Small'
+      className={`p-0 ${className}`}
+      {...props}
+    >
       {children}
     </Heading>
   );
@@ -180,9 +241,10 @@ export const FlipCardTitle: React.FC<{ children: React.ReactNode }> = ({
 
 FlipCardTitle.displayName = 'FlipCardTitle';
 
-export const FlipCardDescription: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const FlipCardDescription: React.FC<{
+  children: React.ReactNode;
+  tabIndex?: number;
+}> = ({ children }) => {
   return (
     <>
       <div className='md:hidden'>

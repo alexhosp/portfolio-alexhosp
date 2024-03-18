@@ -67,6 +67,7 @@ export const getFaqContent = async () => {
       type: 'faq',
     },
     select: {
+      id: true,
       title: true,
       shortDescription: true,
       description: true,
@@ -74,4 +75,5 @@ export const getFaqContent = async () => {
       ctaLink: true,
     },
   });
+  return faqContent;
 };

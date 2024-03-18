@@ -13,6 +13,7 @@ import {
   getAboutContent,
   getServicesContent,
   getProjectsContent,
+  getFaqContent,
 } from '@/lib/data';
 import { CardItemAnimationWrapper } from '@/ui/util/animation-wrapper';
 import Image from 'next/image';
@@ -21,16 +22,17 @@ import {
   AutoplayCarousel,
   CarouselContent,
   CarouselItem,
-  /*   CarouselNext,
-  CarouselPrevious, */
 } from '@/ui/Carousel/carousel';
 import { Prisma } from '@prisma/client';
 import { ProjectModal, CtaData } from '@/components/Modal/modal';
+import { FlipCard } from '@/ui/FlipCard/flip-card';
 
 const HomePage = async () => {
   const aboutContent = await getAboutContent();
   const servicesContent = await getServicesContent();
   const projectsContent = await getProjectsContent();
+  const faqContent = await getFaqContent();
+  console.log(faqContent);
 
   console.log('projectsContent: ', typeof projectsContent);
 
@@ -216,8 +218,6 @@ const HomePage = async () => {
         const modalImageAlt = modalImageData.imageAlt as string;
         const modalBulletpoints = modalData.bulletPoints as string[];
         const modalCtaData = modalData.modalCta as unknown as CtaData;
-        // properly typecheck the CtaData (modalCtaData)
-        console.log('ctaData: ', modalCtaData);
 
         return (
           <>
@@ -239,7 +239,7 @@ const HomePage = async () => {
               color='solidDetail'
               edge='rounded'
               key={project.id}
-              className='w-5/6 p-2 md:grid md:grid-cols-[60%_40%] md:grid-rows-[80%_20%] md:ml-2'
+              className='w-5/6 p-2 md:grid md:grid-cols-[60%_40%] md:grid-rows-[80%_20%] ml-2'
             >
               <CardHeader className='md:col-start-1 md:row-start-1 gap-y-4'>
                 <CardTitle>{project.title}</CardTitle>
@@ -291,6 +291,26 @@ const HomePage = async () => {
           </>
         );
       })}
+      <div className='flex relative flex-col'>
+        {faqContent.map((item) => {
+          const frontContent = {
+            title: item.title,
+          };
+          const backContent = {
+            title: item.shortDescription,
+            description: item.description,
+            cta: item.cta,
+            ctaLink: item.ctaLink,
+          };
+          return (
+            <FlipCard
+              key={item.id}
+              frontContent={frontContent}
+              backContent={backContent}
+            />
+          );
+        })}
+      </div>
     </main>
   );
 };

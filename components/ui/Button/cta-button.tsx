@@ -4,7 +4,7 @@ import { MotionButton, Button } from './button';
 import { CTAButtonAnimation } from '../util/animation';
 import { ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { ButtonHTMLAttributes } from 'react';
+import React from 'react';
 
 export const CTAButton: React.FC<{
   children: React.ReactNode;
@@ -43,7 +43,7 @@ export const GradientCTAButton: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-interface SmallCTAButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface SmallCTAButtonProps {
   variant?:
     | 'link'
     | 'default'
@@ -56,19 +56,32 @@ interface SmallCTAButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | undefined;
   size?: 'default' | 'nav' | 'xs' | 'sm' | 'lg' | 'icon' | null | undefined;
   children: React.ReactNode;
+  className?: string;
+  role?: string;
+  tabIndex?: number;
+  onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export const SmallCTAButton: React.FC<SmallCTAButtonProps> = ({
-  children,
-  ...props
-}) => {
+export const SmallCTAButton = React.forwardRef<
+  HTMLButtonElement,
+  SmallCTAButtonProps
+>(({ children, className, tabIndex, onKeyDown, onClick, ...props }, ref) => {
   return (
-    <motion.div className='inline-block' {...CTAButtonAnimation}>
-      <Button variant='cta' size='xs' {...props}>
-        {children}
-      </Button>
-    </motion.div>
+    <MotionButton
+      ref={ref}
+      variant='cta'
+      size='xs'
+      {...CTAButtonAnimation}
+      className={className}
+      tabIndex={tabIndex}
+      onKeyDown={onKeyDown}
+      onClick={onClick}
+      {...props}
+    >
+      {children}
+    </MotionButton>
   );
-};
+});
 
 SmallCTAButton.displayName = 'SmallCTAButton';
