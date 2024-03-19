@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-const svgVariants = {
+/* const svgVariants = {
   hidden: { opacity: 0, y: -50 },
   visible: {
     opacity: 1,
@@ -23,7 +23,7 @@ const pathVariants = {
       ease: 'easeInOut',
     },
   },
-};
+}; */
 
 export const HeroSVG = () => {
   return (
