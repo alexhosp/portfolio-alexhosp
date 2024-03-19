@@ -17,19 +17,21 @@ interface FlipCardContent {
   ctaLink?: string | null;
 }
 
-interface FlipCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FlipCardProps extends React.HTMLAttributes<HTMLDivElement> {
   frontContent: FlipCardContent;
   backContent: FlipCardContent;
   flipCardColor?:
     | 'gradientPrimary'
     | 'gradientSecondary'
+    | 'gradientGrayPrimary'
+    | 'gradientGrayDetail'
     | 'solidPrimary'
     | 'solidBackground'
     | 'solidDetail';
 }
 
 export const FlipCard = React.forwardRef<HTMLDivElement, FlipCardProps>(
-  ({ frontContent, backContent, flipCardColor, ...props }, ref) => {
+  ({ frontContent, backContent, flipCardColor }, ref) => {
     const [isFlipped, setIsFlipped] = React.useState(false);
     const [isAnimating, setIsAnimating] = React.useState(false);
     const router = useRouter();
@@ -71,13 +73,25 @@ export const FlipCard = React.forwardRef<HTMLDivElement, FlipCardProps>(
       };
 
     return (
-      <div ref={ref} style={{ perspective: '1000px' }} tabIndex={0} {...props}>
+      <motion.div
+        /* variants={{
+          hidden: { opacity: 0, y: 20 },
+          show: {
+            opacity: 1,
+            y: 0,
+          },
+        }} */
+        ref={ref}
+        style={{ perspective: '1000px' }}
+        tabIndex={0}
+        className='h-[75vh] w-full lg-mobile:h-[60vh] md:w-[47vw]'
+      >
         <motion.div
           style={{
             transformStyle: 'preserve-3d',
             transformOrigin: 'center center',
           }}
-          className='md:max-w-[25%] relative'
+          className='w-full h-full relative'
           initial={false}
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.4, animationDuration: 'normal' }}
@@ -99,6 +113,7 @@ export const FlipCard = React.forwardRef<HTMLDivElement, FlipCardProps>(
                 onClick={handleFlip}
                 tabIndex={0}
                 onKeyDown={handleFlipKeyPress}
+                className='text-lg'
               >
                 Reveal
               </SmallCTAButton>
@@ -124,7 +139,7 @@ export const FlipCard = React.forwardRef<HTMLDivElement, FlipCardProps>(
                   tabIndex={0}
                   onKeyDown={handleCtaKeyPress(backContent.ctaLink)}
                   ref={ctaRef}
-                  className='mt-1.5'
+                  className='mt-1.5 text-lg'
                 >
                   <Link href={backContent.ctaLink}>{backContent.cta}</Link>
                 </SmallCTAButton>
@@ -132,7 +147,7 @@ export const FlipCard = React.forwardRef<HTMLDivElement, FlipCardProps>(
             </FlipCardContent>
           </FlipCardBack>
         </motion.div>
-      </div>
+      </motion.div>
     );
   },
 );
@@ -150,7 +165,7 @@ const FlipCardFront = React.forwardRef<HTMLDivElement, FlipCardFrontProps>(
       <Component
         ref={ref}
         {...props}
-        className={`absolute ${className}`}
+        className={`absolute w-full h-full ${className}`}
         style={{ backfaceVisibility: 'hidden', position: 'absolute' }}
       >
         {children}
@@ -173,7 +188,7 @@ const FlipCardBack = React.forwardRef<HTMLDivElement, FlipCardFrontProps>(
           transform: 'rotateY(180deg)',
           position: 'absolute',
         }}
-        className={`absolute ${className}`}
+        className={`absolute w-full h-full ${className}`}
       >
         {children}
       </Component>
@@ -190,6 +205,8 @@ export const FlipCardContent = React.forwardRef<
     flipCardColor?:
       | 'gradientPrimary'
       | 'gradientSecondary'
+      | 'gradientGrayPrimary'
+      | 'gradientGrayDetail'
       | 'solidPrimary'
       | 'solidBackground'
       | 'solidDetail';
@@ -202,7 +219,7 @@ export const FlipCardContent = React.forwardRef<
         edge='rounded'
         width='full'
         color={flipCardColor}
-        className='h-[75vh] gap-y-[4vh] py-2 md:hidden'
+        className='gap-y-[4vh] py-2 h-full md:hidden'
         {...props}
       >
         {children}
@@ -211,7 +228,7 @@ export const FlipCardContent = React.forwardRef<
         ref={ref}
         edge='rounded'
         color={flipCardColor}
-        className='hidden min-h-[75vh] gap-y-[6vh] w-[25vw] md:flex'
+        className='hidden gap-y-[6vh] h-full md:flex'
         {...props}
       >
         {children}
@@ -227,15 +244,26 @@ export const FlipCardTitle: React.FC<{
   className?: string;
 }> = ({ children, className, ...props }) => {
   return (
-    <Heading
-      as='h3'
-      color='default'
-      size='h3Small'
-      className={`p-0 ${className}`}
-      {...props}
-    >
-      {children}
-    </Heading>
+    <>
+      <Heading
+        as='h3'
+        color='default'
+        size='h3Small'
+        className={`p-0 md:hidden ${className}`}
+        {...props}
+      >
+        {children}
+      </Heading>
+      <Heading
+        as='h3'
+        color='default'
+        size='h3Default'
+        className={`p-0 hidden md:flex ${className}`}
+        {...props}
+      >
+        {children}
+      </Heading>
+    </>
   );
 };
 
@@ -252,8 +280,13 @@ export const FlipCardDescription: React.FC<{
           {children}
         </Text>
       </div>
-      <div className='hidden md:block'>
+      <div className='hidden md:block lg:hidden'>
         <Text as='p' size='default' textColor='default'>
+          {children}
+        </Text>
+      </div>
+      <div className='hidden lg:block'>
+        <Text as='p' size='large' textColor='default' className='font-light'>
           {children}
         </Text>
       </div>

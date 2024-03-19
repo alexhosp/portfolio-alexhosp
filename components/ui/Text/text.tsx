@@ -7,7 +7,7 @@ const textVariants = cva(['text-body'], {
       default:
         'text-base antialiased text-pretty whitespace-normal tracking-[0.007em]',
       large:
-        'text-lg font-bold text-center md:text-xl tracking-[0.007em] antialiased text-pretty whitespace-normal',
+        'text-lg font-normal text-center md:text-xl tracking-[0.007em] antialiased text-pretty whitespace-normal',
       small:
         'text-sm/[1.2rem] tracking-[0.007em] antialiased text-pretty whitespace-normal',
     },
@@ -32,6 +32,7 @@ export interface TextProps
   children: React.ReactNode;
   size: 'default' | 'large' | 'small';
   textColor: 'default' | 'accent' | 'highlight' | 'muted';
+  className?: string;
 }
 
 const Text: React.FC<TextProps> = ({
@@ -39,6 +40,7 @@ const Text: React.FC<TextProps> = ({
   textColor = 'default',
   as = 'p',
   children,
+  className,
   ...props
 }) => {
   const variantClasses = textVariants({ size, textColor });
@@ -47,7 +49,7 @@ const Text: React.FC<TextProps> = ({
   const Component = as === 'p' ? 'p' : 'span';
 
   return (
-    <Component className={combinedClasses} {...props}>
+    <Component className={`${className} ${combinedClasses}`} {...props}>
       {children}
     </Component>
   );

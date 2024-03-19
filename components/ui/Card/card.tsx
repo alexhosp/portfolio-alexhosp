@@ -18,8 +18,10 @@ const cardVariants = cva(
         third: 'md:w-1/3',
       },
       color: {
-        gradientPrimary: 'bg-radial-gradient-light text-semibold',
-        gradientSecondary: 'bg-radial-gradient-dark  text-semibold',
+        gradientPrimary: 'bg-radial-gradient-light',
+        gradientSecondary: 'bg-radial-gradient-dark',
+        gradientGrayPrimary: 'bg-radial-gradient-primary',
+        gradientGrayDetail: 'bg-radial-gradient-detail',
         solidPrimary:
           'bg-[var(--color-primary)] text-[var(--color-foreground)]',
         solidBackground: 'bg-[var(--color-background)]',
@@ -40,6 +42,8 @@ export interface CardProps
   color?:
     | 'gradientPrimary'
     | 'gradientSecondary'
+    | 'gradientGrayDetail'
+    | 'gradientGrayPrimary'
     | 'solidPrimary'
     | 'solidBackground'
     | 'solidDetail';

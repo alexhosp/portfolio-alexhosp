@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { easeInOut, motion } from 'framer-motion';
 import React from 'react';
 
 const cardItemAnimationVariants = {
@@ -43,6 +43,23 @@ const cardItemAnimationVariants = {
   },
 };
 
+const staggerAnimationVariants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: easeInOut,
+      staggerChildren: 0.2,
+      duration: 0.15,
+      when: 'beforeChildren',
+    },
+  },
+};
+
 export const CardItemAnimationWrapper = React.forwardRef<
   HTMLDivElement,
   {
@@ -56,7 +73,7 @@ export const CardItemAnimationWrapper = React.forwardRef<
     className={`inline-block ${className ?? ''}`}
     initial='offscreen'
     whileInView='onscreen'
-    viewport={{ once: false, amount: 0.5 }}
+    viewport={{ once: false, amount: 0.3 }}
     variants={cardItemAnimationVariants[animate]}
     {...props}
   >
@@ -65,3 +82,24 @@ export const CardItemAnimationWrapper = React.forwardRef<
 ));
 
 CardItemAnimationWrapper.displayName = 'CardItemAnimationWrapper';
+
+export const StaggeredAnimationWrapper = React.forwardRef<
+  HTMLDivElement,
+  { children: React.ReactNode; className: string }
+>(({ children, className, ...props }, ref) => {
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial='hidden'
+      whileInView='show'
+      variants={staggerAnimationVariants}
+      viewport={{ once: false, amount: 0.2 }}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+});
+
+StaggeredAnimationWrapper.displayName = 'StaggeredAnimationWrapper';

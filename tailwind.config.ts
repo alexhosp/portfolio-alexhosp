@@ -49,6 +49,11 @@ const config = {
       backgroundImage: {
         'radial-gradient-light': 'var(--radial-gradient-light)',
         'radial-gradient-dark': 'var(--radial-gradient-dark)',
+        'radial-gradient-primary': 'var(--radial-gradient-primary)',
+        'radial-gradient-detail': 'var(--radial-gradient-detail)',
+      },
+      screens: {
+        'lg-mobile': '390px',
       },
     },
   },

@@ -20,7 +20,7 @@ const headingVariants = cva(
           'text-2xl font-semibold tracking-[0.007em] md:text-3xl lg:text-5xl',
         h2Tiny: 'text-lg font-semibold tracking-wider',
         h3Default:
-          'text-xl uppercase tracking-wider md:text-2xl lg:text-4xl font-semibold',
+          'text-xl uppercase tracking-wider lg:text-[2rem]/8 font-semibold',
         h3Small:
           'text-sm md:text-base uppercase tracking-wider font-semibold pb-2 antialiased',
       },
@@ -39,7 +39,7 @@ const headingVariants = cva(
       size: 'h2Default',
       color: 'default',
     },
-  }
+  },
 );
 
 export interface HeadingProps

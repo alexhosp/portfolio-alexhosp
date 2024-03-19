@@ -25,16 +25,21 @@ import {
 } from '@/ui/Carousel/carousel';
 import { Prisma } from '@prisma/client';
 import { ProjectModal, CtaData } from '@/components/Modal/modal';
-import { FlipCard } from '@/ui/FlipCard/flip-card';
+import { FlipCard, FlipCardProps } from '@/ui/FlipCard/flip-card';
 
 const HomePage = async () => {
   const aboutContent = await getAboutContent();
   const servicesContent = await getServicesContent();
   const projectsContent = await getProjectsContent();
   const faqContent = await getFaqContent();
-  console.log(faqContent);
+  const flipCardColors: FlipCardProps['flipCardColor'][] = [
+    'gradientPrimary',
+    'gradientGrayPrimary',
+    'gradientPrimary',
+    'gradientGrayDetail',
+  ];
 
-  console.log('projectsContent: ', typeof projectsContent);
+  console.log('faqContent: ', faqContent);
 
   return (
     <main className='overflow-x-hidden'>
@@ -291,26 +296,45 @@ const HomePage = async () => {
           </>
         );
       })}
-      <div className='flex relative flex-col'>
-        {faqContent.map((item) => {
-          const frontContent = {
-            title: item.title,
-          };
-          const backContent = {
-            title: item.shortDescription,
-            description: item.description,
-            cta: item.cta,
-            ctaLink: item.ctaLink,
-          };
-          return (
-            <FlipCard
-              key={item.id}
-              frontContent={frontContent}
-              backContent={backContent}
-            />
-          );
-        })}
+      <div className='w-11/12 mx-auto mt-14 mb-3.5'>
+        <Heading
+          as='h2'
+          color='default'
+          size='h2Small'
+          className='inline !text-left'
+        >
+          FAQ
+        </Heading>
       </div>
+      <Card color='solidPrimary' edge='rounded' className='mx-auto max-w[90vw]'>
+        <div className='w-full grid grid-cols-1 grid-rows-4 gap-y-4 md:gap-x-7 md:gap-y-7 md:grid-cols-2 md:grid-rows-2'>
+          {[...faqContent]
+            .sort((a, b) => a.id - b.id)
+            .map((item, index) => {
+              const frontContent = {
+                title: item.title,
+              };
+              const backContent = {
+                title: item.shortDescription,
+                description: item.description,
+                cta: item.cta,
+                ctaLink: item.ctaLink,
+              };
+
+              const colorIndex = index % flipCardColors.length;
+              const flipCardColor = flipCardColors[colorIndex];
+              return (
+                <CardItemAnimationWrapper animate='floatUp' key={item.id}>
+                  <FlipCard
+                    frontContent={frontContent}
+                    backContent={backContent}
+                    flipCardColor={flipCardColor}
+                  />
+                </CardItemAnimationWrapper>
+              );
+            })}
+        </div>
+      </Card>
     </main>
   );
 };
