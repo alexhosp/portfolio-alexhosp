@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 
 const svgVariants = {
-  hidden: { opacity: 0, y: -50 },
+  hidden: { opacity: 1, y: -50 }, // change opacity back to 0
   visible: {
     opacity: 1,
     y: 20,
