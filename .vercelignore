@@ -1,0 +1,4 @@
+**/*.stories.tsx
+**/*.stories.js
+storybook-static/
+.storybook/
