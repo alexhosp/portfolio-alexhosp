@@ -36,7 +36,14 @@ yarn-error.log*
 next-env.d.ts
 
 # personal notes
-notes.md
+notes.*
 
 # turborepo
 + .turbo
+
+# Storybook build output
+/storybook-static/
+
+# Editor directories and files
+.vscode/
+.idea/

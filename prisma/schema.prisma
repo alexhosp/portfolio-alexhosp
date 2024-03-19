@@ -1,0 +1,24 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Content {
+  id               Int      @id @default(autoincrement())
+  type             String
+  title            String
+  imageUrl         String?
+  imageAlt         String?
+  shortDescription String   @db.Text // for homepage
+  description      String?  @db.Text // for summary pages
+  fullDescription  String?  @db.Text // for dedicated service/project/about pages
+  cta              String?
+  ctaLink          String?
+  additionalInfo   Json? // for any additional structured data
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

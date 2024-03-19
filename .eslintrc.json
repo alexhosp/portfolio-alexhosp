@@ -3,8 +3,9 @@
     "next/core-web-vitals",
     "google",
     "plugin:@typescript-eslint/strict-type-checked",
-    "plugin:@typescript-eslint/stylistic-type-checked", 
-    "prettier"
+    "plugin:@typescript-eslint/stylistic-type-checked",
+    "prettier",
+    "plugin:storybook/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -15,10 +16,18 @@
     },
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "rules": {
     "semi": "warn",
-    "quotes": ["error", "single",{ "allowTemplateLiterals": true }], 
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
     "require-jsdoc": "off"
   }
 }
