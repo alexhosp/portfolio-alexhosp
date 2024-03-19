@@ -54,7 +54,6 @@ export const FlipCard = React.forwardRef<HTMLDivElement, FlipCardProps>(
     };
 
     const handleAnimationComplete = () => {
-      console.log('animation complete');
       setIsAnimating(false);
       if (isFlipped && ctaRef.current) {
         setTimeout(() => {
