@@ -61,6 +61,8 @@ interface SmallCTAButtonProps {
   tabIndex?: number;
   onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  type?: 'button' | 'submit' | 'reset' | undefined;
+  disabled?: boolean;
 }
 
 export const SmallCTAButton = React.forwardRef<
