@@ -27,7 +27,7 @@ const pathVariants = {
 
 export const HeroSVG = () => {
   return (
-    <div className='flex justify-center items-center w-full h-full mb-4 lg:max-h-[50vh] min-h-[40vh] min-w-[70vw]'>
+    <div className='flex justify-center items-center w-full h-full mb-4 lg:max-h-[50vh] min-h-[40vh] min-w-[80vw] md:min-w-[0]'>
       <motion.svg
         viewBox='0 0 80 80'
         version='1.1'
