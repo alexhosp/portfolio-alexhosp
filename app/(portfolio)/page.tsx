@@ -39,8 +39,6 @@ const HomePage = async () => {
     'gradientGrayDetail',
   ];
 
-  console.log('faqContent: ', faqContent);
-
   return (
     <main className='overflow-x-hidden'>
       <Card
