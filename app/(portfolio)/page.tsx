@@ -39,6 +39,20 @@ const HomePage = async () => {
     'gradientGrayDetail',
   ];
 
+  const formatBoldText = (text: string) => {
+    const parts = text.split(/(\*\*.*?\*\*)/);
+    return parts.map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return (
+          <strong className='text-[var(--color-background)]' key={index}>
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+      return part;
+    });
+  };
+
   return (
     <main className='overflow-x-hidden'>
       <Card
@@ -140,73 +154,75 @@ const HomePage = async () => {
             containScroll: 'trimSnaps',
           }}
         >
-          <CarouselContent className='flex'>
-            {servicesContent.map((service) => {
-              return (
-                <CarouselItem
-                  key={service.id}
-                  className='basis-10/12 flex flex-grow transition-opacity'
-                >
-                  <Card
-                    edge='sharp'
-                    color='solidPrimary'
-                    className='max-h-[70vh] md:grid md:grid-rows-3 md:grid-cols-[30%_70%] md:max-h-[60vh]'
+          <CarouselContent>
+            {[...servicesContent]
+              .sort((a, b) => a.id - b.id)
+              .map((service) => {
+                return (
+                  <CarouselItem
+                    key={service.id}
+                    className='basis-10/12 flex flex-grow transition-opacity min-h-max'
                   >
-                    <CardHeader className='md:row-start-1 md:col-start-2'>
-                      <CardItemAnimationWrapper animate='fadeIn'>
-                        <CardTitle>{service.title}</CardTitle>
-                      </CardItemAnimationWrapper>
-                    </CardHeader>
+                    <Card
+                      edge='sharp'
+                      color='solidPrimary'
+                      className='pb-0 pt-0 md:p-6 md:grid md:grid-rows-3 md:grid-cols-[30%_70%] md:max-h-[60vh]'
+                    >
+                      <CardHeader className='md:row-start-1 md:col-start-2'>
+                        <CardItemAnimationWrapper animate='fadeIn'>
+                          <CardTitle>{service.title}</CardTitle>
+                        </CardItemAnimationWrapper>
+                      </CardHeader>
 
-                    <CardContent className='md:row-start-2 md:col-span-2 md:grid md:grid-cols-[30%_70%] md:justify-center md:items-center md:gap-x-4'>
-                      <CardItemAnimationWrapper animate='scaleDown'>
-                        <Image
-                          src={service.imageUrl ?? '/service_fallback.webp'}
-                          alt={
-                            service.imageAlt ??
-                            'geometric shape associated with service'
-                          }
-                          height={512}
-                          width={512}
-                        />
-                      </CardItemAnimationWrapper>
+                      <CardContent className='p-1 md:row-start-2 md:col-span-2 md:grid md:grid-cols-[30%_70%] md:justify-center md:items-center md:gap-x-4'>
+                        <CardItemAnimationWrapper animate='scaleDown'>
+                          <Image
+                            src={service.imageUrl ?? '/service_fallback.webp'}
+                            alt={
+                              service.imageAlt ??
+                              'geometric shape associated with service'
+                            }
+                            height={512}
+                            width={512}
+                          />
+                        </CardItemAnimationWrapper>
 
-                      <CardItemAnimationWrapper animate='floatUp'>
-                        <div className='md:hidden'>
-                          <Text as='p' size='small' textColor='default'>
-                            {service.shortDescription}
-                          </Text>
-                        </div>
-                        <div className='hidden md:block p-4'>
-                          <Text as='p' size='large' textColor='muted'>
-                            {service.shortDescription}
-                          </Text>
-                        </div>
-                      </CardItemAnimationWrapper>
-                    </CardContent>
+                        <CardItemAnimationWrapper animate='floatUp'>
+                          <div className='md:hidden pt-1'>
+                            <Text as='p' size='small' textColor='default'>
+                              {formatBoldText(service.shortDescription)}
+                            </Text>
+                          </div>
+                          <div className='hidden md:block p-4'>
+                            <Text as='p' size='large' textColor='muted'>
+                              {formatBoldText(service.shortDescription)}
+                            </Text>
+                          </div>
+                        </CardItemAnimationWrapper>
+                      </CardContent>
 
-                    <CardFooter className='md:row-start-3 md:col-start-2 md:justify-center'>
-                      <CardItemAnimationWrapper animate='scaleUp'>
-                        <div className='md:hidden pt-5'>
-                          <SmallCTAButton>
-                            <Link href={service.ctaLink ?? '/services'}>
-                              {service.cta}
-                            </Link>
-                          </SmallCTAButton>
-                        </div>
-                        <div className='hidden md:block md:mt-16'>
-                          <CTAButton className='!text-lg'>
-                            <Link href={service.ctaLink ?? '/services'}>
-                              {service.cta}
-                            </Link>
-                          </CTAButton>
-                        </div>
-                      </CardItemAnimationWrapper>
-                    </CardFooter>
-                  </Card>
-                </CarouselItem>
-              );
-            })}
+                      <CardFooter className='md:row-start-3 md:col-start-2 md:justify-center'>
+                        <CardItemAnimationWrapper animate='scaleUp'>
+                          <div className='md:hidden pt-5'>
+                            <SmallCTAButton>
+                              <Link href={service.ctaLink ?? '/services'}>
+                                {service.cta}
+                              </Link>
+                            </SmallCTAButton>
+                          </div>
+                          <div className='hidden md:block md:mt-16'>
+                            <CTAButton className='!text-lg'>
+                              <Link href={service.ctaLink ?? '/services'}>
+                                {service.cta}
+                              </Link>
+                            </CTAButton>
+                          </div>
+                        </CardItemAnimationWrapper>
+                      </CardFooter>
+                    </Card>
+                  </CarouselItem>
+                );
+              })}
           </CarouselContent>
           {/* <CarouselPrevious />
           <CarouselNext /> */}
@@ -275,6 +291,8 @@ const HomePage = async () => {
                     height={512}
                     width={512}
                     className='max-h-[40vh] w-auto md:max-h-[60vh]'
+                    priority
+                    placeholder='blur'
                   />
                 </CardItemAnimationWrapper>
               </CardContent>
