@@ -61,7 +61,7 @@ const HomePage = async () => {
         color='solidBackground'
         className='justify-center pt-0 min-h-[80vh] md:mt-12'
       >
-        <div className='-mt-1 md:mt-0'>
+        <div className='-mt-1.5 md:mt-0'>
           <MotionHeading
             text='let&#x27;s make'
             as='h1'
