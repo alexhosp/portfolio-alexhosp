@@ -62,7 +62,7 @@ export const useDotButton = (api: CarouselApi): useDotButtonType => {
       api.scrollTo(index);
       // turn the autoplay off here
     },
-    [api]
+    [api],
   );
 
   const onInit = React.useCallback((api: CarouselApi) => {
@@ -108,14 +108,14 @@ const Carousel = React.forwardRef<
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [carouselRef, api] = useEmblaCarousel(
       {
         ...opts,
         axis: orientation === 'horizontal' ? 'x' : 'y',
       },
-      plugins
+      plugins,
     );
 
     // Use the hook to get data for dot buttons
@@ -151,7 +151,7 @@ const Carousel = React.forwardRef<
           scrollNext();
         }
       },
-      [scrollPrev, scrollNext]
+      [scrollPrev, scrollNext],
     );
 
     const adjustSlideOpacity = React.useCallback(() => {
@@ -162,7 +162,7 @@ const Carousel = React.forwardRef<
       slides.forEach((slide, index) => {
         const slideCenterPosition = api.scrollSnapList()[index];
         const distanceFromCenter = Math.abs(
-          scrollProgress - slideCenterPosition
+          scrollProgress - slideCenterPosition,
         );
 
         const opacity = 1 - distanceFromCenter * TWEEN_FACTOR;
@@ -252,7 +252,7 @@ const Carousel = React.forwardRef<
         </div>
       </CarouselContext.Provider>
     );
-  }
+  },
 );
 Carousel.displayName = 'Carousel';
 
@@ -269,7 +269,7 @@ const CarouselContent = React.forwardRef<
         className={cn(
           'flex',
           orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
-          className
+          className,
         )}
         {...props}
       />
@@ -290,9 +290,9 @@ const CarouselItem = React.forwardRef<
       role='group'
       aria-roledescription='slide'
       className={cn(
-        'min-w-0 shrink-0 grow-0 basis-full cursor-pointer',
+        'min-w-0 shrink-0 grow-0 basis-full cursor-pointer h-fit',
         orientation === 'horizontal' ? 'pl-4' : 'pt-4',
-        className
+        className,
       )}
       {...props}
     />
@@ -316,7 +316,7 @@ const CarouselPrevious = React.forwardRef<
         orientation === 'horizontal'
           ? '-left-3 top-1/2 -translate-y-1/2'
           : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
-        className
+        className,
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
@@ -345,7 +345,7 @@ const CarouselNext = React.forwardRef<
         orientation === 'horizontal'
           ? '-right-3 top-1/2 -translate-y-1/2'
           : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
-        className
+        className,
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
