@@ -7,7 +7,7 @@ const textVariants = cva(['text-body'], {
       default:
         'text-base antialiased text-pretty whitespace-normal tracking-[0.007em]',
       large:
-        'text-lg font-normal text-center md:text-xl tracking-[0.007em] antialiased text-pretty whitespace-normal',
+        'text-lg font-normal text-center md:text-xl tracking-[0.007em] antialiased text-pretty whitespace-normal md:leading-8',
       small:
         'text-sm/[1.2rem] tracking-[0.007em] antialiased text-pretty whitespace-normal',
     },

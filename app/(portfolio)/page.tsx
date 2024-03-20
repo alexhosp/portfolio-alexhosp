@@ -47,7 +47,7 @@ const HomePage = async () => {
         color='solidBackground'
         className='justify-center pt-0 min-h-[80vh] md:mt-12'
       >
-        <div>
+        <div className='-mt-1 md:mt-0'>
           <MotionHeading
             text='let&#x27;s make'
             as='h1'
@@ -65,7 +65,7 @@ const HomePage = async () => {
               size='h1Default'
             ></MotionHeading>
           </div>
-          <div className='grid gap-3 grid-cols-2 grid-rows-1 mt-12 md:hidden'>
+          <div className='grid gap-5 grid-cols-2 grid-rows-1 mt-12 mx-auto max-w-xs md:max-w-full md:hidden'>
             <SmallCTAButton>
               <Link href='/about'>My Focus</Link>
             </SmallCTAButton>
