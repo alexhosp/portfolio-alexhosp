@@ -62,7 +62,7 @@ export const useDotButton = (api: CarouselApi): useDotButtonType => {
       api.scrollTo(index);
       // turn the autoplay off here
     },
-    [api]
+    [api],
   );
 
   const onInit = React.useCallback((api: CarouselApi) => {
@@ -108,15 +108,34 @@ const Carousel = React.forwardRef<
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [carouselRef, api] = useEmblaCarousel(
       {
         ...opts,
         axis: orientation === 'horizontal' ? 'x' : 'y',
       },
-      plugins
+      plugins,
     );
+
+    // Update carousel height based on tallest slide
+    const containerRef = React.useRef<HTMLDivElement>(null);
+
+    const updateCarouselHeight = () => {
+      if (!containerRef.current) return;
+
+      let maxHeight = 0;
+      const slides = containerRef.current.querySelectorAll(
+        '[aria-roledescription="slide"]',
+      );
+
+      slides.forEach((slide) => {
+        const slideHeight = slide.getBoundingClientRect().height;
+        if (slideHeight > maxHeight) maxHeight = slideHeight;
+      });
+
+      containerRef.current.style.height = `${maxHeight}px`;
+    };
 
     // Use the hook to get data for dot buttons
     const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(api);
@@ -151,7 +170,7 @@ const Carousel = React.forwardRef<
           scrollNext();
         }
       },
-      [scrollPrev, scrollNext]
+      [scrollPrev, scrollNext],
     );
 
     const adjustSlideOpacity = React.useCallback(() => {
@@ -162,7 +181,7 @@ const Carousel = React.forwardRef<
       slides.forEach((slide, index) => {
         const slideCenterPosition = api.scrollSnapList()[index];
         const distanceFromCenter = Math.abs(
-          scrollProgress - slideCenterPosition
+          scrollProgress - slideCenterPosition,
         );
 
         const opacity = 1 - distanceFromCenter * TWEEN_FACTOR;
@@ -214,6 +233,21 @@ const Carousel = React.forwardRef<
       }
     }, [api, adjustSlideOpacity]);
 
+    // add effect that sets height of the carousel
+
+    React.useEffect(() => {
+      if (!api) return;
+      updateCarouselHeight();
+
+      api.on('resize', updateCarouselHeight);
+      api.on('reInit', updateCarouselHeight);
+
+      return () => {
+        api.off('resize', updateCarouselHeight);
+        api.off('reInit', updateCarouselHeight);
+      };
+    }, [api, updateCarouselHeight]);
+
     return (
       <CarouselContext.Provider
         value={{
@@ -252,7 +286,7 @@ const Carousel = React.forwardRef<
         </div>
       </CarouselContext.Provider>
     );
-  }
+  },
 );
 Carousel.displayName = 'Carousel';
 
@@ -269,7 +303,7 @@ const CarouselContent = React.forwardRef<
         className={cn(
           'flex',
           orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
-          className
+          className,
         )}
         {...props}
       />
@@ -292,7 +326,7 @@ const CarouselItem = React.forwardRef<
       className={cn(
         'min-w-0 shrink-0 grow-0 basis-full cursor-pointer',
         orientation === 'horizontal' ? 'pl-4' : 'pt-4',
-        className
+        className,
       )}
       {...props}
     />
@@ -316,7 +350,7 @@ const CarouselPrevious = React.forwardRef<
         orientation === 'horizontal'
           ? '-left-3 top-1/2 -translate-y-1/2'
           : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
-        className
+        className,
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
@@ -345,7 +379,7 @@ const CarouselNext = React.forwardRef<
         orientation === 'horizontal'
           ? '-right-3 top-1/2 -translate-y-1/2'
           : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
-        className
+        className,
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
