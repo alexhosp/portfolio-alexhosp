@@ -8,10 +8,11 @@ import { RootLayout } from '@/ui/Layout/root-layout';
 import NavigationBar from '@/components/Header/dropdown-menu';
 import Footer from '@/components/Footer/footer';
 import dynamic from 'next/dynamic';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const ThemeProvider = dynamic(
   () => import('@/components/ThemeProvider/theme-provider'),
-  { ssr: false }
+  { ssr: false },
 );
 
 // this will be shown on Google!
@@ -44,6 +45,7 @@ const Layout = ({
         <ThemeProvider>
           <RootLayout header={<NavigationBar />} footer={<Footer />}>
             {children}
+            <SpeedInsights />
           </RootLayout>
         </ThemeProvider>
       </body>

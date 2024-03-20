@@ -59,7 +59,7 @@ const HomePage = async () => {
         edge='sharp'
         width='full'
         color='solidBackground'
-        className='justify-center pt-0 min-h-[80vh] md:mt-12'
+        className='justify-center pt-0 min-h-[75vh] md:mt-12'
       >
         <div>
           <MotionHeading
@@ -79,7 +79,7 @@ const HomePage = async () => {
               size='h1Default'
             ></MotionHeading>
           </div>
-          <div className='grid gap-3 grid-cols-2 grid-rows-1 mt-12 md:hidden'>
+          <div className='grid gap-5 grid-cols-2 grid-rows-1 mt-12 mx-auto max-w-xs md:max-w-full md:hidden'>
             <SmallCTAButton>
               <Link href='/about'>My Focus</Link>
             </SmallCTAButton>
@@ -292,7 +292,6 @@ const HomePage = async () => {
                     width={512}
                     className='max-h-[40vh] w-auto md:max-h-[60vh]'
                     priority
-                    placeholder='blur'
                   />
                 </CardItemAnimationWrapper>
               </CardContent>

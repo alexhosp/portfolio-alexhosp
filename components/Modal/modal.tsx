@@ -144,7 +144,6 @@ export const ProjectModal: React.FC<{
               width={512}
               className='max-h-[50%] w-auto mx-auto'
               priority
-              placeholder='blur'
             />
             <div className='flex place-content-center self-stretch ml-10 -mt-4'>
               <ul className='list-none pl-0 flex flex-col items-baseline mx-auto pr-4 text-sm/[1.2rem] tracking-[0.007em] antialiased text-pretty whitespace-normal text-[var(--color-foreground)] opacity-80'>
