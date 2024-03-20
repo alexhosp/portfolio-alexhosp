@@ -12,6 +12,7 @@ model Content {
   type             String
   title            String
   imageUrl         String?
+  blurDataUrl      String?
   imageAlt         String?
   shortDescription String   @db.Text // for homepage
   description      String?  @db.Text // for summary pages

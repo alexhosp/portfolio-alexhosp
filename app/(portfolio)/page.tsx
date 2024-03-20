@@ -292,7 +292,6 @@ const HomePage = async () => {
                     width={512}
                     className='max-h-[40vh] w-auto md:max-h-[60vh]'
                     priority
-                    placeholder='blur'
                   />
                 </CardItemAnimationWrapper>
               </CardContent>
