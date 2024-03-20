@@ -152,7 +152,7 @@ const HomePage = async () => {
                     <Card
                       edge='sharp'
                       color='solidPrimary'
-                      className='pb-0 pt-0 md:grid md:grid-rows-3 md:grid-cols-[30%_70%] md:max-h-[60vh]'
+                      className='pb-0 pt-0 md:p-6 md:grid md:grid-rows-3 md:grid-cols-[30%_70%] md:max-h-[60vh]'
                     >
                       <CardHeader className='md:row-start-1 md:col-start-2'>
                         <CardItemAnimationWrapper animate='fadeIn'>
