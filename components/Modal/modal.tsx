@@ -146,11 +146,12 @@ export const ProjectModal: React.FC<{
               className='max-h-[50%] w-auto mx-auto'
             />
             <div className='flex place-content-center self-stretch ml-10 -mt-4'>
-              <ul className='flex flex-col items-baseline mx-auto pr-4 text-sm/[1.2rem] tracking-[0.007em] antialiased text-pretty whitespace-normal text-[var(--color-foreground)] opacity-80'>
+              <ul className='list-none pl-0 flex flex-col items-baseline mx-auto pr-4 text-sm/[1.2rem] tracking-[0.007em] antialiased text-pretty whitespace-normal text-[var(--color-foreground)] opacity-80'>
                 {bulletPoints.map((line, index) => {
                   return (
-                    <li className='py-1' key={index}>
-                      &#x2714; {line}
+                    <li className='py-1 text-left flex' key={index}>
+                      <span className='shrink-0'>&#x2714;</span>
+                      <span className='flex-1'>{line}</span>
                     </li>
                   );
                 })}
