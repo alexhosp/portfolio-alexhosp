@@ -39,6 +39,20 @@ const HomePage = async () => {
     'gradientGrayDetail',
   ];
 
+  const formatBoldText = (text: string) => {
+    const parts = text.split(/(\*\*.*?\*\*)/);
+    return parts.map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return (
+          <strong className='text-[var(--color-background)]' key={index}>
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+      return part;
+    });
+  };
+
   return (
     <main className='overflow-x-hidden'>
       <Card
@@ -176,12 +190,12 @@ const HomePage = async () => {
                         <CardItemAnimationWrapper animate='floatUp'>
                           <div className='md:hidden pt-1'>
                             <Text as='p' size='small' textColor='default'>
-                              {service.shortDescription}
+                              {formatBoldText(service.shortDescription)}
                             </Text>
                           </div>
                           <div className='hidden md:block p-4'>
                             <Text as='p' size='large' textColor='muted'>
-                              {service.shortDescription}
+                              {formatBoldText(service.shortDescription)}
                             </Text>
                           </div>
                         </CardItemAnimationWrapper>
