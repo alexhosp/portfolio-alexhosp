@@ -140,17 +140,17 @@ const HomePage = async () => {
             containScroll: 'trimSnaps',
           }}
         >
-          <CarouselContent className='flex'>
+          <CarouselContent>
             {servicesContent.map((service) => {
               return (
                 <CarouselItem
                   key={service.id}
-                  className='basis-10/12 flex flex-grow transition-opacity'
+                  className='basis-10/12 flex flex-grow transition-opacity min-h-max'
                 >
                   <Card
                     edge='sharp'
                     color='solidPrimary'
-                    className='max-h-[70vh] md:grid md:grid-rows-3 md:grid-cols-[30%_70%] md:max-h-[60vh]'
+                    className='md:grid md:grid-rows-3 md:grid-cols-[30%_70%] md:max-h-[60vh]'
                   >
                     <CardHeader className='md:row-start-1 md:col-start-2'>
                       <CardItemAnimationWrapper animate='fadeIn'>
