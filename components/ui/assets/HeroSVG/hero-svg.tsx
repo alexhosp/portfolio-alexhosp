@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 
 const svgVariants = {
-  hidden: { opacity: 1, y: -50 },
+  hidden: { opacity: 0, y: -50 },
   visible: {
     opacity: 1,
     y: 20,
@@ -27,7 +27,7 @@ const pathVariants = {
 
 export const HeroSVG = () => {
   return (
-    <div className='flex justify-center items-center w-full h-full mb-4 lg:max-h-[50vh] min-h-[40vh] min-w-[80vw] md:min-w-[0]'>
+    <div className='flex justify-center items-center w-full h-[40vh] md:h-[50vh] mb-4 mt-1 lg:max-h-[50vh] min-h-[40vh] min-w-[80vw] md:min-w-[0]'>
       <motion.svg
         xmlns='http://www.w3.org/2000/svg'
         xmlSpace='preserve'
