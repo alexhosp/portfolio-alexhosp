@@ -59,9 +59,9 @@ const HomePage = async () => {
         edge='sharp'
         width='full'
         color='solidBackground'
-        className='justify-center pt-0 min-h-[80vh] md:mt-12'
+        className='justify-center pt-0 min-h-[75vh] md:mt-12'
       >
-        <div className='-mt-1.5 md:mt-0'>
+        <div>
           <MotionHeading
             text='let&#x27;s make'
             as='h1'
