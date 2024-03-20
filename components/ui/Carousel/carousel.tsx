@@ -118,25 +118,6 @@ const Carousel = React.forwardRef<
       plugins,
     );
 
-    // Update carousel height based on tallest slide
-    const containerRef = React.useRef<HTMLDivElement>(null);
-
-    const updateCarouselHeight = () => {
-      if (!containerRef.current) return;
-
-      let maxHeight = 0;
-      const slides = containerRef.current.querySelectorAll(
-        '[aria-roledescription="slide"]',
-      );
-
-      slides.forEach((slide) => {
-        const slideHeight = slide.getBoundingClientRect().height;
-        if (slideHeight > maxHeight) maxHeight = slideHeight;
-      });
-
-      containerRef.current.style.height = `${maxHeight}px`;
-    };
-
     // Use the hook to get data for dot buttons
     const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(api);
 
@@ -232,21 +213,6 @@ const Carousel = React.forwardRef<
         };
       }
     }, [api, adjustSlideOpacity]);
-
-    // add effect that sets height of the carousel
-
-    React.useEffect(() => {
-      if (!api) return;
-      updateCarouselHeight();
-
-      api.on('resize', updateCarouselHeight);
-      api.on('reInit', updateCarouselHeight);
-
-      return () => {
-        api.off('resize', updateCarouselHeight);
-        api.off('reInit', updateCarouselHeight);
-      };
-    }, [api, updateCarouselHeight]);
 
     return (
       <CarouselContext.Provider
