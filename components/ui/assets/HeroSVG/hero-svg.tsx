@@ -27,11 +27,12 @@ const pathVariants = {
 
 export const HeroSVG = () => {
   return (
-    <div className='flex justify-center items-center w-full h-[40vh] md:h-[50vh] mb-4 mt-1 lg:max-h-[50vh] min-h-[40vh] min-w-[80vw] md:min-w-[0]'>
+    <div className='relative flex justify-center items-center w-full h-[40vh] md:h-[60vh] mb-4 mt-1 lg:max-h-[50vh] min-h-[40vh] min-w-[80vw] md:min-w-[0]'>
       <motion.svg
         xmlns='http://www.w3.org/2000/svg'
         xmlSpace='preserve'
         viewBox='0 0 80 80'
+        height='40vh'
         className='fill-[var(--color-foreground)]'
         initial='hidden'
         animate='visible'
