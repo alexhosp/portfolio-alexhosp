@@ -9,6 +9,7 @@ import NavigationBar from '@/components/Header/dropdown-menu';
 import Footer from '@/components/Footer/footer';
 import dynamic from 'next/dynamic';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { GoogleTagManager } from '@next/third-parties/google';
 
 const ThemeProvider = dynamic(
   () => import('@/components/ThemeProvider/theme-provider'),
@@ -41,6 +42,7 @@ const Layout = ({
 }>) => {
   return (
     <html lang='en' className={`${spaceGrotesk.variable} ${openSans.variable}`}>
+      <GoogleTagManager gtmId='GTM-KLTDTBZ8' />
       <body className='bg-[var(--color-background)]'>
         <ThemeProvider>
           <RootLayout header={<NavigationBar />} footer={<Footer />}>
