@@ -22,6 +22,23 @@ export const metadata: Metadata = {
   title: 'Alex Hosp - Data Driven Web Development ',
   description:
     'Performant websites, web applications and prototypes that scale.',
+  generator: 'Next.js',
+  applicationName: 'Portfolio Alex Hosp',
+  keywords: [
+    'Web Development',
+    'JavaScript',
+    'Data Driven',
+    'Web Design',
+    'React',
+    'Next.js',
+    'Analytics',
+    'Prototyping',
+    'Custom',
+  ],
+  authors: [{ name: 'Alex Hosp' }],
+  creator: 'Alex Hosp',
+  publisher: 'Alex Hosp Dev',
+  verification: { google: 'Kl1n8I2btHpdH8iBHrYhb8497J_1kfnWMgVNGOs4Jyc' },
 };
 
 const spaceGrotesk = displayFont({
