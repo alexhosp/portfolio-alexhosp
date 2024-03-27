@@ -10,6 +10,7 @@ import Footer from '@/components/Footer/footer';
 import dynamic from 'next/dynamic';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleTagManager } from '@next/third-parties/google';
+import { WebVitals } from '@/components/analytics/web-vitals';
 
 const ThemeProvider = dynamic(
   () => import('@/components/ThemeProvider/theme-provider'),
@@ -48,8 +49,9 @@ const Layout = ({
           <RootLayout header={<NavigationBar />} footer={<Footer />}>
             {children}
           </RootLayout>
-          <SpeedInsights />
         </ThemeProvider>
+        <SpeedInsights />
+        <WebVitals />
       </body>
     </html>
   );
