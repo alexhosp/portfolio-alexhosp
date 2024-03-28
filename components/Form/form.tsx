@@ -161,12 +161,12 @@ export const ContactForm = () => {
               control={form.control}
               name='message'
               render={({ field }) => (
-                <FormItem className='my-3 flex flex-col items-start min-h-[8.25rem] md:min-h-32'>
+                <FormItem className='my-3 flex flex-col items-start min-h-[8.25rem] md:min-h-64 min-w-72'>
                   <FormLabel>Message</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder='Provide a short project description and feel free to add any questions and requests.'
-                      className='resize-none w-[75vw] md:w-[35vw]'
+                      className='resize-none w-[75vw] md:w-[35vw] md:h-[20vh]'
                       {...field}
                     />
                   </FormControl>
