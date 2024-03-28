@@ -61,7 +61,7 @@ export const ContactForm = () => {
       <Form {...form}>
         <form
           onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
-          className='bg-[var(--color-background)]/25 mx-auto md:grid md:grid-cols-2 md:gap-x-10'
+          className='bg-[var(--color-background)]/25 mx-auto md:grid md:grid-cols-2 md:gap-x-10 max-w-full'
         >
           <div className='md:col-start-1 flex md:items-end flex-col min-h-[13.25rem]'>
             <FormField
@@ -148,7 +148,7 @@ export const ContactForm = () => {
                     <Input
                       placeholder='Email'
                       fieldHeight='small'
-                      fieldWidth='full'
+                      fieldWidth='default'
                       {...field}
                     />
                   </FormControl>
@@ -170,7 +170,7 @@ export const ContactForm = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className='max-w-64 text-left' />
                 </FormItem>
               )}
             />
