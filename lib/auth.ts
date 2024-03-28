@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const ContactFormSchema = z
   .object({
-    type: z.enum(['job', 'freelance', 'colab', 'other'], {
+    type: z.enum(['job', 'quote', 'colab', 'other'], {
       required_error: 'Please specify an inquiry type',
     }),
     customType: z.string().optional(),
@@ -30,7 +30,7 @@ export const ContactFormSchema = z
     {
       message: 'Please specify the type of your inquiry',
       path: ['customType'],
-    }
+    },
   )
   .transform((data) => {
     if (

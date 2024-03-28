@@ -11,4 +11,6 @@ export default meta;
 
 type Story = StoryObj<typeof ContactForm>;
 
-export const DefaultContactForm: Story = {};
+export const DefaultContactForm: Story = {
+  render: () => <ContactForm />,
+};

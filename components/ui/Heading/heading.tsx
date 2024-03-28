@@ -22,7 +22,7 @@ const headingVariants = cva(
         h3Default:
           'text-xl uppercase tracking-wider lg:text-[2rem]/8 font-semibold',
         h3Small:
-          'text-sm md:text-base uppercase tracking-wider font-semibold pb-2 antialiased',
+          'text-sm md:text-base uppercase tracking-wider font-semibold antialiased',
       },
 
       color: {

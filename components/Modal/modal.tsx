@@ -40,7 +40,7 @@ export const ContactFormModal = () => {
             color='gradientPrimary'
             edge='rounded'
             width='full'
-            className='backdrop-blur-lg sm:max-w-screen'
+            className='backdrop-blur-lg sm:max-w-screen w-[22rem] md:w-full'
           >
             <DialogHeader>
               <DialogTitle>Let&#39;s join Forces!</DialogTitle>
