@@ -180,7 +180,7 @@ export const ContactForm = () => {
               type='submit'
               variant='cta'
               size='xs'
-              className='inline-flex place-items-center min-w-20 mt-6 drop-shadow-lg bg-[var(--color-background)] text-[var(--color-foreground)]'
+              className='inline-flex place-items-center min-w-20 mt-1 drop-shadow-lg bg-[var(--color-background)] text-[var(--color-foreground)]'
               disabled={isSubmitting}
             >
               {isSubmitting ? <LoadinSpinner /> : 'Submit'}

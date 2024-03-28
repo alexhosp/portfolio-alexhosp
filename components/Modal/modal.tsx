@@ -48,7 +48,7 @@ export const ContactFormModal = () => {
                 Interested in working together? I&#39;ll get in touch shortly.
               </DialogDescription>
             </DialogHeader>
-            <div className='grid flex-1 gap-2 mt-4'>
+            <div className='grid flex-1 gap-2 mt-2.5'>
               <ContactForm />
             </div>
           </Card>
