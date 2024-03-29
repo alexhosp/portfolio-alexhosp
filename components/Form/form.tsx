@@ -77,7 +77,7 @@ export const ContactForm = () => {
                         defaultValue={field.value}
                         className='flex flex-col space-y-1'
                       >
-                        <FormItem className='flex items-center space-x-3 space-y-0'>
+                        <FormItem className='flex items-center space-x-3 space-y-0 relative'>
                           <FormControl>
                             <RadioGroupItem value='job' />
                           </FormControl>

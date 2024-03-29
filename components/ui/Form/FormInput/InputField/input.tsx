@@ -22,7 +22,7 @@ const inputVariants = cva(
       fieldHeight: 'default',
       fieldWidth: 'default',
     },
-  }
+  },
 );
 
 type InputVariantsProps = VariantProps<typeof inputVariants>;
@@ -45,7 +45,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {...props}
       />
     );
-  }
+  },
 );
 Input.displayName = 'Input';
 
