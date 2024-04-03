@@ -92,7 +92,7 @@
   --radial-gradient-detail: radial-gradient(
     circle at 50% center,
     var(--color-background),
-    var(--color-detail) 50%,
+    var(--color-primary) 50%,
     var(--color-background) 75%,
     var(--color-background) 75%
   );

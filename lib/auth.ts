@@ -1,5 +1,47 @@
 import { z } from 'zod';
 
+type AllowedMimeType =
+  | 'application/pdf'
+  | 'application/msword'
+  | 'image/jpeg'
+  | 'image/png'
+  | 'video/mp4';
+
+const allowedFileTypes: Record<AllowedMimeType, number> = {
+  'application/pdf': 10 * 1024 * 1024, // PDFs up to 10MB
+  'application/msword': 10 * 1024 * 1024, // DOCs up to 10MB
+  'image/jpeg': 5 * 1024 * 1024, // JPEG Images up to 5MB
+  'image/png': 5 * 1024 * 1024, // PNG Images up to 5MB
+  'video/mp4': 100 * 1024 * 1024, // MP4 Videos up to 100MB
+};
+
+const fileSchema = z.object({
+  file: z
+    .instanceof(File)
+    .optional()
+    .superRefine((file: File | undefined, ctx) => {
+      if (!file) return true; // optional
+
+      const fileType: string = file.type;
+      if (!Object.keys(allowedFileTypes).includes(fileType)) {
+        console.log('unsupported file type:', fileType);
+        ctx.addIssue({
+          code: 'custom',
+          message: `Files of type ${fileType} are not allowed.`,
+        });
+      }
+
+      const fileSizeLimit = allowedFileTypes[file.type as AllowedMimeType];
+      if (file.size > fileSizeLimit) {
+        const sizeLimitMB = fileSizeLimit / (1024 * 1024);
+        ctx.addIssue({
+          code: 'custom',
+          message: `${fileType.split('/')[1].toUpperCase()} files can be no larger than ${sizeLimitMB}MB.`,
+        });
+      }
+      return true;
+    }),
+});
 export const ContactFormSchema = z
   .object({
     type: z.enum(['job', 'quote', 'colab', 'other'], {
@@ -18,6 +60,7 @@ export const ContactFormSchema = z
         message: 'Your message must be 500 or less characters long. ',
       }),
   })
+  .merge(fileSchema)
   .refine(
     (data) => {
       if (data.type === 'other') {

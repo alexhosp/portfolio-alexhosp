@@ -19,11 +19,12 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/ui/Form/RadioGroup/radio-group';
 import { toast } from '@/ui/Toast/hooks/use-toast';
 import { Input } from '@/ui/Form/FormInput/InputField/input';
+import { InputFile } from '@/ui/Form/FileInput/file-input';
 import { Textarea } from '@/ui/Form/Textarea/textarea';
 import { Toaster } from '@/ui/Toast/toaster';
 import LoadinSpinner from '@/ui/assets/LoadingSpinner/loading-spinner';
 
-export const ContactForm = () => {
+export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
   const form = useForm<z.infer<typeof ContactFormSchema>>({
     resolver: zodResolver(ContactFormSchema),
     defaultValues: {
@@ -38,7 +39,14 @@ export const ContactForm = () => {
   const onSubmit = async (data: z.infer<typeof ContactFormSchema>) => {
     setIsSubmitting(true);
 
-    const { type, email } = data;
+    const { type, email, message, file } = data;
+
+    console.log('Form Submission Data:', {
+      type,
+      email,
+      message,
+      file: file ? { name: file.name, type: file.type, size: file.size } : null,
+    });
 
     // simulate the server action, add the server action here
     // make sure to add error handling
@@ -49,7 +57,11 @@ export const ContactForm = () => {
       description: (
         <pre className='mt-2 rounded-md bg-[var(--color-black)] p-1'>
           <code className='text-xs text-mercury'>
-            {JSON.stringify({ type, email }, null, 2)}
+            {JSON.stringify(
+              { type, email, file: file ? file.name : null },
+              null,
+              2,
+            )}
           </code>
         </pre>
       ),
@@ -161,7 +173,7 @@ export const ContactForm = () => {
               control={form.control}
               name='message'
               render={({ field }) => (
-                <FormItem className='my-3 flex flex-col items-start min-h-[8.25rem] md:min-h-64 min-w-72'>
+                <FormItem className='my-3 flex flex-col items-start min-h-[8.25rem] md:min-h-[13rem] min-w-72'>
                   <FormLabel>Message</FormLabel>
                   <FormControl>
                     <Textarea
@@ -174,8 +186,32 @@ export const ContactForm = () => {
                 </FormItem>
               )}
             />
+            {fullForm && (
+              <div className='min-h-[8.25rem]'>
+                <FormField
+                  control={form.control}
+                  name='file'
+                  render={({ field: { onChange, onBlur, ...rest } }) => (
+                    <FormItem className='text-left'>
+                      <FormLabel>Additional File (Optional)</FormLabel>
+                      <FormControl>
+                        <InputFile
+                          onChange={(selectedFile) => {
+                            onChange(selectedFile);
+                          }}
+                          onBlur={onBlur}
+                          {...rest}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            )}
           </div>
-          <div className='md:col-span-2'>
+
+          <div className='md:col-span-2 relative mb-3 md:mb-0'>
             <SmallCTAButton
               type='submit'
               variant='cta'

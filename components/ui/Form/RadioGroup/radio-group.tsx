@@ -38,8 +38,9 @@ const RadioGroupItem = React.forwardRef<
         <motion.div
           className='absolute flex items-center justify-center inset-0 bg-[var(--color-accent)] rounded-full h-full w-full'
           animate={{ scale: 1.2 }}
+          initial={{ scale: 0.5 }}
         >
-          <Circle className='h-2.5 w-2.5 fill-[var(--color-accent)] text-[var(--color-accent-soft)]' />
+          <Circle className='h-2 w-2 fill-[var(--color-accent)] text-[var(--color-accent-soft)]' />
         </motion.div>
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>

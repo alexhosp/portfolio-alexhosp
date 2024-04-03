@@ -83,9 +83,9 @@ export const AnimatedTwoTabs: Story = {
           <Card
             color='gradientGrayDetail'
             edge='rounded'
-            className='text-[var(--color-foreground)] py-2 px-3.5'
+            className='text-[var(--color-foreground)] py-2 px-3.5 md:pb-4'
           >
-            <ContactForm />
+            <ContactForm fullForm />
           </Card>
         </TabsContent>
         <TabsContent value='booking'>
