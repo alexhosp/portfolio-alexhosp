@@ -39,6 +39,7 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
     defaultValues: {
       email: '',
       message: '',
+      type: '',
     },
   });
 
@@ -152,6 +153,7 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
                 <FormField
                   control={form.control}
                   name='customType'
+                  defaultValue=''
                   render={({ field }) => (
                     <FormItem className='min-w-60 min-h-[3.25rem] md:pl-96'>
                       <FormControl>
