@@ -3,6 +3,7 @@
 import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import { motion, MotionProps } from 'framer-motion';
+import React from 'react';
 
 const headingVariants = cva(
   ['font-display text-center flex justify-center items-center'],
@@ -59,6 +60,7 @@ export interface HeadingProps
     | 'h3Default'
     | 'h3Small';
   text?: string;
+  spanText?: string;
 }
 
 export const Heading: React.FC<HeadingProps> = ({
@@ -96,33 +98,62 @@ export const MotionHeading: React.FC<HeadingProps & MotionProps> = ({
   size,
   color = 'default',
   text,
+  spanText,
   ...props
 }) => {
+  const delay = 1;
+  const totalDuration = text ? (text.length - 1) * 0.1 : 0;
+  console.log(
+    `The total animation duration for the first span is: ${totalDuration} seconds`,
+  );
+
   const variantClasses = headingVariants({ size, color });
   const combinedClasses = cn(variantClasses);
 
   const Component = motion(as);
 
   return (
-    <Component className={combinedClasses} {...props}>
+    <Component className={`w-full ${combinedClasses}`} {...props}>
       <span className='sr-only'>{text}</span>
-      <motion.span
-        className='font-[var(--font-exo2)] tracking-[0.008em]'
-        aria-hidden
-        initial='hidden'
-        animate='visible'
-        transition={{
-          staggerChildren: 0.1,
-          ease: 'easeInOut',
-          type: 'spring',
-        }}
-      >
-        {text?.split('').map((char, index) => (
-          <motion.span key={index} variants={childVariants}>
-            {char}
+      <motion.div className={`${spanText && 'text-left w-11/12'}`}>
+        <motion.span
+          className='inline font-[var(--font-exo2)] tracking-[0.008em]'
+          aria-hidden
+          initial='hidden'
+          animate='visible'
+          transition={{
+            staggerChildren: 0.05,
+            ease: 'easeInOut',
+            type: 'spring',
+          }}
+        >
+          {text?.split('').map((char, index) => (
+            <motion.span key={index} variants={childVariants}>
+              {char}
+            </motion.span>
+          ))}
+        </motion.span>
+        {spanText && (
+          <motion.span
+            className='inline font-[var(--font-exo2)] text-[var(--color-primary)] tracking-[0.008em] ml-2'
+            aria-hidden
+            initial='hidden'
+            animate='visible'
+            transition={{
+              delay,
+              staggerChildren: 0.05,
+              ease: 'easeInOut',
+              type: 'spring',
+            }}
+          >
+            {spanText.split('').map((char, index) => (
+              <motion.span key={index} variants={childVariants}>
+                {char}
+              </motion.span>
+            ))}
           </motion.span>
-        ))}
-      </motion.span>
+        )}
+      </motion.div>
     </Component>
   );
 };

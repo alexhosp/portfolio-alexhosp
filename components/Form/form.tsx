@@ -23,6 +23,15 @@ import { InputFile } from '@/ui/Form/FileInput/file-input';
 import { Textarea } from '@/ui/Form/Textarea/textarea';
 import { Toaster } from '@/ui/Toast/toaster';
 import LoadinSpinner from '@/ui/assets/LoadingSpinner/loading-spinner';
+import { createPotentialCustomer } from '@/lib/action';
+
+export interface ContactFormData {
+  type: string;
+  email: string;
+  message: string;
+  file?: File;
+  customType?: string;
+}
 
 export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
   const form = useForm<z.infer<typeof ContactFormSchema>>({
@@ -48,7 +57,19 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
       file: file ? { name: file.name, type: file.type, size: file.size } : null,
     });
 
-    // simulate the server action, add the server action here
+    const contactFormData: FormData = new FormData();
+    contactFormData.append('type', data.type);
+    contactFormData.append('email', data.email);
+    contactFormData.append('message', data.message);
+    if (data.type === 'other' && data.customType) {
+      contactFormData.append('customType', data.customType);
+    }
+    if (data.file) {
+      contactFormData.append('file', data.file, data.file.name);
+    }
+
+    await createPotentialCustomer(contactFormData);
+
     // make sure to add error handling
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
