@@ -1,6 +1,7 @@
 import { z } from 'zod';
+import * as path from 'path';
 
-type AllowedMimeType =
+export type AllowedMimeType =
   | 'application/pdf'
   | 'application/msword'
   | 'image/jpeg'
@@ -64,6 +65,7 @@ export const ContactFormSchema = z
       .max(500, {
         message: 'Your message must be 500 or less characters long. ',
       }),
+    formType: z.enum(['contact', 'modal']),
   })
   .merge(fileSchema)
   .refine(
@@ -94,3 +96,73 @@ export const ContactFormSchema = z
     }
     return data;
   });
+
+const serverFileSchema = z
+  .object({
+    mimetype: z.string(),
+    size: z.number(),
+    name: z.string().min(1, 'File name is required.'),
+  })
+  .superRefine((file, ctx) => {
+    if (!(file.mimetype in allowedFileTypes)) {
+      ctx.addIssue({
+        code: 'custom',
+        message: `Files of type ${file.mimetype} are not allowed.`,
+      });
+    } else {
+      const fileSizeLimit = allowedFileTypes[file.mimetype as AllowedMimeType];
+      if (file.size > fileSizeLimit) {
+        const sizeLimitMB = fileSizeLimit / (1024 * 1024);
+        ctx.addIssue({
+          code: 'custom',
+          message: `Files can be no larger than ${sizeLimitMB}MB.`,
+        });
+      }
+      if (file.size <= 0) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'File size must be larger than 0 bytes.',
+        });
+      }
+    }
+  });
+
+export const ServerContactFormSchema = z
+  .object({
+    type: z.string().min(1, 'Please specify an inquiry type'),
+    email: z.string().email({
+      message: 'Please enter your email address.',
+    }),
+    message: z
+      .string()
+      .min(10, {
+        message: 'Your message must be at least 10 characters long.',
+      })
+      .max(500, {
+        message: 'Your message must be 500 or less characters long. ',
+      }),
+    formType: z.enum(['contact', 'modal']),
+    file: serverFileSchema.optional(),
+  })
+  .refine((data) => data.type.trim().length > 0, {
+    message: 'Invalid inquiry type',
+    path: ['type'],
+  });
+
+// additional file validation
+
+const allowedExtensions = {
+  'application/pdf': ['.pdf'],
+  'application/msword': ['.doc', '.docx'],
+  'image/jpeg': ['.jpg', '.jpeg'],
+  'image/png': ['.png'],
+  'video/mp4': ['.mp4'],
+};
+
+export const validateExtension = (
+  fileName: string,
+  mimeType: AllowedMimeType,
+): boolean => {
+  const extension = path.extname(fileName).toLowerCase();
+  return allowedExtensions[mimeType].includes(extension) || false;
+};

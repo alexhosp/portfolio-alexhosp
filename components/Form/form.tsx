@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { ContactFormSchema } from '@/lib/auth';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { SmallCTAButton } from '@/ui/Button/cta-button';
 import {
@@ -40,8 +40,13 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
       email: '',
       message: '',
       type: '',
+      formType: 'contact',
     },
   });
+
+  useEffect(() => {
+    form.setValue('formType', fullForm ? 'contact' : 'modal');
+  }, [form, fullForm]);
 
   const watchType = form.watch('type');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,19 +54,22 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
   const onSubmit = async (data: z.infer<typeof ContactFormSchema>) => {
     setIsSubmitting(true);
 
-    const { type, email, message, file } = data;
+    const { type, email, message, file, formType } = data;
 
     console.log('Form Submission Data:', {
       type,
       email,
       message,
       file: file ? { name: file.name, type: file.type, size: file.size } : null,
+      formType,
     });
 
     const contactFormData: FormData = new FormData();
     contactFormData.append('type', data.type);
     contactFormData.append('email', data.email);
     contactFormData.append('message', data.message);
+    contactFormData.append('formType', data.formType);
+
     if (data.type === 'other' && data.customType) {
       contactFormData.append('customType', data.customType);
     }
@@ -90,6 +98,16 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
     });
     setIsSubmitting(false);
   };
+
+  // just for logging
+  let formType;
+  if (fullForm) {
+    formType = 'contact';
+  } else {
+    formType = 'modal';
+  }
+  console.log('form type is:', formType);
+
   return (
     <>
       <Form {...form}>
@@ -233,7 +251,6 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
               </div>
             )}
           </div>
-
           <div className='md:col-span-2 relative mb-3 md:mb-0'>
             <SmallCTAButton
               type='submit'
