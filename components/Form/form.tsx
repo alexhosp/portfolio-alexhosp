@@ -196,7 +196,7 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
               control={form.control}
               name='message'
               render={({ field }) => (
-                <FormItem className='my-3 flex flex-col items-start min-h-[8.25rem] md:min-h-[13rem] min-w-72'>
+                <FormItem className='my-3 flex flex-col items-start min-h-[8.25rem] md:min-h-[17rem] min-w-72'>
                   <FormLabel>Message</FormLabel>
                   <FormControl>
                     <Textarea
@@ -239,7 +239,7 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
               type='submit'
               variant='cta'
               size='xs'
-              className='inline-flex place-items-center min-w-20 mt-1 drop-shadow-lg bg-[var(--color-background)] text-[var(--color-foreground)]'
+              className='inline-flex place-items-center min-w-20 mt-1 drop-shadow-lg bg-[var(--color-background)] text-[var(--color-foreground)] border border-[var(--color-accent)]'
               disabled={isSubmitting}
             >
               {isSubmitting ? <LoadinSpinner /> : 'Submit'}

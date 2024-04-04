@@ -45,7 +45,12 @@ const fileSchema = z.object({
 export const ContactFormSchema = z
   .object({
     type: z.enum(['job', 'quote', 'colab', 'other'], {
-      required_error: 'Please specify an inquiry type',
+      errorMap: (issue, ctx) => {
+        if (issue.code === z.ZodIssueCode.invalid_enum_value) {
+          return { message: 'Please specify an inquiry type' };
+        }
+        return { message: ctx.defaultError };
+      },
     }),
     customType: z.string().optional(),
     email: z.string().email({
