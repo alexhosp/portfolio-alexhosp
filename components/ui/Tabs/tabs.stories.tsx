@@ -5,9 +5,10 @@ import {
   Open_Sans as opensans,
   Space_Grotesk as spacegrotesk,
 } from 'next/font/google';
-import { Card } from '@/ui/Card/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/ui/Card/card';
 import { Heading } from '@/ui/Heading/heading';
 import { CardItemAnimationWrapper } from '../util/animation-wrapper';
+import Image from 'next/image';
 
 const openSans = opensans({
   subsets: ['latin'],
@@ -79,17 +80,33 @@ export const AnimatedTwoTabs: Story = {
             </Heading>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value='contact' className='w-10/12 mx-auto'>
+        <TabsContent value='contact' className='mx-auto'>
           <Card
             color='gradientGrayDetail'
             edge='rounded'
-            className='text-[var(--color-foreground)] py-2 px-3.5 md:pb-4'
+            className='text-[var(--color-foreground)] py-2 px-3.5 md:pb-4 md:w-4/5 mx-auto'
           >
             <ContactForm fullForm />
           </Card>
         </TabsContent>
         <TabsContent value='booking'>
-          <p>Booking</p>
+          <Card
+            color='gradientGrayPrimary'
+            edge='rounded'
+            className='text-[var(--color-foreground)] py-2 px-3.5 md:pb-4 min-h-screen'
+          >
+            <CardHeader>
+              <CardTitle>Currently working on this :)</CardTitle>{' '}
+            </CardHeader>
+            <CardContent>
+              <Image
+                src='https://takpdarjgrwxjlffpfkw.supabase.co/storage/v1/object/public/portfolio-media/images/contact/in-progress.png'
+                alt='matrix code'
+                width='960'
+                height='640'
+              />
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </CardItemAnimationWrapper>
