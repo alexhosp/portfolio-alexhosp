@@ -98,19 +98,20 @@ export const ContactFormSchema = z
   });
 
 const serverFileSchema = z
-  .object({
+  /* .object({
     mimetype: z.string(),
     size: z.number(),
     name: z.string().min(1, 'File name is required.'),
-  })
+  }) */
+  .instanceof(File)
   .superRefine((file, ctx) => {
-    if (!(file.mimetype in allowedFileTypes)) {
+    if (!(file.type in allowedFileTypes)) {
       ctx.addIssue({
         code: 'custom',
-        message: `Files of type ${file.mimetype} are not allowed.`,
+        message: `Files of type ${file.type} are not allowed.`,
       });
     } else {
-      const fileSizeLimit = allowedFileTypes[file.mimetype as AllowedMimeType];
+      const fileSizeLimit = allowedFileTypes[file.type as AllowedMimeType];
       if (file.size > fileSizeLimit) {
         const sizeLimitMB = fileSizeLimit / (1024 * 1024);
         ctx.addIssue({
