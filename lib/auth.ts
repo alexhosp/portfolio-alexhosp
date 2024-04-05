@@ -97,36 +97,29 @@ export const ContactFormSchema = z
     return data;
   });
 
-const serverFileSchema = z
-  /* .object({
-    mimetype: z.string(),
-    size: z.number(),
-    name: z.string().min(1, 'File name is required.'),
-  }) */
-  .instanceof(File)
-  .superRefine((file, ctx) => {
-    if (!(file.type in allowedFileTypes)) {
+const serverFileSchema = z.instanceof(File).superRefine((file, ctx) => {
+  if (!(file.type in allowedFileTypes)) {
+    ctx.addIssue({
+      code: 'custom',
+      message: `Files of type ${file.type} are not allowed.`,
+    });
+  } else {
+    const fileSizeLimit = allowedFileTypes[file.type as AllowedMimeType];
+    if (file.size > fileSizeLimit) {
+      const sizeLimitMB = fileSizeLimit / (1024 * 1024);
       ctx.addIssue({
         code: 'custom',
-        message: `Files of type ${file.type} are not allowed.`,
+        message: `Files can be no larger than ${sizeLimitMB}MB.`,
       });
-    } else {
-      const fileSizeLimit = allowedFileTypes[file.type as AllowedMimeType];
-      if (file.size > fileSizeLimit) {
-        const sizeLimitMB = fileSizeLimit / (1024 * 1024);
-        ctx.addIssue({
-          code: 'custom',
-          message: `Files can be no larger than ${sizeLimitMB}MB.`,
-        });
-      }
-      if (file.size <= 0) {
-        ctx.addIssue({
-          code: 'custom',
-          message: 'File size must be larger than 0 bytes.',
-        });
-      }
     }
-  });
+    if (file.size <= 0) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'File size must be larger than 0 bytes.',
+      });
+    }
+  }
+});
 
 export const ServerContactFormSchema = z
   .object({
