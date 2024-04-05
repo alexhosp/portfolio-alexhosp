@@ -5,6 +5,7 @@ import { validateExtension, sanitizeFilename } from '@/lib/auth';
 import { z } from 'zod';
 import { nanoid } from 'nanoid';
 import { supabase } from '@/lib/supabase';
+import { insertPotentialCustomer, PotentialCustomerData } from '@/lib/data';
 
 interface ValidationResult<T> {
   success: boolean;
@@ -59,7 +60,6 @@ const validateFormData = async (
   }
 };
 
-// requires Blob to upload to supabase
 const formatAndStoreFile = async (file: File, uniqueId: string) => {
   const { type, name } = file;
   const fileExtention = name.split('.').pop();
@@ -78,15 +78,34 @@ const formatAndStoreFile = async (file: File, uniqueId: string) => {
       : 'others';
   const filePath = `${subdir}/${uniqueId}.${fileExtention}`;
 
+  const bucketName = 'potential-customer-files';
+
   try {
-    const { data, error } = await supabase.storage
-      .from('potential-customer-files')
+    const { error } = await supabase.storage
+      .from(bucketName)
       .upload(filePath, file);
     if (error) {
+      throw error; // upload error
+    }
+    try {
+      const { data: signedUrlData, error: signedUrlError } =
+        await supabase.storage
+          .from(bucketName)
+          .createSignedUrl(filePath, 365 * 24 * 60 * 60);
+
+      if (signedUrlError) {
+        throw signedUrlError; // url genration error
+      }
+
+      const signedUrl = signedUrlData.signedUrl;
+      return signedUrl;
+    } catch (error) {
+      console.error(
+        'Failed to create signed URL:',
+        error instanceof Error ? error.message : 'Unknown error',
+      );
       throw error;
     }
-    console.log('Upload successful: ', data);
-    return data;
   } catch (error) {
     if (error instanceof Error) {
       console.log('Upload failed: ', error.message);
@@ -103,15 +122,26 @@ export const createPotentialCustomer = async (formData: FormData) => {
   const dataObject = formDataToObject(data);
   const validationResult = await validateFormData(dataObject);
 
-  if (validationResult.success) {
+  if (validationResult.success && validationResult.data) {
     const uniqueId = nanoid(14);
     const validatedData = validationResult.data;
-    if (validatedData?.file instanceof File) {
-      console.log('validated file: ', validatedData.file);
-      await formatAndStoreFile(validatedData.file, uniqueId);
-    }
 
-    console.log('allData:', uniqueId, validationResult.success, validatedData);
+    if (validatedData.file instanceof File) {
+      const file = validatedData.file;
+      const fileUrl = await formatAndStoreFile(file, uniqueId);
+
+      delete validatedData.file;
+      validatedData.fileUrl = fileUrl;
+    }
+    const potentialCustomerData: PotentialCustomerData = {
+      uniqueId: uniqueId,
+      inquiryType: validationResult.data.type as string,
+      email: validationResult.data.email as string,
+      message: validationResult.data.message as string,
+      formType: validationResult.data.formType as string,
+      fileUrl: validationResult.data.fileUrl as string | undefined,
+    };
+    await insertPotentialCustomer(potentialCustomerData);
   } else {
     console.error('Validation failed: ', validationResult.errors);
   }

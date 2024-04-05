@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
-    "@prisma/client": "^5.10.2",
+    "@prisma/client": "^5.12.1",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-form": "^0.0.3",
@@ -63,7 +63,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-storybook": "^0.6.15",
     "postcss": "^8",
-    "prisma": "^5.10.2",
+    "prisma": "^5.12.1",
     "storybook": "^8.0.0",
     "storybook-tailwind-dark-mode": "^1.0.22",
     "tailwindcss": "^3.3.0",
