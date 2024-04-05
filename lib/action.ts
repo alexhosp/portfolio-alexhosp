@@ -1,8 +1,9 @@
 'use server';
 
 import { ServerContactFormSchema, AllowedMimeType } from '@/lib/auth';
-import { validateExtension } from '@/lib/auth';
+import { validateExtension, sanitizeFilename } from '@/lib/auth';
 import { z } from 'zod';
+import sharp from 'sharp';
 
 interface ValidationResult<T> {
   success: boolean;
@@ -15,12 +16,13 @@ const formDataToObject = (formData: FormData): Record<string, unknown> => {
 
   for (const [key, value] of formData.entries()) {
     if (typeof value === 'string') {
-      object[key as string] = value;
+      object[key] = value;
     } else if (value instanceof File) {
-      object[key as string] = {
+      object[key] = {
         mimetype: value.type,
         size: value.size,
         name: value.name,
+
         // include more file information if needed
       };
     }
@@ -33,18 +35,35 @@ const validateFormData = async (
   /* eslint-disable-next-line */
 ): Promise<ValidationResult<Record<string, unknown>>> => {
   try {
-    const zodValidatedData = ServerContactFormSchema.parse(dataObject);
-    // additional validation for the file
+    const mutableDataObject = { ...dataObject };
+
+    if (mutableDataObject.file) {
+      const file = mutableDataObject.file as {
+        mimetype: AllowedMimeType;
+        name: string;
+        size: number;
+      };
+
+      file.name = sanitizeFilename(file.name);
+      /* 
+      if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        console.log(`File is a valid PNG or JPEG: ${(file.name, typeof file)}`);
+      } */
+    }
+    const zodValidatedData = ServerContactFormSchema.parse(mutableDataObject);
+
     if (zodValidatedData.file) {
       const { mimetype, name } = zodValidatedData.file as {
         mimetype: AllowedMimeType;
         name: string;
       };
+
       const isExtentionValid = validateExtension(name, mimetype);
       if (!isExtentionValid) {
         return { success: false, errors: ['Invalid file extension'] };
       }
     }
+
     return { success: true, data: zodValidatedData };
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -76,12 +95,3 @@ export const createPotentialCustomer = async (formData: FormData) => {
     console.error('Validation failed: ', validationResult.errors);
   }
 };
-
-// To Do: add a basic sanitization function, this is a basic idea of it
-/* const sanitizeFileName = (fileName) => {
-  return fileName.replace(/[^a-z0-9_\-\.]/gi, '_').toLowerCase();
-};
- */
-
-// add validation for image files and videos?
-// https://chat.openai.com/c/21ce20aa-0aa8-4b6f-b6d8-4f1df8a09157

@@ -166,3 +166,12 @@ export const validateExtension = (
   const extension = path.extname(fileName).toLowerCase();
   return allowedExtensions[mimeType].includes(extension) || false;
 };
+
+export const sanitizeFilename = (fileName: string) => {
+  const validFilename = fileName
+    .replace(/[^a-zA-Z0-9.]/g, '_')
+    .replace(/_{2,}/g, '_');
+
+  const extention = path.extname(fileName).toLowerCase();
+  return path.basename(validFilename, extention) + extention;
+};

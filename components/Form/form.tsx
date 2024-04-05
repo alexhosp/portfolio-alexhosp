@@ -74,7 +74,9 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
       contactFormData.append('customType', data.customType);
     }
     if (data.file) {
-      contactFormData.append('file', data.file, data.file.name);
+      const fileBuffer = await data.file.arrayBuffer();
+      const fileBlob = new Blob([fileBuffer], { type: data.file.type });
+      contactFormData.append('file', fileBlob, data.file.name);
     }
 
     await createPotentialCustomer(contactFormData);
