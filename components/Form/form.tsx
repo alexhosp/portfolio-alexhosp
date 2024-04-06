@@ -54,7 +54,7 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
   const onSubmit = async (data: z.infer<typeof ContactFormSchema>) => {
     setIsSubmitting(true);
 
-    const { type, email, message, file, formType } = data;
+    /*    const { type, email, message, file, formType } = data;
 
     console.log('Form Submission Data:', {
       type,
@@ -62,7 +62,7 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
       message,
       file: file ? { name: file.name, type: file.type, size: file.size } : null,
       formType,
-    });
+    }); */
 
     const contactFormData: FormData = new FormData();
     contactFormData.append('type', data.type);
@@ -111,15 +111,6 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
       setIsSubmitting(false);
     }
   };
-
-  // just for logging
-  let formType;
-  if (fullForm) {
-    formType = 'contact';
-  } else {
-    formType = 'modal';
-  }
-  console.log('form type is:', formType);
 
   return (
     <>
