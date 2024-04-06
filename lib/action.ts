@@ -19,6 +19,7 @@ const formDataToObject = (formData: FormData): Record<string, unknown> => {
   for (const [key, value] of formData.entries()) {
     object[key] = value;
   }
+  console.log('file: ', object.file);
   return object;
 };
 

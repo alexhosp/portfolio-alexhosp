@@ -25,10 +25,12 @@ export const DefaultProjectModal: Story = {
 
     imageUrl: '',
     imageAlt: 'product image of the project',
-    dialogCtaData: {
-      cta: ['Read Case Study', 'See it Live'],
-      ctaLink: ['', ''],
-    },
+    dialogCtaData: [
+      {
+        name: 'Open Quick Insights',
+        link: '',
+      },
+    ],
   },
   parameters: {
     nextjs: {
