@@ -115,6 +115,9 @@ const formatAndStoreFile = async (file: File, uniqueId: string) => {
   }
 };
 
+// add error handling for all possible validation errors, upload errors and database write errors
+// errors are thrown in the functions called and need to be caught and handled here
+
 /* eslint-disable-next-line */
 export const createPotentialCustomer = async (formData: FormData) => {
   // this needs to accept the validated form data JS object
@@ -141,7 +144,18 @@ export const createPotentialCustomer = async (formData: FormData) => {
       formType: validationResult.data.formType as string,
       fileUrl: validationResult.data.fileUrl as string | undefined,
     };
-    await insertPotentialCustomer(potentialCustomerData);
+    try {
+      await insertPotentialCustomer(potentialCustomerData);
+      // along with success message return saved data here
+      return { success: true, message: 'Recieved your message.' };
+    } catch (error) {
+      console.error('Error creating potential customer:', error);
+      return {
+        success: false,
+        message:
+          error instanceof Error ? error.message : 'Something went wrong',
+      };
+    }
   } else {
     console.error('Validation failed: ', validationResult.errors);
   }

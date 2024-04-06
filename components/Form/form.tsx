@@ -79,26 +79,37 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
       contactFormData.append('file', fileBlob, data.file.name);
     }
 
-    await createPotentialCustomer(contactFormData);
-
-    // make sure to add error handling
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    toast({
-      title: 'Received your message.',
-      description: (
-        <pre className='mt-2 rounded-md bg-[var(--color-black)] p-1'>
-          <code className='text-xs text-mercury'>
-            {JSON.stringify(
-              { type, email, file: file ? file.name : null },
-              null,
-              2,
-            )}
-          </code>
-        </pre>
-      ),
-    });
-    setIsSubmitting(false);
+    try {
+      const response = await createPotentialCustomer(contactFormData);
+      if (response) {
+        if (response.success) {
+          toast({
+            title: response.message,
+            description: (
+              <pre className='mt-2 rounded-md bg-[var(--color-black)] p-1'>
+                <code className='text-xs text-mercury'>
+                  {/* add the data received here, replace response.message with it */}
+                  {JSON.stringify(response.message, null, 2)}
+                </code>
+              </pre>
+            ),
+          });
+        } else {
+          toast({
+            title: 'Error submitting form',
+            description: response.message,
+          });
+        }
+      }
+    } catch (error) {
+      // Handle unexpected errors
+      toast({
+        title: 'Error',
+        description: 'An unexpected error occurred.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // just for logging
