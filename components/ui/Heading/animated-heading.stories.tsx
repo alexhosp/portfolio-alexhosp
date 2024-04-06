@@ -49,3 +49,22 @@ export const AnimatedHeadingElectricBlue: Story = {
     text: 'Got an idea?',
   },
 };
+
+export const AnimatedHeadingSpan: Story = {
+  render: (args) => (
+    <MotionHeading
+      as={args.as}
+      size={args.size}
+      color={args.color}
+      text={args.text}
+      spanText={args.spanText}
+    ></MotionHeading>
+  ),
+  args: {
+    as: 'h1',
+    size: 'h1Default',
+    color: 'h2accent',
+    text: 'Got an idea.',
+    spanText: 'Cool Thing this is a long one!',
+  },
+};

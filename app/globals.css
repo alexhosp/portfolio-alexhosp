@@ -21,8 +21,8 @@
   --color-accent: #0471e4;
   --color-accent-active: #0861c5;
   --color-highlight: #7097a0;
-  --color-destructive: #ff7043;
   --color-accent-soft: #4ccbff;
+  --color-destructive: #fe4011;
 
   --radial-gradient-light: radial-gradient(
     circle at 50% center,
@@ -63,6 +63,7 @@
   --color-primary: #50555c;
   --color-detail: #20262a;
   --color-accent-soft: #0f325c;
+  --color-destructive: #ff7043;
 
   --radial-gradient-light: radial-gradient(
     circle at 50% center,
@@ -91,7 +92,7 @@
   --radial-gradient-detail: radial-gradient(
     circle at 50% center,
     var(--color-background),
-    var(--color-detail) 50%,
+    var(--color-primary) 50%,
     var(--color-background) 75%,
     var(--color-background) 75%
   );
