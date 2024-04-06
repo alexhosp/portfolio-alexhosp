@@ -1,5 +1,7 @@
 'use server';
 
+// handling of the file needs to be adjusted and evaluated, submission throws an error in production: ReferenceError: File is not defined
+
 import { ServerContactFormSchema, AllowedMimeType } from '@/lib/auth';
 import { validateExtension, sanitizeFilename } from '@/lib/auth';
 import { z } from 'zod';
