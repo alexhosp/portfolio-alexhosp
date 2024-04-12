@@ -29,8 +29,12 @@ export const getServicesContent = async () => {
       imageUrl: true,
       imageAlt: true,
       shortDescription: true,
+      description: true,
+      fullDescription: true,
       cta: true,
+      additionalInfo: true,
       ctaLink: true,
+      icon: true,
     },
   });
   return servicesContent;

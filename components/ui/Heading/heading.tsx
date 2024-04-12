@@ -102,10 +102,6 @@ export const MotionHeading: React.FC<HeadingProps & MotionProps> = ({
   ...props
 }) => {
   const delay = 1;
-  const totalDuration = text ? (text.length - 1) * 0.1 : 0;
-  console.log(
-    `The total animation duration for the first span is: ${totalDuration} seconds`,
-  );
 
   const variantClasses = headingVariants({ size, color });
   const combinedClasses = cn(variantClasses);

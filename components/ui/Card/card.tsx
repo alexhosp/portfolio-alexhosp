@@ -15,7 +15,8 @@ const cardVariants = cva(
       width: {
         full: 'w-full p-8 sm:max-w-screen',
         half: 'md:w-1/2',
-        third: 'md:w-1/3',
+        twoThirds: 'md:7/12',
+        quarter: 'md:3/12',
       },
       color: {
         gradientPrimary: 'bg-radial-gradient-light',

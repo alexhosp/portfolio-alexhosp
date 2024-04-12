@@ -22,6 +22,7 @@ import { motion } from 'framer-motion';
 import { ContactForm } from '@/components/Form/form';
 import { FooterMenuItem } from '@/ui/MenuItem/menu-item';
 import Text from '@/ui/Text/text';
+import React from 'react';
 
 const MotionMail = motion(Mail);
 
@@ -190,3 +191,33 @@ export const ProjectModal: React.FC<{
     </Dialog>
   );
 };
+
+interface serviceModalData {
+  icon?: string | undefined;
+  description?: string | undefined;
+  examples: string[] | undefined;
+  technologies?: string[] | undefined;
+  features?: string[] | undefined;
+  cta?: string | undefined;
+}
+
+export const ServiceModal = React.forwardRef<HTMLDivElement, serviceModalData>(
+  ({ cta, icon, description, examples, technologies, features }, ref) => {
+    return (
+      <Dialog>
+        <DialogTrigger asChild>
+          <>
+            <div className='md:hidden'>
+              <SmallCTAButton>{cta}</SmallCTAButton>
+            </div>
+            <div className='hidden md:block'>
+              <CTAButton className='!text-lg'>{cta}</CTAButton>
+            </div>
+          </>
+        </DialogTrigger>
+      </Dialog>
+    );
+  },
+);
+
+ServiceModal.displayName = 'serviceModal';
