@@ -19,7 +19,7 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/ui/Form/RadioGroup/radio-group';
 import { toast } from '@/ui/Toast/hooks/use-toast';
 import { Input } from '@/ui/Form/FormInput/InputField/input';
-import { InputFile } from '@/ui/Form/FileInput/file-input';
+/* import { InputFile } from '@/ui/Form/FileInput/file-input'; */
 import { Textarea } from '@/ui/Form/Textarea/textarea';
 import { Toaster } from '@/ui/Toast/toaster';
 import LoadinSpinner from '@/ui/assets/LoadingSpinner/loading-spinner';
@@ -73,11 +73,11 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
     if (data.type === 'other' && data.customType) {
       contactFormData.append('customType', data.customType);
     }
-    if (data.file) {
+    /*  if (data.file) {
       const fileBuffer = await data.file.arrayBuffer();
       const fileBlob = new Blob([fileBuffer], { type: data.file.type });
       contactFormData.append('file', fileBlob, data.file.name);
-    }
+    } */
 
     try {
       const response = await createPotentialCustomer(contactFormData);
@@ -88,8 +88,7 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
             description: (
               <pre className='mt-2 rounded-md bg-[var(--color-black)] p-1'>
                 <code className='text-xs text-mercury'>
-                  {/* add the data received here, replace response.message with it */}
-                  {JSON.stringify(response.message, null, 2)}
+                  {JSON.stringify(response.data, null, 2)}
                 </code>
               </pre>
             ),
@@ -231,7 +230,7 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
                 </FormItem>
               )}
             />
-            {fullForm && (
+            {/*  {fullForm && (
               <div className='min-h-[8.25rem]'>
                 <FormField
                   control={form.control}
@@ -253,7 +252,7 @@ export const ContactForm = ({ fullForm }: { fullForm?: boolean }) => {
                   )}
                 />
               </div>
-            )}
+            )} */}
           </div>
           <div className='md:col-span-2 relative mb-3 md:mb-0'>
             <SmallCTAButton

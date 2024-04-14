@@ -130,14 +130,13 @@ export const createPotentialCustomer = async (formData: FormData) => {
 
   if (validationResult.success && validationResult.data) {
     const uniqueId = nanoid(14);
-    const validatedData = validationResult.data;
+    const validatedData = { ...validationResult.data };
 
     if (validatedData.file instanceof File) {
       const file = validatedData.file;
       const fileUrl = await formatAndStoreFile(file, uniqueId);
-
-      delete validatedData.file;
       validatedData.fileUrl = fileUrl;
+      delete validatedData.file;
     }
     const potentialCustomerData: PotentialCustomerData = {
       uniqueId: uniqueId,
@@ -149,8 +148,27 @@ export const createPotentialCustomer = async (formData: FormData) => {
     };
     try {
       await insertPotentialCustomer(potentialCustomerData);
-      // along with success message return saved data here
-      return { success: true, message: 'Recieved your message.' };
+
+      const messageLength = 20;
+      let messageToShow = potentialCustomerData.message;
+      if (messageToShow.length > messageLength) {
+        let lastIndex = messageToShow.lastIndexOf(' ', messageLength);
+        if (lastIndex === -1) {
+          lastIndex = Math.min(messageLength, messageToShow.length);
+        }
+        messageToShow = messageToShow.substring(0, lastIndex) + '...';
+      }
+      const resData = {
+        email: potentialCustomerData.email,
+        inquiry: potentialCustomerData.inquiryType,
+        message: messageToShow,
+      };
+
+      return {
+        success: true,
+        message: 'Recieved your message.',
+        data: resData,
+      };
     } catch (error) {
       console.error('Error creating potential customer:', error);
       return {
