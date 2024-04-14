@@ -29,7 +29,7 @@ export interface ContactFormData {
   type: string;
   email: string;
   message: string;
-  file?: File;
+  /*   file?: File; */
   customType?: string;
 }
 
