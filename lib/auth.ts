@@ -1,7 +1,7 @@
 import { z } from 'zod';
 /* import * as path from 'path'; */
 
-export type AllowedMimeType =
+/* export type AllowedMimeType =
   | 'application/pdf'
   | 'application/msword'
   | 'image/jpeg'
@@ -14,9 +14,9 @@ const allowedFileTypes: Record<AllowedMimeType, number> = {
   'image/jpeg': 5 * 1024 * 1024, // JPEG Images up to 5MB
   'image/png': 5 * 1024 * 1024, // PNG Images up to 5MB
   'video/mp4': 100 * 1024 * 1024, // MP4 Videos up to 100MB
-};
+}; */
 
-const fileSchema = z.object({
+/* const fileSchema = z.object({
   file: z
     .instanceof(File)
     .optional()
@@ -42,7 +42,7 @@ const fileSchema = z.object({
       }
       return true;
     }),
-});
+}); */
 export const ContactFormSchema = z
   .object({
     type: z.enum(['job', 'quote', 'colab', 'other'], {
@@ -67,7 +67,7 @@ export const ContactFormSchema = z
       }),
     formType: z.enum(['contact', 'modal']),
   })
-  .merge(fileSchema)
+  /*   .merge(fileSchema) */
   .refine(
     (data) => {
       if (data.type === 'other') {
