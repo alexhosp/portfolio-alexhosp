@@ -136,7 +136,7 @@ export const ServerContactFormSchema = z
         message: 'Your message must be 500 or less characters long. ',
       }),
     formType: z.enum(['contact', 'modal']),
-    file: serverFileSchema.optional(),
+    /*   file: serverFileSchema.optional(), */
   })
   .refine((data) => data.type.trim().length > 0, {
     message: 'Invalid inquiry type',

@@ -2,11 +2,11 @@
 
 // handling of the file needs to be adjusted and evaluated, submission throws an error in production: ReferenceError: File is not defined
 
-import { ServerContactFormSchema, AllowedMimeType } from '@/lib/auth';
-import { validateExtension, sanitizeFilename } from '@/lib/auth';
+import { ServerContactFormSchema /*  AllowedMimeType  */ } from '@/lib/auth';
+/* import { validateExtension, sanitizeFilename } from '@/lib/auth'; */
 import { z } from 'zod';
 import { nanoid } from 'nanoid';
-import { supabase } from '@/lib/supabase';
+/* import { supabase } from '@/lib/supabase'; */
 import { insertPotentialCustomer, PotentialCustomerData } from '@/lib/data';
 
 interface ValidationResult<T> {
@@ -21,7 +21,6 @@ const formDataToObject = (formData: FormData): Record<string, unknown> => {
   for (const [key, value] of formData.entries()) {
     object[key] = value;
   }
-  console.log('file: ', object.file);
   return object;
 };
 
@@ -31,7 +30,7 @@ const validateFormData = async (
 ): Promise<ValidationResult<Record<string, unknown>>> => {
   try {
     const zodValidatedData = ServerContactFormSchema.parse(dataObject);
-    if (zodValidatedData.file instanceof File) {
+    /*    if (zodValidatedData.file instanceof File) {
       const file: File = zodValidatedData.file;
 
       const mimeType: AllowedMimeType = file.type as AllowedMimeType;
@@ -41,7 +40,7 @@ const validateFormData = async (
       if (!isExtentionValid) {
         return { success: false, errors: ['Invalid file extension'] };
       }
-    }
+    } */
     // If the file extension is valid, return success and the validated data
     return { success: true, data: zodValidatedData };
   } catch (error) {
@@ -62,7 +61,7 @@ const validateFormData = async (
     }
   }
 };
-
+/* 
 const formatAndStoreFile = async (file: File, uniqueId: string) => {
   const { type, name } = file;
   const fileExtention = name.split('.').pop();
@@ -116,7 +115,7 @@ const formatAndStoreFile = async (file: File, uniqueId: string) => {
       throw error;
     }
   }
-};
+}; */
 
 // add error handling for all possible validation errors, upload errors and database write errors
 // errors are thrown in the functions called and need to be caught and handled here
@@ -130,21 +129,21 @@ export const createPotentialCustomer = async (formData: FormData) => {
 
   if (validationResult.success && validationResult.data) {
     const uniqueId = nanoid(14);
-    const validatedData = { ...validationResult.data };
+    /* const validatedData = { ...validationResult.data }; */
 
-    if (validatedData.file instanceof File) {
+    /*    if (validatedData.file instanceof File) {
       const file = validatedData.file;
       const fileUrl = await formatAndStoreFile(file, uniqueId);
       validatedData.fileUrl = fileUrl;
       delete validatedData.file;
-    }
+    } */
     const potentialCustomerData: PotentialCustomerData = {
       uniqueId: uniqueId,
       inquiryType: validationResult.data.type as string,
       email: validationResult.data.email as string,
       message: validationResult.data.message as string,
       formType: validationResult.data.formType as string,
-      fileUrl: validationResult.data.fileUrl as string | undefined,
+      /* fileUrl: validationResult.data.fileUrl as string | undefined, */
     };
     try {
       await insertPotentialCustomer(potentialCustomerData);
