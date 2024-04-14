@@ -23,6 +23,8 @@ import { ContactForm } from '@/components/Form/form';
 import { FooterMenuItem } from '@/ui/MenuItem/menu-item';
 import Text from '@/ui/Text/text';
 import React from 'react';
+import { Heading } from '@/ui/Heading/heading';
+import { ServiceIcon } from '@/app/(portfolio)/services/page';
 
 const MotionMail = motion(Mail);
 
@@ -193,6 +195,7 @@ export const ProjectModal: React.FC<{
 };
 
 interface serviceModalData {
+  title: string;
   icon?: string | undefined;
   description?: string | undefined;
   examples: string[] | undefined;
@@ -202,20 +205,59 @@ interface serviceModalData {
 }
 
 export const ServiceModal = React.forwardRef<HTMLDivElement, serviceModalData>(
-  ({ cta, icon, description, examples, technologies, features }, ref) => {
+  (
+    { title, cta, icon, description, examples, technologies, features },
+    ref,
+  ) => {
+    const descriptionArray = description?.split('|');
+    console.log(descriptionArray?.[0]);
     return (
-      <Dialog>
-        <DialogTrigger asChild>
-          <>
-            <div className='md:hidden'>
-              <SmallCTAButton>{cta}</SmallCTAButton>
-            </div>
-            <div className='hidden md:block'>
-              <CTAButton className='!text-lg'>{cta}</CTAButton>
-            </div>
-          </>
-        </DialogTrigger>
-      </Dialog>
+      <div ref={ref}>
+        <Dialog>
+          <DialogTrigger>
+            <CardItemAnimationWrapper animate='scaleUp'>
+              <div className='md:hidden'>
+                <SmallCTAButton>{cta}</SmallCTAButton>
+              </div>
+              <div className='hidden md:block'>
+                <CTAButton className='!text-lg'>{cta}</CTAButton>
+              </div>
+            </CardItemAnimationWrapper>
+          </DialogTrigger>
+          <DialogContent className='w-11/12'>
+            <Card color='solidBackground' edge='rounded' className='p-1.5 py-5'>
+              <DialogHeader className='flex flex-row gap-5'>
+                <ServiceIcon icon={icon} />
+                <div className='mx-auto mt-7 mb-3.5'>
+                  <Heading
+                    as='h3'
+                    color='default'
+                    size='h3Small'
+                    className='inline !text-left md:hidden'
+                  >
+                    {`${title}.`}
+                    <span className='text-[var(--color-primary)] ml-1'>
+                      Details
+                    </span>
+                  </Heading>
+                  <Heading
+                    as='h3'
+                    color='default'
+                    size='h3Default'
+                    className='!text-left hidden md:inline'
+                  >
+                    {`${title}.`}
+                    <span className='text-[var(--color-primary)] ml-1'>
+                      Details
+                    </span>
+                  </Heading>
+                </div>
+              </DialogHeader>
+              <DialogFooter className='flex flex-col'></DialogFooter>
+            </Card>
+          </DialogContent>
+        </Dialog>
+      </div>
     );
   },
 );

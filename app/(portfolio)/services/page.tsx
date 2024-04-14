@@ -12,6 +12,20 @@ import Text from '@/ui/Text/text';
 import { SmallCTAButton } from '@/ui/Button/cta-button';
 import { Prisma } from '@prisma/client';
 import { ServiceModal } from '@/components/Modal/modal';
+import { JsonValue } from '@prisma/client/runtime/library';
+
+interface Service {
+  id: number;
+  icon?: string | null;
+  title: string;
+  description?: string | null;
+  cta?: string | null;
+  additionalInfo?: JsonValue | null;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
+  fullDescription?: string | null;
+  ctaLink?: string | null;
+}
 
 interface CardStyles {
   color:
@@ -30,8 +44,9 @@ interface CardStyles {
 // define types
 
 const ServicesPage = async () => {
-  const servicesContent = await getServicesContent();
+  const servicesContent: Service[] = await getServicesContent();
 
+  console.log(servicesContent);
   return (
     <>
       <div className='md:mt-12'>
@@ -73,6 +88,7 @@ const ServicesPage = async () => {
                 iconColor: 'text-[var(--color-accent)]',
               };
             }
+
             return (
               <Card
                 key={service.id}
@@ -100,7 +116,12 @@ const ServicesPage = async () => {
                   {additionalInfo.group === 'main' ? (
                     <SmallCTAButton>{service.cta}</SmallCTAButton>
                   ) : (
-                    <ServiceModal cta={service.cta} />
+                    <ServiceModal
+                      cta={service.cta}
+                      description={service.fullDescription}
+                      title={service.title}
+                      icon={safeIcon}
+                    />
                   )}
                 </CardFooter>
               </Card>
