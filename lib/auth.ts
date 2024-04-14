@@ -97,7 +97,7 @@ export const ContactFormSchema = z
     return data;
   });
 
-const serverFileSchema = z.instanceof(File).superRefine((file, ctx) => {
+/* const serverFileSchema = z.instanceof(File).superRefine((file, ctx) => {
   if (!(file.type in allowedFileTypes)) {
     ctx.addIssue({
       code: 'custom',
@@ -120,7 +120,7 @@ const serverFileSchema = z.instanceof(File).superRefine((file, ctx) => {
     }
   }
 });
-
+ */
 export const ServerContactFormSchema = z
   .object({
     type: z.string().min(1, 'Please specify an inquiry type'),
