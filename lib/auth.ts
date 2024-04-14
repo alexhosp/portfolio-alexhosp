@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import * as path from 'path';
+/* import * as path from 'path'; */
 
 export type AllowedMimeType =
   | 'application/pdf'
@@ -145,14 +145,14 @@ export const ServerContactFormSchema = z
 
 // additional file validation
 
-const allowedExtensions = {
+/* const allowedExtensions = {
   'application/pdf': ['.pdf'],
   'application/msword': ['.doc', '.docx'],
   'image/jpeg': ['.jpg', '.jpeg'],
   'image/png': ['.png'],
   'video/mp4': ['.mp4'],
-};
-
+}; */
+/* 
 export const validateExtension = (
   fileName: string,
   mimeType: AllowedMimeType,
@@ -169,3 +169,4 @@ export const sanitizeFilename = (fileName: string) => {
   const extention = path.extname(fileName).toLowerCase();
   return path.basename(validFilename, extention) + extention;
 };
+ */
