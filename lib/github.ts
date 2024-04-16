@@ -2,6 +2,7 @@ import { Octokit } from 'octokit';
 
 const octokit = new Octokit({ auth: process.env.GITHUB_ACCESS_TOKEN });
 
+// fetch montnly commits
 export const fetchCommits = async (months = 4) => {
   // Default to 4 months if no argument is passed
   const today = new Date();
@@ -9,13 +10,18 @@ export const fetchCommits = async (months = 4) => {
 
   try {
     // Fetch all repositories for the authenticated user
-    const { data: repos } = await octokit.rest.repos.listForAuthenticatedUser();
+    let { data: repos } = await octokit.rest.repos.listForAuthenticatedUser();
 
     let totalCommits = 0;
+    // Filter out Git Profile
+    repos = repos.filter((repo) => repo.name !== repo.owner.login);
 
-    // Loop through each repository and fetch commits for each specified month
     for (const repo of repos) {
-      console.log(`Fetching commits for ${repo.name}`);
+      if (repo.name === repo.owner.login) {
+        console.log(`Skipping profile repository: ${repo.owner.login}`);
+        continue;
+      }
+
       for (let i = 0; i < months; i++) {
         const startOfMonth = new Date(
           today.getFullYear(),
@@ -69,7 +75,8 @@ export const fetchCommits = async (months = 4) => {
     console.log(
       `Total number of commits across all repositories: ${totalCommits}`,
     );
-    return { totalCommits, monthlyCommits };
+    console.log(`All Repos: ${repos.length}`);
+    return { totalCommits, monthlyCommits, repos };
   } catch (error) {
     console.error('Failed to fetch repositories', error);
     return {
