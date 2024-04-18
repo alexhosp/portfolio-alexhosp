@@ -77,3 +77,31 @@ export const getFaqContent = async () => {
   });
   return faqContent;
 };
+
+export interface PotentialCustomerData {
+  uniqueId: string;
+  inquiryType: string;
+  email: string;
+  message: string;
+  formType: string;
+  fileUrl?: string;
+}
+
+export const insertPotentialCustomer = async (data: PotentialCustomerData) => {
+  try {
+    const createdPotentialCustomer = await prisma.potentialCustomer.create({
+      data: {
+        uniqueId: data.uniqueId,
+        inquiryType: data.inquiryType,
+        email: data.email,
+        message: data.message,
+        formType: data.formType,
+        fileUrl: data.fileUrl,
+      },
+    });
+    console.log('Customer created', createdPotentialCustomer);
+  } catch (error) {
+    console.error('Error creating potential customer:', error);
+    throw error; // handle in createPotentialCustomer
+  }
+};

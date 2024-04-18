@@ -3,6 +3,7 @@
 import * as React from 'react';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { Circle } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 
@@ -28,13 +29,19 @@ const RadioGroupItem = React.forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        'aspect-square h-4 w-4 rounded-full border border-primary text-[var(--color-foreground)] ring-offset-[var(--color-background)] focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-        className
+        'aspect-square h-4 w-4 rounded-full border border-[var(--color-foreground)] text-[var(--color-foreground)] ring-offset-[var(--color-background)] focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+        className,
       )}
       {...props}
     >
-      <RadioGroupPrimitive.Indicator className='flex items-center justify-center'>
-        <Circle className='h-2.5 w-2.5 fill-[var(--color-accent)] text-[var(--color-foreground)]' />
+      <RadioGroupPrimitive.Indicator className='flex items-center justify-center relative'>
+        <motion.div
+          className='absolute flex items-center justify-center inset-0 bg-[var(--color-accent)] rounded-full h-full w-full'
+          animate={{ scale: 1.2 }}
+          initial={{ scale: 0.5 }}
+        >
+          <Circle className='h-2 w-2 fill-[var(--color-accent)] text-[var(--color-accent-soft)]' />
+        </motion.div>
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   );

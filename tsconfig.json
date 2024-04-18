@@ -13,6 +13,7 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
+    "target": "ES2022",
     "plugins": [
       {
         "name": "next",

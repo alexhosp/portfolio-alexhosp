@@ -21,6 +21,7 @@ import { motion } from 'framer-motion';
 
 import { ContactForm } from '@/components/Form/form';
 import { FooterMenuItem } from '@/ui/MenuItem/menu-item';
+import Text from '@/ui/Text/text';
 
 const MotionMail = motion(Mail);
 
@@ -40,15 +41,15 @@ export const ContactFormModal = () => {
             color='gradientPrimary'
             edge='rounded'
             width='full'
-            className='backdrop-blur-lg sm:max-w-screen'
+            className='backdrop-blur-lg sm:max-w-screen w-[22rem] md:w-full'
           >
             <DialogHeader>
               <DialogTitle>Let&#39;s join Forces!</DialogTitle>
-              <DialogDescription>
+              <Text as='p' size='small' textColor='muted'>
                 Interested in working together? I&#39;ll get in touch shortly.
-              </DialogDescription>
+              </Text>
             </DialogHeader>
-            <div className='grid flex-1 gap-2'>
+            <div className='grid flex-1 gap-2 mt-2.5'>
               <ContactForm />
             </div>
           </Card>

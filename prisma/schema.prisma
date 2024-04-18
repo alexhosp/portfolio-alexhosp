@@ -23,3 +23,15 @@ model Content {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
+
+model PotentialCustomer {
+  id          Int      @id @default(autoincrement())
+  uniqueId    String   @unique
+  inquiryType String
+  email       String
+  message     String
+  formType    String
+  fileUrl     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
