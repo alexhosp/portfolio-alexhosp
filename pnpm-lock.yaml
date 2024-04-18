@@ -9,8 +9,8 @@ dependencies:
     specifier: ^3.3.4
     version: 3.3.4(react-hook-form@7.50.1)
   '@next/third-parties':
-    specifier: ^14.1.4
-    version: 14.1.4(next@14.1.0)(react@18.2.0)
+    specifier: ^14.2.2
+    version: 14.2.2(next@14.1.0)(react@18.2.0)
   '@prisma/client':
     specifier: ^5.12.1
     version: 5.12.1(prisma@5.12.1)
@@ -2022,8 +2022,8 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@next/third-parties@14.1.4(next@14.1.0)(react@18.2.0):
-    resolution: {integrity: sha512-e/kpEFq5/ZPhHkxpJkvhMfLp3OC6KCBou0/BV8BvgjXAPgEo6sa0ZXe0l4ZEb3wcA7NIEHIpqCmjU5Z7QAHcKQ==}
+  /@next/third-parties@14.2.2(next@14.1.0)(react@18.2.0):
+    resolution: {integrity: sha512-udHgllytb8GPbqghxIDf09E7x/4hYgp7WjmfH1Z3u4EG29Mhf12NyXpc49wtd0k3rLydunqDa4MH9ej2y5Ph/A==}
     peerDependencies:
       next: ^13.0.0 || ^14.0.0
       react: ^18.2.0
