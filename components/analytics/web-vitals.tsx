@@ -24,7 +24,7 @@ const sendToGTM = (metric: Metric) => {
 
 export const WebVitals = () => {
   useReportWebVitals((metric: Metric) => {
-    console.log(metric);
+    /* console.log(metric); */
     sendToGTM(metric);
   });
   return null;
