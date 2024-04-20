@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 const ContactPage = () => {
   return (
-    <>
+    <div className='overflow-x-hidden'>
       <div className='md:mt-12'>
         <MotionHeading
           as='h2'
@@ -72,7 +72,7 @@ const ContactPage = () => {
           </TabsContent>
         </Tabs>
       </CardItemAnimationWrapper>
-    </>
+    </div>
   );
 };
 export default ContactPage;
