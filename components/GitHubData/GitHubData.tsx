@@ -1,25 +1,17 @@
 import { fetchCommits } from '@/lib/github';
+import { CommitsPerMonthLineChart } from '@/components/LineChart/line-chart';
 
+// chart is not displayed!
 export const GitHubData = async () => {
   const { repos, totalCommits, monthlyCommits } = await fetchCommits(4);
 
   return (
     <div>
       <p>Total number of commits is: {totalCommits}</p>
-      <ul>
-        {monthlyCommits.map((count, index) => {
-          const month = new Date(
-            new Date().getFullYear(),
-            new Date().getMonth() - index,
-            1,
-          ).toLocaleString('default', { month: 'long' });
-          return (
-            <li key={index}>
-              Number of commits in {month} is {count}
-            </li>
-          );
-        })}
-      </ul>
+      <div className='h-full w-96'>
+        <CommitsPerMonthLineChart monthlyCommits={monthlyCommits} />
+      </div>
+
       <ul>
         {repos?.map((repo, index) => (
           <li key={index}>{`All repos by name: ${repo.name}`}</li>
