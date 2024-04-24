@@ -11,17 +11,17 @@ export const VideoComponent: React.FC<{
   isShort?: boolean;
   title: string;
 }> = ({ id, isShort, title }) => {
-  const src = `https://www.youtube.com/embed/${id}`;
+  const src = `https://www.youtube.com/embed/${id}?modestbranding=1`;
 
   return (
-    <div>
+    <div className='md:flex md:place-content-end'>
       <iframe
         src={src}
         allowFullScreen
         title={title}
         loading='lazy'
-        width={isShort ? '315' : ''}
-        height={isShort ? '560' : ''}
+        width={isShort ? '255.15' : '560'}
+        height={isShort ? '453.6' : '315'}
       />
     </div>
   );
