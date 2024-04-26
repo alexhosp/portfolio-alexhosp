@@ -84,11 +84,13 @@ const AboutPage = () => {
             </div>
             <div className='md:grid grid-cols-2'>
               {videoIds[index] && videoTitles[index] && (
-                <VideoComponent
-                  id={videoIds[index]}
-                  title={videoTitles[index]}
-                  isShort
-                />
+                <CardItemAnimationWrapper animate='scaleDown'>
+                  <VideoComponent
+                    id={videoIds[index]}
+                    title={videoTitles[index]}
+                    isShort
+                  />
+                </CardItemAnimationWrapper>
               )}
 
               <div className='hidden md:flex md: place-content-center col-start-2'>
