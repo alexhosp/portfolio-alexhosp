@@ -15,12 +15,20 @@ const videoTitles = [
 // fetch this from the db in the next version
 const videoDescriptions = [
   [
-    'Practical Solutions: I care about turning complex insights into useful tools.',
+    'Practical Solutions: I care about turning complex data into useful tools.',
     'Access to Technology: I care about building apps that make powerful tools available to everyone.',
     'Growth: I build apps with the goal to help everyone grow and learn.',
   ],
-  [],
-  [],
+  [
+    'Strategic Planning: My strategic planning ensures efficient development.',
+    'Go and See: I connect with users to experience their true challenges.',
+    'Building with Purpose: I develop aligned with user goals - which are business goals.',
+  ],
+  [
+    'Powerful Connections: I build apps that connect businesses and users, driving mutual growth and success.',
+    'Interface & Infrastructure: I combine intuitive interfaces with robust backends, to make powerful tools accessible.',
+    'Apps Users Love: I build apps that solve problems, make users smile, and simplify life.',
+  ],
 ];
 
 const introHeading = ['Values. ', 'Problem-Solving. ', 'Focus. '];
@@ -77,16 +85,17 @@ const AboutPage = () => {
             <div className='md:grid grid-cols-2'>
               {videoIds[index] && videoTitles[index] && (
                 <VideoComponent
-                  id={videoIds[index]} // Pass video ID
-                  title={videoTitles[index]} // Pass corresponding title
+                  id={videoIds[index]}
+                  title={videoTitles[index]}
                   isShort
                 />
               )}
-              <div className='hidden md:flex md: place-content-center'>
+
+              <div className='hidden md:flex md: place-content-center col-start-2'>
                 <CardItemAnimationWrapper animate='floatUp'>
                   {videoDescriptions[index].length > 0 ? (
                     <ul className='flex content-start p-8 pt-16'>
-                      <div className='flex flex-col content-start justify-center'>
+                      <div className='flex flex-col content-start justify-center border-2 border-[var(--color-background)] rounded p-2 pb-2.5 dark:border-[var(--color-foreground)]'>
                         {videoDescriptions[index].map(
                           (description, descIndex) => {
                             const parts = description.split(':');
@@ -95,7 +104,7 @@ const AboutPage = () => {
                                 <Heading
                                   as='h3'
                                   size='h3Small'
-                                  color='default'
+                                  color='white'
                                   className='mb-2'
                                 >
                                   {parts[0]}

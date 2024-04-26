@@ -1,9 +1,7 @@
 // To do:
 /* 
-- Layout for Desktop has to be added 
-- Dimensions of player should be set responively
-- The more shorts banner needs to disappear
 - Add a loading skelleton for each of the videos
+- In order to control loading state use the YouTube API to fetch videos
   */
 
 export const VideoComponent: React.FC<{
