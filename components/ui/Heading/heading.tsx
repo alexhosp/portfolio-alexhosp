@@ -30,10 +30,12 @@ const headingVariants = cva(
         default: 'text-[var(--color-foreground)]',
         h1accent:
           'bg-clip-text text-transparent bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-foreground)] drop-shadow-lg',
-        h2accent: 'text-[var(--color-accent)] drop-shadow-sm',
+        h2accent: 'text-[var(--color-accent)]',
         h2accentgradient:
           'bg-clip-text text-transparent bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-active)] drop-shadow-md',
         lighter: 'text-[var(--color-primary)]',
+        white:
+          'text-[var(--color-background)] dark:text-[var(--color-foreground)]',
       },
     },
     defaultVariants: {
@@ -47,7 +49,13 @@ export interface HeadingProps
   extends React.HTMLAttributes<HTMLHeadingElement>,
     VariantProps<typeof headingVariants> {
   as: 'h1' | 'h2' | 'h3';
-  color: 'default' | 'h2accent' | 'h1accent' | 'lighter' | 'h2accentgradient';
+  color:
+    | 'default'
+    | 'h2accent'
+    | 'h1accent'
+    | 'lighter'
+    | 'h2accentgradient'
+    | 'white';
 
   children?: React.ReactNode;
   size:
