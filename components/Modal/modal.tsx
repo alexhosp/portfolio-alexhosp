@@ -23,8 +23,6 @@ import { ContactForm } from '@/components/Form/form';
 import { FooterMenuItem } from '@/ui/MenuItem/menu-item';
 import Text from '@/ui/Text/text';
 import React from 'react';
-import { Heading } from '@/ui/Heading/heading';
-import { ServiceIcon } from '@/app/(portfolio)/services/page';
 
 const MotionMail = motion(Mail);
 
@@ -194,7 +192,7 @@ export const ProjectModal: React.FC<{
   );
 };
 
-interface serviceModalData {
+/* interface serviceModalData {
   title: string;
   icon?: string | undefined;
   description?: string | undefined;
@@ -203,8 +201,8 @@ interface serviceModalData {
   features?: string[] | undefined;
   cta?: string | undefined;
 }
-
-export const ServiceModal = React.forwardRef<HTMLDivElement, serviceModalData>(
+ */
+/* export const ServiceModal = React.forwardRef<HTMLDivElement, serviceModalData>(
   (
     { title, cta, icon, description, examples, technologies, features },
     ref,
@@ -253,6 +251,25 @@ export const ServiceModal = React.forwardRef<HTMLDivElement, serviceModalData>(
                   </Heading>
                 </div>
               </DialogHeader>
+              <Text as='p' textColor='default' size='small'>
+                {descriptionArray[0]}
+              </Text>
+              <Collapsible>
+                <CollapsibleTrigger>{descriptionArray[1]}</CollapsibleTrigger>
+                <CollapsibleContent>
+                  <ul>
+                    {examples?.map((example, index) => {
+                      return (
+                        <li key={index}>
+                          <Text as='p' textColor='muted' size='small'>
+                            {example}
+                          </Text>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </CollapsibleContent>
+              </Collapsible>
               <DialogFooter className='flex flex-col'></DialogFooter>
             </Card>
           </DialogContent>
@@ -263,3 +280,4 @@ export const ServiceModal = React.forwardRef<HTMLDivElement, serviceModalData>(
 );
 
 ServiceModal.displayName = 'serviceModal';
+ */
