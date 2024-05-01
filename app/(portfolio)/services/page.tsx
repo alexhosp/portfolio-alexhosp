@@ -1,6 +1,6 @@
 import { MotionHeading } from '@/ui/Heading/heading';
 import { getServicesContent } from '@/lib/data';
-import { sanitizeHTML } from '@/lib/auth';
+import { ServiceIcon } from '@/ui/assets/ServiceIcon/service-icon';
 import {
   Card,
   CardHeader,
@@ -11,10 +11,9 @@ import {
 import Text from '@/ui/Text/text';
 import { SmallCTAButton, CTAButton } from '@/ui/Button/cta-button';
 import { Prisma } from '@prisma/client';
-import { ServiceModal } from '@/components/Modal/modal';
 import { JsonValue } from '@prisma/client/runtime/library';
 import Link from 'next/link';
-import { CardItemAnimationWrapper } from '@/components/ui/util/animation-wrapper';
+import { CardItemAnimationWrapper } from '@/ui/util/animation-wrapper';
 
 interface Service {
   id: number;
@@ -75,10 +74,6 @@ const ServicesPage = async () => {
           .map((service) => {
             // Map to render Cards
             const additionalInfo = service.additionalInfo as Prisma.JsonObject;
-            const safeIcon =
-              typeof service.icon === 'string'
-                ? sanitizeHTML(service.icon)
-                : undefined;
 
             let cardStyles: CardStyles = {
               color: 'solidBackground',
@@ -107,15 +102,14 @@ const ServicesPage = async () => {
                 <Card
                   edge='rounded'
                   color={cardStyles.color}
-                  className={`${cardStyles.border} ${cardStyles.gridClass} pt-2 `}
+                  className={`transition-all duration-300 ease-in-out transform hover:scale-105 ${cardStyles.border} hover:border-[var(--color-highlight)] ${cardStyles.gridClass} pt-2 `}
                 >
                   <CardHeader>
-                    {safeIcon && (
-                      <ServiceIcon
-                        icon={safeIcon}
-                        color={cardStyles.iconColor}
-                      />
-                    )}
+                    <ServiceIcon
+                      icon={service.icon ? service.icon : undefined}
+                      color={cardStyles.iconColor}
+                    />
+
                     <CardTitle>{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent className='px-0 md:my-1.5'>
@@ -155,15 +149,3 @@ const ServicesPage = async () => {
   );
 };
 export default ServicesPage;
-
-export const ServiceIcon: React.FC<{ icon: string; color?: string }> = ({
-  icon,
-  color,
-}) => {
-  return (
-    <div
-      className={`${color} flex place-content-center`}
-      dangerouslySetInnerHTML={{ __html: icon }}
-    />
-  );
-};

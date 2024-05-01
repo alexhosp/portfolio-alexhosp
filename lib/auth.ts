@@ -1,5 +1,5 @@
 import { z } from 'zod';
-/* import * as path from 'path'; */
+import * as path from 'path';
 
 /* export type AllowedMimeType =
   | 'application/pdf'
@@ -160,6 +160,7 @@ export const validateExtension = (
   const extension = path.extname(fileName).toLowerCase();
   return allowedExtensions[mimeType].includes(extension) || false;
 };
+*/
 
 export const sanitizeFilename = (fileName: string) => {
   const validFilename = fileName
