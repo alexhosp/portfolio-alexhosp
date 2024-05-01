@@ -43,7 +43,7 @@ const cardItemAnimationVariants = {
   },
 };
 
-const staggerAnimationVariants = {
+export const staggerAnimationVariants = {
   hidden: {
     opacity: 0,
     y: 20,
@@ -54,6 +54,7 @@ const staggerAnimationVariants = {
     transition: {
       ease: easeInOut,
       staggerChildren: 0.2,
+      delayChildren: 0.1,
       duration: 0.15,
       when: 'beforeChildren',
     },
@@ -85,7 +86,7 @@ CardItemAnimationWrapper.displayName = 'CardItemAnimationWrapper';
 
 export const StaggeredAnimationWrapper = React.forwardRef<
   HTMLDivElement,
-  { children: React.ReactNode; className: string }
+  { children: React.ReactNode; className?: string }
 >(({ children, className, ...props }, ref) => {
   return (
     <motion.div

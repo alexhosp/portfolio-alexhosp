@@ -1,5 +1,5 @@
 import { z } from 'zod';
-/* import * as path from 'path'; */
+import * as path from 'path';
 
 /* export type AllowedMimeType =
   | 'application/pdf'
@@ -160,6 +160,7 @@ export const validateExtension = (
   const extension = path.extname(fileName).toLowerCase();
   return allowedExtensions[mimeType].includes(extension) || false;
 };
+*/
 
 export const sanitizeFilename = (fileName: string) => {
   const validFilename = fileName
@@ -169,4 +170,20 @@ export const sanitizeFilename = (fileName: string) => {
   const extention = path.extname(fileName).toLowerCase();
   return path.basename(validFilename, extention) + extention;
 };
- */
+
+// sanitize inner html
+
+export const sanitizeHTML = (htmlContent: string) => {
+  // Remove script tags
+  htmlContent = htmlContent.replace(
+    /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+    '',
+  );
+
+  // Remove event handlers
+  htmlContent = htmlContent.replace(/\son\w+="[^"]*"/g, ''); // Removes event handlers within double quotes
+  htmlContent = htmlContent.replace(/\son\w+='[^']*'/g, ''); // Removes event handlers within single quotes
+  htmlContent = htmlContent.replace(/\son\w+=`[^`]*`/g, ''); // Removes event handlers within backticks
+
+  return htmlContent;
+};

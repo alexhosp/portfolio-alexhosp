@@ -1,0 +1,1 @@
+2024-04-12T18:19:01.119636Z  WARN turborepo_filewatch: encountered error watching filesystem enumerating recursive watch: IO error for operation on /home/siva/WebDev/projects/production-projects/dev/portfolio-alexhosp/node_modules/.pnpm/data-urls@5.0.0/node_modules/data-urls_tmp_101675/lib: No such file or directory (os error 2)

@@ -22,6 +22,7 @@ import { motion } from 'framer-motion';
 import { ContactForm } from '@/components/Form/form';
 import { FooterMenuItem } from '@/ui/MenuItem/menu-item';
 import Text from '@/ui/Text/text';
+import React from 'react';
 
 const MotionMail = motion(Mail);
 
@@ -190,3 +191,93 @@ export const ProjectModal: React.FC<{
     </Dialog>
   );
 };
+
+/* interface serviceModalData {
+  title: string;
+  icon?: string | undefined;
+  description?: string | undefined;
+  examples: string[] | undefined;
+  technologies?: string[] | undefined;
+  features?: string[] | undefined;
+  cta?: string | undefined;
+}
+ */
+/* export const ServiceModal = React.forwardRef<HTMLDivElement, serviceModalData>(
+  (
+    { title, cta, icon, description, examples, technologies, features },
+    ref,
+  ) => {
+    const descriptionArray = description?.split('|');
+    console.log(descriptionArray?.[0]);
+    return (
+      <div ref={ref}>
+        <Dialog>
+          <DialogTrigger>
+            <CardItemAnimationWrapper animate='scaleUp'>
+              <div className='md:hidden'>
+                <SmallCTAButton>{cta}</SmallCTAButton>
+              </div>
+              <div className='hidden md:block'>
+                <CTAButton className='!text-lg'>{cta}</CTAButton>
+              </div>
+            </CardItemAnimationWrapper>
+          </DialogTrigger>
+          <DialogContent className='w-11/12'>
+            <Card color='solidBackground' edge='rounded' className='p-1.5 py-5'>
+              <DialogHeader className='flex flex-row gap-5'>
+                <ServiceIcon icon={icon} />
+                <div className='mx-auto mt-7 mb-3.5'>
+                  <Heading
+                    as='h3'
+                    color='default'
+                    size='h3Small'
+                    className='inline !text-left md:hidden'
+                  >
+                    {`${title}.`}
+                    <span className='text-[var(--color-primary)] ml-1'>
+                      Details
+                    </span>
+                  </Heading>
+                  <Heading
+                    as='h3'
+                    color='default'
+                    size='h3Default'
+                    className='!text-left hidden md:inline'
+                  >
+                    {`${title}.`}
+                    <span className='text-[var(--color-primary)] ml-1'>
+                      Details
+                    </span>
+                  </Heading>
+                </div>
+              </DialogHeader>
+              <Text as='p' textColor='default' size='small'>
+                {descriptionArray[0]}
+              </Text>
+              <Collapsible>
+                <CollapsibleTrigger>{descriptionArray[1]}</CollapsibleTrigger>
+                <CollapsibleContent>
+                  <ul>
+                    {examples?.map((example, index) => {
+                      return (
+                        <li key={index}>
+                          <Text as='p' textColor='muted' size='small'>
+                            {example}
+                          </Text>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </CollapsibleContent>
+              </Collapsible>
+              <DialogFooter className='flex flex-col'></DialogFooter>
+            </Card>
+          </DialogContent>
+        </Dialog>
+      </div>
+    );
+  },
+);
+
+ServiceModal.displayName = 'serviceModal';
+ */

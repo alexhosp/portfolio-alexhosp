@@ -10,6 +10,7 @@ const textVariants = cva(['text-body'], {
         'text-lg font-normal text-center md:text-xl tracking-[0.007em] antialiased text-pretty whitespace-normal md:leading-8',
       small:
         'text-sm/[1.2rem] tracking-[0.007em] antialiased text-pretty whitespace-normal leading-5',
+      tiny: 'text-xs  tracking-[0.007em] antialiased text-pretty whitespace-normal md:text-sm',
     },
     textColor: {
       default: 'text-[var(--color-foreground)]',
@@ -30,7 +31,7 @@ export interface TextProps
     React.HTMLAttributes<HTMLParagraphElement | HTMLSpanElement> {
   as: 'p' | 'span';
   children: React.ReactNode;
-  size: 'default' | 'large' | 'small';
+  size: 'default' | 'large' | 'small' | 'tiny';
   textColor: 'default' | 'accent' | 'highlight' | 'muted';
   className?: string;
 }

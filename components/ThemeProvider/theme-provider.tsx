@@ -8,7 +8,7 @@ const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <NextThemeProvider
       attribute='class'
-      defaultTheme='system'
+      defaultTheme='dark'
       enableSystem
       disableTransitionOnChange
     >
