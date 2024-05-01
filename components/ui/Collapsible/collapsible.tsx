@@ -67,7 +67,7 @@ const CollapsibleContent: React.FC<{ listItems: string[] }> = ({
                       as='h3'
                       size='h3Default'
                       color='h1accent'
-                      className='md:flex mb-2'
+                      className='hidden md:flex mb-2'
                     >
                       {parts[0].trim()}
                     </Heading>
