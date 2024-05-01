@@ -52,7 +52,7 @@ const Footer = () => {
                 <li className='mb-4 flex place-content-center'>
                   <FooterMenuItem>
                     <a
-                      href='/alexandra-hosp-DUMMY-resume.pdf'
+                      href='/cv_alexandra_hosp.pdf'
                       target='_blank'
                       rel='noopener noreferrer'
                       download

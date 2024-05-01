@@ -48,5 +48,10 @@ notes.*
 .vscode/
 .idea/
 
+<<<<<<< HEAD
 #env
 .env
+=======
+# env
+.env
+>>>>>>> origin/main

@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import * as path from 'path';
+/* import * as path from 'path'; */
 
-export type AllowedMimeType =
+/* export type AllowedMimeType =
   | 'application/pdf'
   | 'application/msword'
   | 'image/jpeg'
@@ -14,9 +14,9 @@ const allowedFileTypes: Record<AllowedMimeType, number> = {
   'image/jpeg': 5 * 1024 * 1024, // JPEG Images up to 5MB
   'image/png': 5 * 1024 * 1024, // PNG Images up to 5MB
   'video/mp4': 100 * 1024 * 1024, // MP4 Videos up to 100MB
-};
+}; */
 
-const fileSchema = z.object({
+/* const fileSchema = z.object({
   file: z
     .instanceof(File)
     .optional()
@@ -42,7 +42,7 @@ const fileSchema = z.object({
       }
       return true;
     }),
-});
+}); */
 export const ContactFormSchema = z
   .object({
     type: z.enum(['job', 'quote', 'colab', 'other'], {
@@ -67,7 +67,7 @@ export const ContactFormSchema = z
       }),
     formType: z.enum(['contact', 'modal']),
   })
-  .merge(fileSchema)
+  /*   .merge(fileSchema) */
   .refine(
     (data) => {
       if (data.type === 'other') {
@@ -97,7 +97,7 @@ export const ContactFormSchema = z
     return data;
   });
 
-const serverFileSchema = z.instanceof(File).superRefine((file, ctx) => {
+/* const serverFileSchema = z.instanceof(File).superRefine((file, ctx) => {
   if (!(file.type in allowedFileTypes)) {
     ctx.addIssue({
       code: 'custom',
@@ -120,7 +120,7 @@ const serverFileSchema = z.instanceof(File).superRefine((file, ctx) => {
     }
   }
 });
-
+ */
 export const ServerContactFormSchema = z
   .object({
     type: z.string().min(1, 'Please specify an inquiry type'),
@@ -136,7 +136,7 @@ export const ServerContactFormSchema = z
         message: 'Your message must be 500 or less characters long. ',
       }),
     formType: z.enum(['contact', 'modal']),
-    file: serverFileSchema.optional(),
+    /*   file: serverFileSchema.optional(), */
   })
   .refine((data) => data.type.trim().length > 0, {
     message: 'Invalid inquiry type',
@@ -145,14 +145,14 @@ export const ServerContactFormSchema = z
 
 // additional file validation
 
-const allowedExtensions = {
+/* const allowedExtensions = {
   'application/pdf': ['.pdf'],
   'application/msword': ['.doc', '.docx'],
   'image/jpeg': ['.jpg', '.jpeg'],
   'image/png': ['.png'],
   'video/mp4': ['.mp4'],
-};
-
+}; */
+/* 
 export const validateExtension = (
   fileName: string,
   mimeType: AllowedMimeType,

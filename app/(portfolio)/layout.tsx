@@ -9,6 +9,8 @@ import NavigationBar from '@/components/Header/dropdown-menu';
 import Footer from '@/components/Footer/footer';
 import dynamic from 'next/dynamic';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { GoogleTagManager } from '@next/third-parties/google';
+import { WebVitals } from '@/components/analytics/web-vitals';
 
 const ThemeProvider = dynamic(
   () => import('@/components/ThemeProvider/theme-provider'),
@@ -20,6 +22,23 @@ export const metadata: Metadata = {
   title: 'Alex Hosp - Data Driven Web Development ',
   description:
     'Performant websites, web applications and prototypes that scale.',
+  generator: 'Next.js',
+  applicationName: 'Portfolio Alex Hosp',
+  keywords: [
+    'Web Development',
+    'JavaScript',
+    'Data Driven',
+    'Web Design',
+    'React',
+    'Next.js',
+    'Analytics',
+    'Prototyping',
+    'Custom',
+  ],
+  authors: [{ name: 'Alex Hosp' }],
+  creator: 'Alex Hosp',
+  publisher: 'Alex Hosp Dev',
+  verification: { google: 'Kl1n8I2btHpdH8iBHrYhb8497J_1kfnWMgVNGOs4Jyc' },
 };
 
 const spaceGrotesk = displayFont({
@@ -41,13 +60,15 @@ const Layout = ({
 }>) => {
   return (
     <html lang='en' className={`${spaceGrotesk.variable} ${openSans.variable}`}>
+      <GoogleTagManager gtmId='GTM-KLTDTBZ8' />
       <body className='bg-[var(--color-background)]'>
         <ThemeProvider>
           <RootLayout header={<NavigationBar />} footer={<Footer />}>
             {children}
-            <SpeedInsights />
           </RootLayout>
         </ThemeProvider>
+        <SpeedInsights />
+        <WebVitals />
       </body>
     </html>
   );
