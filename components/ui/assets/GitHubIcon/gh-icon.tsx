@@ -1,9 +1,14 @@
 import { iconAnimation } from '@/ui/util/animation';
 import { MotionButton } from '@/ui/Button/button';
 
-const GitHubIcon = () => {
+const GitHubIcon = ({ className }: { className?: string }) => {
   return (
-    <MotionButton variant='ghost' size='icon' {...iconAnimation}>
+    <MotionButton
+      variant='ghost'
+      size='icon'
+      {...iconAnimation}
+      className={className}
+    >
       <a
         href='https://github.com/alexhosp'
         target='_blank'
