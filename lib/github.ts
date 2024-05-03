@@ -47,10 +47,6 @@ export const fetchCommits = async (months = 4) => {
 
           monthlyCommits[i] += commits.length;
           totalCommits += commits.length;
-
-          console.log(
-            `Fetched ${commits.length} commits for ${repo.name} in ${startOfMonth.toLocaleString('default', { month: 'long' })}`,
-          );
         } catch (error) {
           if (error instanceof Error) {
             console.error(
@@ -62,26 +58,27 @@ export const fetchCommits = async (months = 4) => {
     }
 
     // Log the total number of commits fetched per month across all repositories
-    monthlyCommits.forEach((count, index) => {
+    /*    monthlyCommits.forEach((count, index) => {
+      
       const monthName = new Date(
         today.getFullYear(),
         today.getMonth() - index,
         1,
       ).toLocaleString('default', { month: 'long' });
-      console.log(`Total number of commits in ${monthName}: ${count}`);
+        console.log(`Total number of commits in ${monthName}: ${count}`);
     });
-
+ */
     // Log the total number of commits fetched across all repositories
-    console.log(
+    /*    console.log(
       `Total number of commits across all repositories: ${totalCommits}`,
-    );
-    console.log(`All Repos: ${repos.length}`);
+    ); */
+    /*  console.log(`All Repos: ${repos.length}`); */
     return { totalCommits, monthlyCommits, repos };
   } catch (error) {
     console.error('Failed to fetch repositories', error);
     return {
       totalCommits: 0,
-      monthlyCommits: Array.from({ length: months }, () => 0),
+      /*  monthlyCommits: Array.from({ length: months }, () => 0), */
     };
   }
 };
