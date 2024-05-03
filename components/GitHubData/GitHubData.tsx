@@ -81,7 +81,7 @@ export const GitHubData = async () => {
           </Text>
           <Link href='https://github.com/alexhosp'>
             <SmallCTAButton>
-              <GitHubIcon />
+              <GitHubIcon className='!h-4' />
               Code
             </SmallCTAButton>
           </Link>
