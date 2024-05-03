@@ -49,5 +49,5 @@ notes.*
 .vscode/
 .idea/
 
-# env file
+# env
 .env
