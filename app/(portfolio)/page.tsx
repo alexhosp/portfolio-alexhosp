@@ -19,9 +19,12 @@ import { CardItemAnimationWrapper } from '@/ui/util/animation-wrapper';
 import Image from 'next/image';
 import Text from '@/ui/Text/text';
 import {
+  Carousel,
   AutoplayCarousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from '@/ui/Carousel/carousel';
 import { Prisma } from '@prisma/client';
 import { ProjectModal, CtaData } from '@/components/Modal/modal';
@@ -231,86 +234,105 @@ const HomePage = async () => {
       {projectsContent.map((project) => {
         const additionalInfo = project.additionalInfo as Prisma.JsonObject;
         const sectionTitles = additionalInfo.sectionTitle as string[];
-        const modalData = additionalInfo.projectModal as Prisma.JsonObject;
-        const modalImageData = modalData.modalImage as Prisma.JsonObject;
-        const modalImageUrl = modalImageData.imageUrl as string;
-        const modalImageAlt = modalImageData.imageAlt as string;
-        const modalBulletpoints = modalData.bulletPoints as string[];
-        const modalCtaData = modalData.modalCta as unknown as CtaData;
-
         return (
-          <>
-            <div className='w-11/12 mx-auto mt-7 mb-3.5'>
-              <Heading
-                as='h2'
-                color='default'
-                size='h2Small'
-                className='inline !text-left'
-              >
-                {Array.isArray(sectionTitles) ? sectionTitles[0] : undefined}
-                <span className='text-[var(--color-primary)] ml-2'>
-                  {Array.isArray(sectionTitles) ? sectionTitles[1] : undefined}
-                </span>
-              </Heading>
-            </div>
-
-            <Card
-              color='solidDetail'
-              edge='rounded'
-              key={project.id}
-              className='w-5/6 p-2 md:grid md:grid-cols-[60%_40%] md:grid-rows-[80%_20%] ml-2'
+          <div key={project.id} className='w-11/12 mx-auto mt-7 mb-3.5'>
+            <Heading
+              as='h2'
+              color='default'
+              size='h2Small'
+              className='inline !text-left'
             >
-              <CardHeader className='md:col-start-1 md:row-start-1 gap-y-4'>
-                <CardTitle>{project.title}</CardTitle>
-
-                <Text
-                  as='p'
-                  size='small'
-                  textColor='default'
-                  className='md:hidden'
-                >
-                  {project.shortDescription}
-                </Text>
-                <Text
-                  as='p'
-                  size='large'
-                  textColor='muted'
-                  className='hidden md:block text-xl'
-                  style={{ whiteSpace: 'pre-wrap' }}
-                >
-                  {project.description?.replace(/([!?]) /g, '$1\n\n')}
-                </Text>
-              </CardHeader>
-              <CardContent className='md:col-star-2 row-span-2'>
-                <CardItemAnimationWrapper animate='scaleDown'>
-                  <Image
-                    src={project.imageUrl ?? '/project_fallback.webp'}
-                    alt={
-                      project.imageAlt ?? 'product resulting from the project'
-                    }
-                    height={512}
-                    width={512}
-                    className='max-h-[40vh] w-auto md:max-h-[60vh]'
-                    priority
-                  />
-                </CardItemAnimationWrapper>
-              </CardContent>
-              <CardFooter className='md:col-start-1 md:row-start-2'>
-                <ProjectModal
-                  dialogTitle={project.title}
-                  imageUrl={modalImageUrl}
-                  imageAlt={modalImageAlt}
-                  bulletPoints={modalBulletpoints}
-                  ctaName={project.cta}
-                  dialogCtaData={
-                    Array.isArray(modalCtaData) ? modalCtaData : undefined
-                  }
-                />
-              </CardFooter>
-            </Card>
-          </>
+              {Array.isArray(sectionTitles) ? sectionTitles[0] : undefined}
+              <span className='text-[var(--color-primary)] ml-2'>
+                {Array.isArray(sectionTitles) ? sectionTitles[1] : undefined}
+              </span>
+            </Heading>
+          </div>
         );
       })}
+      <Carousel className='p-0'>
+        <CarouselContent className='m-auto flex justify-start'>
+          {projectsContent
+            .slice() // Create a shallow copy to avoid mutating the original array
+            .reverse() // Reverse the array so the last project appears first
+            .map((project) => {
+              const additionalInfo =
+                project.additionalInfo as Prisma.JsonObject;
+              const modalData =
+                additionalInfo.projectModal as Prisma.JsonObject;
+              const modalImageData = modalData.modalImage as Prisma.JsonObject;
+              const modalImageUrl = modalImageData.imageUrl as string;
+              const modalImageAlt = modalImageData.imageAlt as string;
+              const modalBulletpoints = modalData.bulletPoints as string[];
+              const modalCtaData = modalData.modalCta as unknown as CtaData;
+
+              return (
+                <CarouselItem
+                  key={project.id}
+                  className='basis-full flextransition-opacity min-h-max p-0'
+                >
+                  <Card
+                    color='solidDetail'
+                    edge='rounded'
+                    className='mx-auto w-4/5 p-2 md:grid md:grid-cols-[60%_40%] md:grid-rows-[80%_20%] lg:min-h-full'
+                  >
+                    <CardHeader className='md:col-start-1 md:row-start-1 gap-y-4'>
+                      <CardTitle>{project.title}</CardTitle>
+
+                      <Text
+                        as='p'
+                        size='small'
+                        textColor='default'
+                        className='md:hidden'
+                      >
+                        {project.shortDescription}
+                      </Text>
+                      <Text
+                        as='p'
+                        size='large'
+                        textColor='muted'
+                        className='hidden md:block text-xl !mt-8'
+                        style={{ whiteSpace: 'pre-wrap' }}
+                      >
+                        {project.description?.replace(/([!?]) /g, '$1\n\n')}
+                      </Text>
+                    </CardHeader>
+                    <CardContent className='md:col-star-2 row-span-2'>
+                      <CardItemAnimationWrapper animate='scaleDown'>
+                        <Image
+                          src={project.imageUrl ?? '/project_fallback.webp'}
+                          alt={
+                            project.imageAlt ??
+                            'product resulting from the project'
+                          }
+                          height={512}
+                          width={512}
+                          className='max-h-[40vh] w-auto md:max-h-[60vh] rounded-sm'
+                          priority
+                        />
+                      </CardItemAnimationWrapper>
+                    </CardContent>
+                    <CardFooter className='md:col-start-1 md:row-start-2'>
+                      <ProjectModal
+                        dialogTitle={project.title}
+                        imageUrl={modalImageUrl}
+                        imageAlt={modalImageAlt}
+                        bulletPoints={modalBulletpoints}
+                        ctaName={project.cta}
+                        dialogCtaData={
+                          Array.isArray(modalCtaData) ? modalCtaData : undefined
+                        }
+                      />
+                    </CardFooter>
+                  </Card>
+                </CarouselItem>
+              );
+            })}
+        </CarouselContent>
+        <CarouselNext className='right-3' />
+        <CarouselPrevious className='left-3' />
+      </Carousel>
+
       <div className='w-11/12 mx-auto mt-14 mb-3.5'>
         <Heading
           as='h2'
