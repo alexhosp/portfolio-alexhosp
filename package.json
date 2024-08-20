@@ -5,7 +5,7 @@
   "packageManager": "pnpm@8.15.3",
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
@@ -75,6 +75,7 @@
     "storybook": "^8.0.0",
     "storybook-tailwind-dark-mode": "^1.0.22",
     "tailwindcss": "^3.4.1",
+    "turbo": "^2.0.14",
     "typescript": "^5.3.3"
   }
 }
