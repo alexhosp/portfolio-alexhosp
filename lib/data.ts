@@ -1,4 +1,5 @@
 import prisma from '@/lib/db';
+import { getPlaiceholder } from 'plaiceholder';
 
 export const getAboutContent = async () => {
   // add logic to fetch the longDescription conditionally
