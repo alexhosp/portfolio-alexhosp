@@ -60,6 +60,9 @@ export const getProjectsContent = async () => {
       ctaLink: true,
       additionalInfo: true,
     },
+    orderBy: {
+      id: 'desc',
+    },
   });
 
   return projectsContent;
