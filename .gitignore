@@ -48,6 +48,3 @@ notes.*
 # Editor directories and files
 .vscode/
 .idea/
-
-# env
-.env

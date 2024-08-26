@@ -133,8 +133,12 @@ export const ProjectModal: React.FC<{
           </div>
         </CardItemAnimationWrapper>
       </DialogTrigger>
-      <DialogContent>
-        <Card color='solidBackground' edge='rounded' className='p-1.5 py-5'>
+      <DialogContent className=''>
+        <Card
+          color='solidBackground'
+          edge='rounded'
+          className='p-1.5 py-5 mx-auto'
+        >
           <DialogHeader>
             <DialogTitle className='self-stretch'>{dialogTitle}</DialogTitle>
             <Image
@@ -144,11 +148,11 @@ export const ProjectModal: React.FC<{
               }
               height={512}
               width={512}
-              className='max-h-[50%] w-auto mx-auto'
+              className='max-h-[45%] w-auto mx-auto'
               priority
             />
             <div className='flex place-content-center self-stretch ml-10 -mt-4'>
-              <ul className='list-none pl-0 flex flex-col items-baseline mx-auto pr-4 text-sm/[1.2rem] tracking-[0.007em] antialiased text-pretty whitespace-normal text-[var(--color-foreground)] opacity-80'>
+              <ul className='list-none pl-0 flex flex-col items-baseline mx-auto pr-4 text-sm/[1.2rem] tracking-[0.007em] antialiased text-pretty whitespace-normal text-[var(--color-foreground)] opacity-80 pb-1.5'>
                 {bulletPoints.map((line, index) => {
                   return (
                     <li className='py-1 text-left flex' key={index}>
@@ -161,7 +165,7 @@ export const ProjectModal: React.FC<{
             </div>
           </DialogHeader>
           <DialogFooter className='flex flex-col'>
-            <div className='flex flex-row gap-4 p-4'>
+            <div className='flex flex-row gap-4 p-1.5'>
               {dialogCtaData?.map((cta, index) => {
                 const isDisabled =
                   dialogTitle === 'Dev Portfolio' && cta.name === 'See it Live';
