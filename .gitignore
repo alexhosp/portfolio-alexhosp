@@ -48,3 +48,7 @@ notes.*
 # Editor directories and files
 .vscode/
 .idea/
+
+# Ignore Supabase CLI configuration
+supabase/
+
