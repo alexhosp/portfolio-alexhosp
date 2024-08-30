@@ -1,6 +1,7 @@
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
@@ -8,21 +9,41 @@ generator client {
 }
 
 model Content {
-  id               Int      @id @default(autoincrement())
+  id               Int        @id @default(autoincrement())
   type             String
   title            String
   imageUrl         String?
   blurDataUrl      String?
   imageAlt         String?
-  shortDescription String   @db.Text // for homepage
-  description      String?  @db.Text // for summary pages
-  fullDescription  String?  @db.Text // for dedicated service/project/about pages
+  shortDescription String     @db.Text // for homepage
+  description      String?    @db.Text // for summary pages
+  fullDescription  String?    @db.Text // for dedicated service/project/about pages
   cta              String?
   ctaLink          String?
   additionalInfo   Json? // for any additional structured data
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
   icon             String?
+  slug             String?    @unique // Slug for mapping case studies
+  caseStudyId      Int? // Foreign key to link to the CaseStudy table
+  caseStudy        CaseStudy? @relation("ContentCaseStudy")
+}
+
+model CaseStudy {
+  id               Int      @id @default(autoincrement())
+  contentId        Int      @unique
+  title            String
+  sections         Json?
+  progressStage    String?
+  progressPercent  Int?
+  progressImageUrl String?
+  outcomeImageUrl  String?
+  gitHubLink       String?
+  pdfUrl           String?
+  icon             String?
+  content          Content  @relation("ContentCaseStudy", fields: [contentId], references: [id])
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now())
 }
 
 model PotentialCustomer {
