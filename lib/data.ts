@@ -143,6 +143,10 @@ export const getCaseStudyBySlug = async (slug: string): Promise<CaseStudy> => {
   if (!content?.caseStudy) {
     throw new Error('Case study not found');
   }
+  /* console.log(
+    'Fetched Case Study:',
+    JSON.stringify(content.caseStudy, null, 2),
+  ); */
 
   return content.caseStudy as CaseStudy;
 };

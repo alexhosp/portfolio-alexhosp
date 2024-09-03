@@ -46,7 +46,6 @@ const ServicePage = async ({ params }: { params: { service: string } }) => {
           icon={serviceToDisplay.icon ? serviceToDisplay.icon : undefined}
         />
       </CardItemAnimationWrapper>
-
       <div className='md:mt-12'>
         <MotionHeading
           as='h2'
@@ -56,8 +55,8 @@ const ServicePage = async ({ params }: { params: { service: string } }) => {
         ></MotionHeading>
       </div>
       <div className='md:mx-auto md:max-w-screen-lg'>
-        <Card className='pb-1'>
-          <CardContent className='px-0 md:my-1.5'>
+        <Card className='pb-1 py-1'>
+          <CardContent className='md:my-1.5 pb-0 w-screen'>
             <CardItemAnimationWrapper animate='floatUp'>
               <Text
                 as='p'
@@ -76,6 +75,10 @@ const ServicePage = async ({ params }: { params: { service: string } }) => {
                 {descriptionArray?.[0] && descriptionArray[0]}
               </Text>
             </CardItemAnimationWrapper>
+          </CardContent>
+        </Card>
+        <Card className='py-1'>
+          <CardContent className='w-screen'>
             <CardItemAnimationWrapper animate='fadeIn'>
               <Collapsible>
                 <div className='flex justify-center'>
@@ -83,7 +86,6 @@ const ServicePage = async ({ params }: { params: { service: string } }) => {
                     triggerTitle={descriptionArray?.[1] && descriptionArray[1]}
                   />
                 </div>
-
                 <CollapsibleContent
                   listItems={additionalInfo.examples as string[]}
                 />
@@ -92,7 +94,7 @@ const ServicePage = async ({ params }: { params: { service: string } }) => {
           </CardContent>
         </Card>
         <Card className='pt-0 pb-0'>
-          <CardContent className='px-0 md:my-1.5'>
+          <CardContent className='px-0 md:my-1.5 w-screen'>
             <CardItemAnimationWrapper animate='fadeIn'>
               <Collapsible>
                 <div className='flex justify-center'>

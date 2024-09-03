@@ -41,6 +41,7 @@ notes.*
 
 # turborepo
 + .turbo
+.turbo/
 
 # Storybook build output
 /storybook-static/
