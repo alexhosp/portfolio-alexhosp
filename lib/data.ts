@@ -123,7 +123,9 @@ export interface CaseStudy {
   progressStage?: string;
   progressPercent?: number;
   progressImageUrl?: string;
+  progressImageDesc?: string;
   outcomeImageUrl?: string;
+  outcomeImageDesc?: string;
   gitHubLink?: string;
   pdfUrl?: string;
   icon?: string;

@@ -12,6 +12,7 @@ import { Sparkle } from 'lucide-react';
 import Text from '@/ui/Text/text';
 import { SmallCTAButton } from '@/ui/Button/cta-button';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const ProjectCaseStudyPage = async ({
   params,
@@ -51,7 +52,7 @@ const ProjectCaseStudyPage = async ({
           text={caseStudy.title}
         ></MotionHeading>
       </div>
-      <div className='hidden md:flex mt-6 pt-2'>
+      <div className='hidden md:flex mt-6 pt-2 mb-6'>
         <MotionHeading
           as='h2'
           color='h2accent'
@@ -105,7 +106,7 @@ const ProjectCaseStudyPage = async ({
                                       as='h3'
                                       size='h3Default'
                                       color='h1accent'
-                                      className='hidden md:flex md:p-4'
+                                      className='hidden md:flex m-2'
                                     >
                                       {String(subsection.title)}
                                     </Heading>
@@ -128,6 +129,58 @@ const ProjectCaseStudyPage = async ({
                                           ) : null,
                                       )}
                                     </ul>
+                                    {
+                                      <div>
+                                        {index === 1 && subIndex === 1 ? (
+                                          <>
+                                            <Image
+                                              alt='Image of project progress.'
+                                              src={
+                                                caseStudy.progressImageUrl
+                                                  ? caseStudy.progressImageUrl
+                                                  : '/project_fallback.webp'
+                                              }
+                                              width={500}
+                                              height={500}
+                                              className='max-w-[80%] mx-auto rounded-md m-2'
+                                            />
+
+                                            <Text
+                                              as='p'
+                                              size='tiny'
+                                              textColor='muted'
+                                              className='my-2'
+                                            >
+                                              {caseStudy.progressImageDesc}
+                                            </Text>
+                                          </>
+                                        ) : null}
+                                        {index === 1 && subIndex === 2 ? (
+                                          <>
+                                            <Image
+                                              alt='Image of project outcome.'
+                                              src={
+                                                caseStudy.outcomeImageUrl
+                                                  ? caseStudy.outcomeImageUrl
+                                                  : '/project_fallback.webp'
+                                              }
+                                              width={500}
+                                              height={500}
+                                              className='max-w-[80%] mx-auto rounded-md'
+                                            />
+
+                                            <Text
+                                              as='p'
+                                              size='tiny'
+                                              textColor='muted'
+                                              className='my-2'
+                                            >
+                                              {caseStudy.outcomeImageDesc}
+                                            </Text>
+                                          </>
+                                        ) : null}
+                                      </div>
+                                    }
                                   </div>
                                 );
                               }
@@ -199,7 +252,7 @@ const ProjectCaseStudyPage = async ({
                           as='p'
                           size='tiny'
                           textColor='default'
-                          className='text-center md:hidden'
+                          className='text-center p-2 md:hidden'
                         >
                           {desc}
                         </Text>
@@ -218,7 +271,7 @@ const ProjectCaseStudyPage = async ({
                   )}
                 </ul>
               )}
-            <div className='flex gap-4 mt-2'>
+            <div className='flex gap-4 mt-4'>
               <Link
                 href={
                   caseStudy.gitHubLink

@@ -30,20 +30,22 @@ model Content {
 }
 
 model CaseStudy {
-  id               Int      @id @default(autoincrement())
-  contentId        Int      @unique
-  title            String
-  sections         Json?
-  progressStage    String?
-  progressPercent  Int?
-  progressImageUrl String?
-  outcomeImageUrl  String?
-  gitHubLink       String?
-  pdfUrl           String?
-  icon             String?
-  content          Content  @relation("ContentCaseStudy", fields: [contentId], references: [id])
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @default(now())
+  id                Int      @id @default(autoincrement())
+  contentId         Int      @unique
+  title             String
+  sections          Json?
+  progressStage     String?
+  progressPercent   Int?
+  progressImageUrl  String?
+  progressImageDesc String?
+  outcomeImageUrl   String?
+  outcomeImageDesc  String?
+  gitHubLink        String?
+  pdfUrl            String?
+  icon              String?
+  content           Content  @relation("ContentCaseStudy", fields: [contentId], references: [id])
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @default(now())
 }
 
 model PotentialCustomer {
