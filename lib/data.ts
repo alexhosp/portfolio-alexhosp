@@ -1,4 +1,5 @@
 import prisma from '@/lib/db';
+import { Prisma } from '@prisma/client';
 
 export const getAboutContent = async () => {
   // add logic to fetch the longDescription conditionally
@@ -60,6 +61,9 @@ export const getProjectsContent = async () => {
       ctaLink: true,
       additionalInfo: true,
     },
+    orderBy: {
+      id: 'desc',
+    },
   });
 
   return projectsContent;
@@ -108,4 +112,43 @@ export const insertPotentialCustomer = async (data: PotentialCustomerData) => {
     console.error('Error creating potential customer:', error);
     throw error; // handle in createPotentialCustomer
   }
+};
+
+// Define structure of CaseStudy
+export interface CaseStudy {
+  id: number;
+  contentId: number;
+  title: string;
+  sections?: Prisma.JsonArray;
+  progressStage?: string;
+  progressPercent?: number;
+  progressImageUrl?: string;
+  progressImageDesc?: string;
+  outcomeImageUrl?: string;
+  outcomeImageDesc?: string;
+  gitHubLink?: string;
+  pdfUrl?: string;
+  icon?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Get case study page content
+export const getCaseStudyBySlug = async (slug: string): Promise<CaseStudy> => {
+  const content = await prisma.content.findUnique({
+    where: { slug },
+    include: {
+      caseStudy: true,
+    },
+  });
+
+  if (!content?.caseStudy) {
+    throw new Error('Case study not found');
+  }
+  /* console.log(
+    'Fetched Case Study:',
+    JSON.stringify(content.caseStudy, null, 2),
+  ); */
+
+  return content.caseStudy as CaseStudy;
 };

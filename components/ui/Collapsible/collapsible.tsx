@@ -18,7 +18,7 @@ const CollapsibleTrigger: React.FC<{ triggerTitle: string | undefined }> = ({
 }) => {
   return (
     <CollapsiblePrimitive.Trigger asChild>
-      <MotionButton className='flex flex-row items-center gap-4 md:mb-4'>
+      <MotionButton className='flex flex-row items-center gap-4 md:mb-4 w-full'>
         <Heading as='h3' size='h3Small' color='default' className='md:hidden'>
           {triggerTitle}
         </Heading>
@@ -36,11 +36,14 @@ const CollapsibleTrigger: React.FC<{ triggerTitle: string | undefined }> = ({
   );
 };
 
-const CollapsibleContent: React.FC<{ listItems: string[] }> = ({
-  listItems,
-}) => {
+const CollapsibleContent: React.FC<{
+  listItems: string[];
+  className?: string;
+}> = ({ listItems, className }) => {
   return (
-    <CollapsiblePrimitive.Content className='border-2 border-[var(--color-accent-soft)] p-1.5 pt-3 md:p-6'>
+    <CollapsiblePrimitive.Content
+      className={`${className} border-2 border-[var(--color-accent-soft)] p-1.5 pt-3 md:p-6 mx-6`}
+    >
       <StaggeredAnimationWrapper>
         <ul>
           {listItems.map((item, index) => {
@@ -108,4 +111,22 @@ const CollapsibleContent: React.FC<{ listItems: string[] }> = ({
   );
 };
 
-export { Collapsible, CollapsibleTrigger, CollapsibleContent };
+const CollapsibleContentJson: React.FC<{
+  className?: string;
+  children: React.ReactNode;
+}> = ({ className, children }) => {
+  return (
+    <CollapsiblePrimitive.Content
+      className={`${className} border-2 border-[var(--color-accent-soft)] p-1.5 pt-3 md:p-6 mx-6`}
+    >
+      <div>{children}</div>
+    </CollapsiblePrimitive.Content>
+  );
+};
+
+export {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+  CollapsibleContentJson,
+};

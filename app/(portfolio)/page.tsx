@@ -254,7 +254,6 @@ const HomePage = async () => {
         <CarouselContent className='m-auto flex justify-start'>
           {projectsContent
             .slice() // Create a shallow copy to avoid mutating the original array
-            .reverse() // Reverse the array so the last project appears first
             .map((project) => {
               const additionalInfo =
                 project.additionalInfo as Prisma.JsonObject;
