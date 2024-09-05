@@ -43,8 +43,6 @@ interface CardStyles {
   gridClass: string;
 }
 
-// define types
-
 const ServicesPage = async () => {
   const servicesContent: Service[] = await getServicesContent();
 

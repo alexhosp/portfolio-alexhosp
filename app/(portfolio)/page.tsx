@@ -107,9 +107,12 @@ const HomePage = async () => {
             edge='sharp'
             width='full'
             color='solidDetail'
-            className='pt-0 lg:grid lg:gap-x-5'
+            className='pt-0 lg:grid lg:gap-x-5 md:max-w-[90%] md:mx-auto md:mb-8 md:mt-24'
           >
-            <CardItemAnimationWrapper animate='scaleDown'>
+            <CardItemAnimationWrapper
+              animate='scaleDown'
+              className='lg:col-start-1'
+            >
               <Image
                 alt='avatar of the developer'
                 src={item.imageUrl ?? '/avatar-blue.png'}
@@ -118,7 +121,7 @@ const HomePage = async () => {
                 className='md:mt-4'
               />
             </CardItemAnimationWrapper>
-            <div className='lg:col-start-2'>
+            <div className='lg:col-start-2 md:grid md:gap-2'>
               <CardItemAnimationWrapper animate='fadeIn'>
                 <CardTitle>{item.title}</CardTitle>
               </CardItemAnimationWrapper>
