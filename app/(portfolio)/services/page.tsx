@@ -74,7 +74,7 @@ const ServicesPage = async () => {
             const additionalInfo = service.additionalInfo as Prisma.JsonObject;
 
             let cardStyles: CardStyles = {
-              color: 'solidBackground',
+              color: 'gradientGrayDetail',
               border: 'border-2 border-[var(--color-primary)]',
               iconColor: 'text-[var(--color-foreground)]',
               gridClass: 'col-span-5',

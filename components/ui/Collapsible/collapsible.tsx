@@ -62,7 +62,7 @@ const CollapsibleContent: React.FC<{
                       as='h3'
                       size='h3Small'
                       color='h1accent'
-                      className='ml-4 mr-2 max-w-[50%] md:hidden'
+                      className='ml-4 mr-2 mb-1 max-w-[70%] md:hidden'
                     >
                       {parts[0].trim()}
                     </Heading>
@@ -78,7 +78,7 @@ const CollapsibleContent: React.FC<{
                       as='span'
                       size='tiny'
                       textColor='muted'
-                      className='md:hidden'
+                      className='md:hidden px-0.5'
                     >
                       {parts[1].trim()}
                     </Text>
