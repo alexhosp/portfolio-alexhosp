@@ -70,7 +70,7 @@ const ServicePage = async ({ params }: { params: { service: string } }) => {
                 as='p'
                 size='large'
                 textColor='muted'
-                className='hidden md:flex md:mb-8'
+                className='hidden md:flex md:mb-8 md:mt-7 lg:max-w-[60%] lg:mx-auto'
               >
                 {descriptionArray?.[0] && descriptionArray[0]}
               </Text>
@@ -88,6 +88,7 @@ const ServicePage = async ({ params }: { params: { service: string } }) => {
                 </div>
                 <CollapsibleContent
                   listItems={additionalInfo.examples as string[]}
+                  className='lg:max-w-[60%] lg:mx-auto'
                 />
               </Collapsible>
             </CardItemAnimationWrapper>
@@ -104,6 +105,7 @@ const ServicePage = async ({ params }: { params: { service: string } }) => {
                 </div>
                 <CollapsibleContent
                   listItems={additionalInfo.technologies as string[]}
+                  className='lg:max-w-[60%] lg:mx-auto'
                 />
               </Collapsible>
             </CardItemAnimationWrapper>
@@ -123,6 +125,7 @@ const ServicePage = async ({ params }: { params: { service: string } }) => {
                   </div>
                   <CollapsibleContent
                     listItems={additionalInfo.features as string[]}
+                    className='lg:max-w-[60%] lg:mx-auto'
                   />
                 </Collapsible>
               </CardItemAnimationWrapper>
