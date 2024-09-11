@@ -14,6 +14,25 @@ import { Prisma } from '@prisma/client';
 import { JsonValue } from '@prisma/client/runtime/library';
 import Link from 'next/link';
 import { CardItemAnimationWrapper } from '@/ui/util/animation-wrapper';
+import { Metadata } from 'next';
+
+// Define metadata for this page
+export const metadata: Metadata = {
+  title: 'Alex Hosp - Services',
+  description:
+    'Explore the services provided by Alex Hosp, including data insights, machine learning solutions, web app development, prototyping, and consultation.',
+  keywords: [
+    'Alex Hosp',
+    'Services',
+    'Data Insights',
+    'Machine Learning Solutions',
+    'Web App Development',
+    'Prototyping',
+    'Consultation',
+    'Data Analysis',
+    'Scalable Apps',
+  ],
+};
 
 interface Service {
   id: number;
@@ -43,8 +62,6 @@ interface CardStyles {
   gridClass: string;
 }
 
-// define types
-
 const ServicesPage = async () => {
   const servicesContent: Service[] = await getServicesContent();
 
@@ -59,7 +76,7 @@ const ServicesPage = async () => {
           spanText='What I Do.'
         ></MotionHeading>
       </div>
-      <div className='grid grid-cols-1 gap-y-4 p-6 md:grid-cols-12 mx-auto md:px-8 lg:px-16 md:gap-x-6'>
+      <div className='grid grid-cols-1 gap-y-4 p-6 lg:grid-cols-12 mx-auto md:px-8 lg:px-16 lg:gap-x-6 lg:items-center'>
         {servicesContent
           .filter((service) => service.additionalInfo !== null) // Filter services with additionalInfo
           .sort((a, b) => {
@@ -76,7 +93,7 @@ const ServicesPage = async () => {
             const additionalInfo = service.additionalInfo as Prisma.JsonObject;
 
             let cardStyles: CardStyles = {
-              color: 'solidBackground',
+              color: 'gradientGrayDetail',
               border: 'border-2 border-[var(--color-primary)]',
               iconColor: 'text-[var(--color-foreground)]',
               gridClass: 'col-span-5',
@@ -87,7 +104,7 @@ const ServicesPage = async () => {
                 color: 'gradientPrimary',
                 border: 'border-2 border-[var(--color-accent-soft)]',
                 iconColor: 'text-[var(--color-accent)]',
-                gridClass: 'col-span-7',
+                gridClass: 'col-span-7 lg:my-1 lg:mr-8',
               };
             }
             const urlSlug = service.title.toLowerCase().replace(/\s+/g, '_'); // Replace spaces with underscores
@@ -102,12 +119,13 @@ const ServicesPage = async () => {
                 <Card
                   edge='rounded'
                   color={cardStyles.color}
-                  className={`transition-all duration-300 ease-in-out transform hover:scale-105 ${cardStyles.border} hover:border-[var(--color-highlight)] ${cardStyles.gridClass} pt-2 `}
+                  className={`transition-all duration-300 ease-in-out transform hover:scale-105 ${cardStyles.border} hover:border-[var(--color-highlight)] ${cardStyles.gridClass} pt-2 lg:min-h-[40rem]`}
                 >
                   <CardHeader>
                     <ServiceIcon
                       icon={service.icon ? service.icon : undefined}
                       color={cardStyles.iconColor}
+                      className='mb-2'
                     />
 
                     <CardTitle>{service.title}</CardTitle>

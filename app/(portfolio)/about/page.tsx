@@ -2,6 +2,20 @@ import { MotionHeading, Heading } from '@/ui/Heading/heading';
 import { Card } from '@/ui/Card/card';
 import { VideoComponent } from '@/ui/YouTubeEmbed/video-component';
 import { CardItemAnimationWrapper } from '@/ui/util/animation-wrapper';
+import { Metadata } from 'next';
+
+// Define metadata
+export const metadata: Metadata = {
+  title: 'Alex Hosp - About Me',
+  description: 'Discover more about Alex Hosp, developer & data analyst.',
+  keywords: [
+    'About Alex Hosp',
+    'Web Developer',
+    'Scalable Apps',
+    'Data Analyst',
+  ],
+  authors: [{ name: 'Alex Hosp' }],
+};
 
 // all these should be loaded from the database in the next version
 // these can be fetched on the server using the YouTube API in the next version

@@ -3,6 +3,23 @@ import { GitHubData } from '@/components/GitHubData/GitHubData';
 import { Suspense } from 'react';
 import Text from '@/ui/Text/text';
 import LoadingSpinner from '@/ui/assets/LoadingSpinner/loading-spinner';
+import { Metadata } from 'next';
+
+// Define metadata for page
+export const metadata: Metadata = {
+  title: 'Alex Hosp - Projects',
+  description:
+    'Discover Alex&#39;s latest projects and contributions on GitHub.',
+  keywords: [
+    'Alex Hosp',
+    'Projects',
+    'GitHub',
+    'Web Development',
+    'Data Analysis',
+    'Machine Learning',
+    'Coding',
+  ],
+};
 
 const LoadingPlaceholder = () => {
   return (

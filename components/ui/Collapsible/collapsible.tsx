@@ -52,7 +52,7 @@ const CollapsibleContent: React.FC<{
               <motion.li
                 variants={staggerAnimationVariants}
                 key={index}
-                className='flex flex-row items-center text-[var(--color-foreground)] py-1 pb-2 justify-center md:mb-3'
+                className='flex flex-row items-center text-[var(--color-foreground)] py-1 pb-2 justify-center md:mb-3 lg:mb-5'
               >
                 {parts.length > 1 ? (
                   // Render parts separately with different styles if a colon is found
@@ -62,7 +62,7 @@ const CollapsibleContent: React.FC<{
                       as='h3'
                       size='h3Small'
                       color='h1accent'
-                      className='ml-4 mr-2 max-w-[50%] md:hidden'
+                      className='ml-4 mr-2 mb-1 max-w-[70%] md:hidden'
                     >
                       {parts[0].trim()}
                     </Heading>
@@ -70,7 +70,7 @@ const CollapsibleContent: React.FC<{
                       as='h3'
                       size='h3Default'
                       color='h1accent'
-                      className='hidden md:flex mb-2'
+                      className='hidden md:flex mb-2 lg:mb-4'
                     >
                       {parts[0].trim()}
                     </Heading>
@@ -78,7 +78,7 @@ const CollapsibleContent: React.FC<{
                       as='span'
                       size='tiny'
                       textColor='muted'
-                      className='md:hidden'
+                      className='md:hidden px-0.5'
                     >
                       {parts[1].trim()}
                     </Text>
