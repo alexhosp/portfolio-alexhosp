@@ -77,11 +77,14 @@ const ServicePage = async ({ params }: { params: { service: string } }) => {
             </CardItemAnimationWrapper>
           </CardContent>
         </Card>
-        <Card className='py-1'>
+        <Card className='py-1 lg:m-4'>
           <CardContent className='w-screen'>
-            <CardItemAnimationWrapper animate='fadeIn'>
-              <Collapsible>
-                <div className='flex justify-center'>
+            <CardItemAnimationWrapper
+              animate='fadeIn'
+              className='lg:flex lg:items-center'
+            >
+              <Collapsible className='lg:w-[150rem] lg:mx-auto'>
+                <div className='flex justify-center lg:mb-2'>
                   <CollapsibleTrigger
                     triggerTitle={descriptionArray?.[1] && descriptionArray[1]}
                   />
@@ -94,11 +97,14 @@ const ServicePage = async ({ params }: { params: { service: string } }) => {
             </CardItemAnimationWrapper>
           </CardContent>
         </Card>
-        <Card className='pt-0 pb-0'>
-          <CardContent className='px-0 md:my-1.5 w-screen'>
-            <CardItemAnimationWrapper animate='fadeIn'>
-              <Collapsible>
-                <div className='flex justify-center'>
+        <Card className='py-1 lg:m-4'>
+          <CardContent className='w-screen'>
+            <CardItemAnimationWrapper
+              animate='fadeIn'
+              className='lg:flex lg:items-center'
+            >
+              <Collapsible className='lg:w-[150rem] lg:mx-auto'>
+                <div className='flex justify-center lg:mb-2'>
                   <CollapsibleTrigger
                     triggerTitle={descriptionArray?.[2] && descriptionArray[2]}
                   />
@@ -112,11 +118,14 @@ const ServicePage = async ({ params }: { params: { service: string } }) => {
           </CardContent>
         </Card>
         {additionalInfo.features && (
-          <Card className='pt-0'>
+          <Card className='pt-0 lg:m-4'>
             <CardContent className='px-0 md:my-1.5'>
-              <CardItemAnimationWrapper animate='fadeIn'>
-                <Collapsible>
-                  <div className='flex justify-center'>
+              <CardItemAnimationWrapper
+                animate='fadeIn'
+                className='lg:flex lg:items-center'
+              >
+                <Collapsible className='lg:w-[150rem] lg:mx-auto'>
+                  <div className='flex justify-center lg:mb-2'>
                     <CollapsibleTrigger
                       triggerTitle={
                         descriptionArray?.[3] && descriptionArray[3]

@@ -14,6 +14,25 @@ import { Prisma } from '@prisma/client';
 import { JsonValue } from '@prisma/client/runtime/library';
 import Link from 'next/link';
 import { CardItemAnimationWrapper } from '@/ui/util/animation-wrapper';
+import { Metadata } from 'next';
+
+// Define metadata for this page
+export const metadata: Metadata = {
+  title: 'Alex Hosp - Services',
+  description:
+    'Explore the services provided by Alex Hosp, including data insights, machine learning solutions, web app development, prototyping, and consultation.',
+  keywords: [
+    'Alex Hosp',
+    'Services',
+    'Data Insights',
+    'Machine Learning Solutions',
+    'Web App Development',
+    'Prototyping',
+    'Consultation',
+    'Data Analysis',
+    'Scalable Apps',
+  ],
+};
 
 interface Service {
   id: number;

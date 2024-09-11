@@ -10,7 +10,9 @@ export const RootLayout: React.FC<{
       <Slot>
         <div className='fixed top-0 left-0 w-full z-[40]'>{header}</div>
       </Slot>
-      <div className='flex-grow overflow-auto mt-[5.5rem]'>{children}</div>
+      <div className='flex-grow overflow-auto mt-[5.5rem] overflow-x-hidden'>
+        {children}
+      </div>
       <Slot>
         <div className='mt-auto'>{footer}</div>
       </Slot>
