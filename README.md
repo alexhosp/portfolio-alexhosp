@@ -1,6 +1,8 @@
 # Next.js Portfolio Website
 This repository contains the source code for my personal portfolio website, built with Next.js, Prisma, and Supabase. It showcases my skills and projects through a custom UI design system created with Storybook, Shadcn UI, and Tailwind CSS. The site features About, Projects, Services, and Contact pages.
 
+**Live Site:** [https://alexhosp.dev](https://alexhosp.dev)
+
 ## Table of Contents
 
 - [Overview](#overview)
