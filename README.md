@@ -35,7 +35,7 @@ This project is my personal portfolio website, designed to showcase my skills an
 - **About Page**: Shares personal background information, including embedded YouTube Shorts.
 
   # [Technology Stack](#technology-stack)
-  - **Framework**: Next.js
+- **Framework**: Next.js
 - **Database**: Supabase (PostgreSQL)
 - **ORM**: Prisma
 - **Language:** TypeScript
